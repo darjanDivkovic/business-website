@@ -23,7 +23,7 @@ const testimonials: Testimonial[] = [
     date: "May 2024",
     relationship: "Managed Darjan directly",
     quote:
-      "Simply put, Darjan is EXCELLENT. He shows up with poise and positive energy, is self-motivated, and gets stuff done. He designed a beautiful application from front-to-back with no guidance. We're very lucky to work with Darjan.",
+      "Simply put, Darjan is EXCELLENT. He shows up with poise and positive energy, is self-motivated, and gets stuff done.",
   },
   {
     name: "Warren Lebovics",
@@ -34,7 +34,7 @@ const testimonials: Testimonial[] = [
     date: "March 2023",
     relationship: "Managed Darjan directly",
     quote:
-      "Darjan is a designer's dream frontend partner. He brings creativity and pride to his work, resulting in extremely polished and thoughtful user experiences. Any team is lucky to have him.",
+      "Darjan is a designer's dream frontend partner. Any team is lucky to have him.",
   },
   {
     name: "Ji Tae Kim",
@@ -45,7 +45,7 @@ const testimonials: Testimonial[] = [
     date: "March 2023",
     relationship: "Worked with Darjan on the same team",
     quote:
-      "Darjan is an engineer who thinks like a designer. He can turn any design into a flawless and stunning feature that delights your end users. He would be a great asset to any design-led company that wants to wow its customers.",
+      "Darjan is an engineer who thinks like a designer. He can turn any design into a flawless and stunning feature that delights your end users. ",
   },
   {
     name: "Jeff Auston",
@@ -55,7 +55,7 @@ const testimonials: Testimonial[] = [
     date: "March 2023",
     relationship: "Managed Darjan directly",
     quote:
-      "Darjan worked with our team for more than 2 years, made significant contributions to our code base, and was a pleasure to work with. I would hire Darjan again — highly recommend him for any team looking for a strong engineer.",
+      "Darjan worked with our team for more than 2 years. I would hire Darjan again — highly recommend him for any team looking for a strong engineer.",
   },
   {
     name: "Harsh Patel",
@@ -76,7 +76,7 @@ const testimonials: Testimonial[] = [
     date: "April 2023",
     relationship: "Worked with Darjan on the same team",
     quote:
-      "I was consistently impressed by his productivity and speed. His ability to solve complex problems in a timely manner is truly exceptional. I have no doubt that Darjan would be an asset to any team lucky enough to work with him.",
+      "I was consistently impressed by his productivity and speed. His ability to solve complex problems in a timely manner is truly exceptional.",
   },
   {
     name: "Colby Dugger",
@@ -86,7 +86,7 @@ const testimonials: Testimonial[] = [
     date: "May 2023",
     relationship: "Worked with Darjan on the same team",
     quote:
-      "Darjan automated a multi-step pipeline that saved our team weeks of time. The turnaround time and cross-functional collaboration were unmatched. I highly recommend him to anyone looking for a top-tier developer.",
+      "The turnaround time and cross-functional collaboration were unmatched. I highly recommend him to anyone looking for a top-tier developer.",
   },
   {
     name: "Joseph Lee",
@@ -97,7 +97,7 @@ const testimonials: Testimonial[] = [
     date: "March 2023",
     relationship: "Worked with Darjan on the same team",
     quote:
-      "Darjan fearlessly took on difficult frontend assignments and skillfully translated detailed Figma designs into functioning code. He would be a great addition to any engineering team.",
+      "Darjan fearlessly took on difficult frontend assignments and skillfully translated detailed Figma designs into functioning code.",
   },
   {
     name: "Ioana Manoliu",
@@ -128,7 +128,7 @@ const testimonials: Testimonial[] = [
     date: "March 2023",
     relationship: "Worked with Darjan on the same team",
     quote:
-      "Darjan was instrumental in delivering complex frontend projects and his work exceeded expectations. He demonstrated remarkable attention to detail and implemented pixel-perfect designs with precision and efficiency.",
+      "Darjan was instrumental in delivering complex frontend projects and his work exceeded expectations. ",
   },
   {
     name: "Milos Glendza",
@@ -188,7 +188,7 @@ export function TestimonialsSection() {
                       {date} · {relationship}
                     </span>
                   </div>
-                  <blockquote className="mt-3">
+                  <blockquote className="mt-8">
                     <p className="text-foreground/70 text-sm leading-relaxed tracking-wide">
                       {quote}
                     </p>
