@@ -81,7 +81,7 @@ export default function GalleryHoverCarousel({
       {/* Header */}
       <div className="mx-auto max-w-6xl px-6 lg:px-8 mb-8 md:mb-14 lg:mb-16">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between">
-          <h3 className="max-w-2xl text-2xl font-medium leading-snug text-foreground lg:text-3xl">
+          <h3 className="max-w-xl mx-2 text-2xl font-medium leading-snug text-foreground lg:text-3xl">
             {heading}{" "}
             <span className="text-base text-muted-foreground lg:text-2xl">
               — Explore the collection of latest projects Darjan has been
