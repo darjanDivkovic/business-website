@@ -41,13 +41,6 @@ export function Header() {
           href="/"
           className="hover:bg-accent flex items-center gap-2 rounded-md p-2"
         >
-          <Image
-            src="/logo.png"
-            alt="darjan.dev logo"
-            width={35}
-            height={35}
-            className="shrink-0"
-          />
           <WordmarkIcon className="h-4" />
         </Link>
         <div className="hidden items-center gap-2 md:flex">

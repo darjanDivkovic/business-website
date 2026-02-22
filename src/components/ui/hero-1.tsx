@@ -11,7 +11,7 @@ export function HeroSection() {
         aria-hidden="true"
         className="absolute inset-0 isolate hidden overflow-hidden contain-strict lg:block"
       >
-        <div className="absolute inset-0 -top-14 isolate -z-10 bg-[radial-gradient(35%_80%_at_49%_0%,color-mix(in_oklch,var(--color-foreground)_8%,transparent),transparent)] contain-strict" />
+        <div className="absolute inset-0 -top-14 isolate -z-10 bg-[radial-gradient(35%_80%_at_49%_0%,color-mix(in_oklch,var(--color-foreground)_8%,transparent),transparent)] contain-strict opacity-40" />
       </div>
 
       {/*
@@ -63,10 +63,10 @@ export function HeroSection() {
             "[text-shadow:0_0px_50px_color-mix(in_oklch,var(--color-foreground)_20%,transparent)]",
           )}
         >
-          High-Quality Solutions. Real results. No fluff.
+          High-Quality Solutions. <br /> Real results. No fluff.
         </h1>
 
-        <p className="animate-in fade-in slide-in-from-bottom-4 mx-auto max-w-md fill-mode-backwards text-center text-base text-foreground/80 tracking-wider delay-200 duration-500 ease-out sm:text-lg md:text-lg">
+        <p className="animate-in fade-in slide-in-from-bottom-4 mx-auto max-w-md fill-mode-backwards text-center text-base text-foreground/80 tracking-wider delay-200 duration-500 ease-out sm:text-md md:text-md opacity-40">
           At prices you can actually afford and validate
         </p>
 
@@ -88,9 +88,10 @@ export function HeroSection() {
 export function LogosSection() {
   return (
     <section className="relative border-t border-b">
-      <div className="mx-auto max-w-6xl space-y-4 px-6 py-8 lg:px-8">
-        <h2 className="text-center font-medium text-lg text-muted-foreground tracking-tight md:text-xl">
-          Trusted by <span className="text-foreground">experts</span>
+      <div className="mx-auto max-w-6xl space-y-4 px-6 py-8 lg:px-8 ">
+        <h2 className="text-center font-medium text-lg text-muted-foreground tracking-tight md:text-md opacity-20">
+          Trusted by <span className="text-foreground">Companies</span> around
+          the globe
         </h2>
         <LogoCloud logos={logos} />
       </div>
@@ -100,35 +101,31 @@ export function LogosSection() {
 
 const logos = [
   {
-    src: "https://storage.efferd.com/logo/nvidia-wordmark.svg",
-    alt: "Nvidia Logo",
+    src: "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/Pequity.png",
+    alt: "Pequity Logo",
   },
   {
-    src: "https://storage.efferd.com/logo/supabase-wordmark.svg",
-    alt: "Supabase Logo",
+    src: "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/Kandor.png",
+    alt: "Kandor Logo",
   },
   {
-    src: "https://storage.efferd.com/logo/openai-wordmark.svg",
-    alt: "OpenAI Logo",
+    src: "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/Kinnect.png",
+    alt: "Kinnect Logo",
   },
   {
-    src: "https://storage.efferd.com/logo/turso-wordmark.svg",
-    alt: "Turso Logo",
+    src: "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/InnoScripta.png",
+    alt: "InnoScripta Logo",
   },
   {
-    src: "https://storage.efferd.com/logo/vercel-wordmark.svg",
-    alt: "Vercel Logo",
+    src: "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/BildIT.png",
+    alt: "Bild-IT Logo",
   },
   {
-    src: "https://storage.efferd.com/logo/github-wordmark.svg",
-    alt: "GitHub Logo",
+    src: "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/Pequity.png",
+    alt: "Pequity Logo",
   },
   {
-    src: "https://storage.efferd.com/logo/claude-wordmark.svg",
-    alt: "Claude AI Logo",
-  },
-  {
-    src: "https://storage.efferd.com/logo/clerk-wordmark.svg",
-    alt: "Clerk Logo",
+    src: "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/Kandor.png",
+    alt: "Kandor Logo",
   },
 ];

@@ -1,21 +1,27 @@
-import type { Metadata } from 'next'
-import '@/app/styles/globals.css'
+import type { Metadata } from "next";
+import "@/app/styles/globals.css";
+import { Actor } from "next/font/google";
+
+const actor = Actor({
+  subsets: ["latin"],
+  weight: ["400"], // Actor only has regular
+  variable: "--font-primary",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: 'darjan.dev',
-  description: 'Freelance developer',
-}
+  title: "darjan.dev",
+  description: "Freelance developer",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="antialiased">
-        {children}
-      </body>
+      <body className={`${actor.variable} antialiased`}>{children}</body>
     </html>
-  )
+  );
 }

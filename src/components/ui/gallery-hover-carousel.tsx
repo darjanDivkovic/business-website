@@ -24,27 +24,27 @@ interface GalleryHoverCarouselItem {
 const defaultItems: GalleryHoverCarouselItem[] = [
   {
     id: "item-1",
-    title: "Build Modern UIs",
+    title: "Community Website & Shop – Barz Freak",
     summary:
-      "Create stunning user interfaces with our comprehensive design system.",
+      "From concept to launch, I spearheaded the end-to-end development of Barz Freak as a responsive, mobile-first website optimized for cross-browser compatibility and high-performance loading times, ensuring seamless user experiences across desktops, tablets, and smartphones.",
     url: "#",
     image:
       "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/BarzFreakPoster.png",
   },
   {
     id: "item-2",
-    title: "Computer Vision Technology",
+    title: "Pequity - B2B SaaS Application",
     summary:
-      "Powerful image recognition and processing capabilities that allow AI systems to analyze, understand, and interpret visual information from the world.",
+      "At Pequity, a San Francisco-based equity management SaaS helping organizations achieve pay equity and transparent compensation, I served as UI/UX Developer from 2021 to September 2023. Leveraging 5+ years of frontend expertise (React.js, Vue.js, TypeScript, Tailwind/SCSS, API integrations), I delivered polished, high-converting interfaces while extending functionality with third-party tools and building automation scripts to power marketing at scale.",
     url: "#",
     image:
       "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/PequityPoster.png",
   },
   {
     id: "item-3",
-    title: "Machine Learning Automation",
+    title: "Marketing Portal for browser game alliance",
     summary:
-      "Self-improving algorithms that learn from data patterns to automate complex tasks and make intelligent decisions with minimal human intervention.",
+      "I embarked on the exciting task of designing and developing a website for a browser game that revolves around alliances of players The objective was to create a personalized portal where players could be invited to join alliances.",
     url: "#",
     image:
       "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/LegioGemina.png",
@@ -84,8 +84,8 @@ export default function GalleryHoverCarousel({
           <h3 className="max-w-2xl text-2xl font-medium leading-snug text-foreground lg:text-3xl">
             {heading}{" "}
             <span className="text-base text-muted-foreground lg:text-2xl">
-              — Explore our collection of innovative solutions and cutting-edge
-              technologies designed to transform your business.
+              — Explore the collection of latest projects Darjan has been
+              involved with
             </span>
           </h3>
 
