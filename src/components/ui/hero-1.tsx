@@ -121,11 +121,11 @@ const logos = [
     alt: "Bild-IT Logo",
   },
   {
-    src: "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/Pequity.png",
-    alt: "Pequity Logo",
+    src: "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/BarzFreak.png",
+    alt: "Barz Freak Logo",
   },
   {
-    src: "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/Kandor.png",
-    alt: "Kandor Logo",
+    src: "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/LegioGeminaLogo.png",
+    alt: "Legio Gemina Logo",
   },
 ];
