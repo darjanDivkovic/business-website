@@ -1,5 +1,6 @@
 import { HeroSection, LogosSection } from "@/components/ui/hero-1";
 import { Header } from "@/components/ui/header-1";
+import GalleryHoverCarousel from "@/components/ui/gallery-hover-carousel";
 
 export function HomePage() {
   return (
@@ -8,6 +9,7 @@ export function HomePage() {
       <main className="relative grow overflow-hidden">
         <HeroSection />
         <LogosSection />
+        <GalleryHoverCarousel heading="Featured Projects" />
       </main>
     </div>
   );

@@ -5,8 +5,8 @@ import { LogoCloud } from "@/components/ui/logo-cloud-3";
 
 export function HeroSection() {
   return (
-    <section className="mx-auto w-full max-w-5xl">
-      {/* Top Shades */}
+    <section className="mx-auto w-full max-w-6xl">
+      {/* Radial top glow */}
       <div
         aria-hidden="true"
         className="absolute inset-0 isolate hidden overflow-hidden contain-strict lg:block"
@@ -14,32 +14,40 @@ export function HeroSection() {
         <div className="absolute inset-0 -top-14 isolate -z-10 bg-[radial-gradient(35%_80%_at_49%_0%,color-mix(in_oklch,var(--color-foreground)_8%,transparent),transparent)] contain-strict" />
       </div>
 
-      {/* Vertical Bold Faded Borders */}
+      {/*
+        Outer vertical rail lines — track the max-w-6xl container edges.
+        left-0/right-0 are relative to the mx-auto centered container,
+        so they sit exactly at the content column boundary.
+      */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 mx-auto hidden min-h-screen w-full max-w-5xl lg:block"
+        className="absolute inset-0 mx-auto hidden min-h-screen w-full max-w-6xl lg:block"
       >
-        <div className="absolute inset-y-0 left-0 z-10 h-full w-px bg-foreground/15 [mask-image:linear-gradient(to_bottom,transparent_80%,black)]" />
-        <div className="absolute inset-y-0 right-0 z-10 h-full w-px bg-foreground/15 [mask-image:linear-gradient(to_bottom,transparent_80%,black)]" />
+        <div className="absolute inset-y-0 left-0 z-10 h-full w-px bg-foreground/10 [mask-image:linear-gradient(to_bottom,transparent_80%,black)]" />
+        <div className="absolute inset-y-0 right-0 z-10 h-full w-px bg-foreground/10 [mask-image:linear-gradient(to_bottom,transparent_80%,black)]" />
       </div>
 
-      {/* Main content */}
-      <div className="relative flex flex-col items-center justify-center gap-5 pt-32 pb-28">
-        {/* Content Faded Borders */}
+      {/* Main content — padded to match section standard */}
+      <div className="relative flex flex-col items-center justify-center gap-5 px-6 pt-32 pb-28 lg:px-8">
+        {/*
+          Inner decorative lines — sit at the padding boundary.
+          px-6 (24px) on mobile → left-6/right-6
+          lg:px-8 (32px) on desktop → lg:left-8/lg:right-8
+        */}
         <div
           aria-hidden="true"
           className="absolute inset-0 -z-[1] size-full overflow-hidden"
         >
-          <div className="absolute inset-y-0 left-4 w-px bg-gradient-to-b from-transparent via-border to-border md:left-8" />
-          <div className="absolute inset-y-0 right-4 w-px bg-gradient-to-b from-transparent via-border to-border md:right-8" />
-          <div className="absolute inset-y-0 left-8 w-px bg-gradient-to-b from-transparent via-border/50 to-border/50 md:left-12" />
-          <div className="absolute inset-y-0 right-8 w-px bg-gradient-to-b from-transparent via-border/50 to-border/50 md:right-12" />
+          <div className="absolute inset-y-0 left-6 w-px bg-gradient-to-b from-transparent via-border to-border lg:left-8" />
+          <div className="absolute inset-y-0 right-6 w-px bg-gradient-to-b from-transparent via-border to-border lg:right-8" />
+          <div className="absolute inset-y-0 left-10 w-px bg-gradient-to-b from-transparent via-border/40 to-border/40 lg:left-14" />
+          <div className="absolute inset-y-0 right-10 w-px bg-gradient-to-b from-transparent via-border/40 to-border/40 lg:right-14" />
         </div>
 
         <a
           className={cn(
             "group mx-auto flex w-fit items-center gap-3 rounded-full border bg-card px-3 py-1 shadow",
-            "animate-in fade-in slide-in-from-bottom-4 fill-mode-backwards transition-all delay-500 duration-500 ease-out"
+            "animate-in fade-in slide-in-from-bottom-4 fill-mode-backwards transition-all delay-500 duration-500 ease-out",
           )}
           href="#link"
         >
@@ -52,15 +60,14 @@ export function HeroSection() {
         <h1
           className={cn(
             "animate-in fade-in slide-in-from-bottom-4 fill-mode-backwards text-balance text-center text-4xl tracking-tight delay-100 duration-500 ease-out md:text-5xl lg:text-6xl",
-            "[text-shadow:0_0px_50px_color-mix(in_oklch,var(--color-foreground)_20%,transparent)]"
+            "[text-shadow:0_0px_50px_color-mix(in_oklch,var(--color-foreground)_20%,transparent)]",
           )}
         >
-          Building Teams Help <br /> You Scale and Lead
+          High-Quality Solutions. Real results. No fluff.
         </h1>
 
-        <p className="animate-in fade-in slide-in-from-bottom-4 mx-auto max-w-md fill-mode-backwards text-center text-base text-foreground/80 tracking-wider delay-200 duration-500 ease-out sm:text-lg md:text-xl">
-          Connecting you with world-class talent <br /> to scale, innovate and
-          lead
+        <p className="animate-in fade-in slide-in-from-bottom-4 mx-auto max-w-md fill-mode-backwards text-center text-base text-foreground/80 tracking-wider delay-200 duration-500 ease-out sm:text-lg md:text-lg">
+          At prices you can actually afford and validate
         </p>
 
         <div className="animate-in fade-in slide-in-from-bottom-4 flex flex-row flex-wrap items-center justify-center gap-3 fill-mode-backwards pt-2 delay-300 duration-500 ease-out">
@@ -80,11 +87,11 @@ export function HeroSection() {
 
 export function LogosSection() {
   return (
-    <section className="relative space-y-4 border-t pt-6 pb-10">
-      <h2 className="text-center font-medium text-lg text-muted-foreground tracking-tight md:text-xl">
-        Trusted by <span className="text-foreground">experts</span>
-      </h2>
-      <div className="relative z-10 mx-auto max-w-4xl">
+    <section className="relative border-t border-b">
+      <div className="mx-auto max-w-6xl space-y-4 px-6 py-8 lg:px-8">
+        <h2 className="text-center font-medium text-lg text-muted-foreground tracking-tight md:text-xl">
+          Trusted by <span className="text-foreground">experts</span>
+        </h2>
         <LogoCloud logos={logos} />
       </div>
     </section>
