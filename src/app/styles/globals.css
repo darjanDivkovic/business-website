@@ -82,6 +82,24 @@ body {
   --ring: oklch(0.556 0 0);
 }
 
+@theme {
+  --animate-meteor-effect: meteor 5s linear infinite;
+}
+
+@keyframes meteor {
+  0% {
+    transform: rotate(215deg) translateX(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(215deg) translateX(-500px);
+    opacity: 0;
+  }
+}
+
 @layer base {
   * {
     border-color: var(--color-border);

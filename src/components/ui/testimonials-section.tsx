@@ -151,7 +151,7 @@ export function TestimonialsSection() {
           <h2 className="text-3xl tracking-tight text-balance md:text-4xl lg:text-5xl">
             What people say
           </h2>
-          <p className="text-muted-foreground text-base md:text-lg opacity-60">
+          <p className="font-medium text-md mt-2 text-muted-foreground tracking-tight md:text-md opacity-50">
             Verified recommendations from colleagues, managers, and founders
             I've worked with.
           </p>
