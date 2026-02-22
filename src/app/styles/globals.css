@@ -108,4 +108,18 @@ body {
     background-color: var(--color-background);
     color: var(--color-foreground);
   }
+
+  /*
+    Typography defaults — components can override these with Tailwind utilities.
+    The hero h1 overrides size responsively; page-level bare h1s get these defaults.
+  */
+  h1 {
+    @apply text-4xl font-bold tracking-tight;
+  }
+  h2 {
+    @apply text-3xl font-bold tracking-tight;
+  }
+  h3 {
+    @apply text-2xl font-semibold tracking-tight;
+  }
 }

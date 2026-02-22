@@ -1,6 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 type Testimonial = {
   name: string;
@@ -143,60 +145,123 @@ const testimonials: Testimonial[] = [
   },
 ];
 
+// ─── Sub-component ────────────────────────────────────────────────────────────
+
+function CardContent({ t }: { t: Testimonial }) {
+  return (
+    <>
+      <img
+        alt={t.name}
+        src={t.image}
+        loading="lazy"
+        className="size-9 rounded-full mt-0.5 object-cover"
+      />
+      <div>
+        <div className="-mt-0.5 space-y-0.5">
+          <p className="text-sm tracking-tight font-medium">{t.name}</p>
+          <span className="text-muted-foreground block text-[11px] tracking-tight opacity-70">
+            {t.role}
+            {t.company ? ` · ${t.company}` : ""}
+          </span>
+          <span className="text-[10px] opacity-40 block">
+            {t.date} · {t.relationship}
+          </span>
+        </div>
+        <blockquote className="mt-8">
+          <p className="text-foreground/70 text-sm leading-relaxed tracking-wide">
+            {t.quote}
+          </p>
+        </blockquote>
+      </div>
+    </>
+  );
+}
+
+// ─── Section ─────────────────────────────────────────────────────────────────
+
 export function TestimonialsSection() {
+  const [expanded, setExpanded] = useState(false);
+
+  const firstBatch = testimonials.slice(0, 6);
+  const restBatch = testimonials.slice(6);
+
   return (
     <section className="relative w-full py-20 px-6 lg:px-10 max-w-6xl mx-auto">
       <div className="mx-auto max-w-6xl space-y-10">
         <div className="space-y-2">
-          <h2 className="text-3xl tracking-tight text-balance md:text-4xl lg:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl">
             What people say
           </h2>
           <p className="font-medium text-md mt-2 text-muted-foreground tracking-tight md:text-md opacity-50">
             Verified recommendations from colleagues, managers, and founders
-            I've worked with.
+            I&apos;ve worked with.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map(
-            (
-              { name, role, company, quote, image, date, relationship },
-              index,
-            ) => (
+          {/* ── First 6 cards ─────────────────────────────────────────── */}
+          {firstBatch.map((t, index) => {
+            const isSixth = index === 5;
+            const showMobileOverlay = index === 4 && !expanded;
+            const showDesktopOverlay = isSixth && !expanded;
+
+            return (
               <motion.div
-                key={name}
+                key={t.name}
                 initial={{ filter: "blur(4px)", translateY: -8, opacity: 0 }}
                 whileInView={{ filter: "blur(0px)", translateY: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.05 * index + 0.05, duration: 0.7 }}
-                className="grid grid-cols-[auto_1fr] gap-x-3 border border-border rounded-md bg-[#fff]/2 p-4"
+                className={cn(
+                  "relative grid grid-cols-[auto_1fr] gap-x-3 border border-border rounded-md bg-[#fff]/2 p-4",
+                  // 6th card is hidden on mobile unless expanded
+                  isSixth && !expanded && "hidden sm:grid",
+                )}
               >
-                <img
-                  alt={name}
-                  src={image}
-                  loading="lazy"
-                  className="size-9 rounded-full mt-0.5 object-cover"
-                />
-                <div>
-                  <div className="-mt-0.5 space-y-0.5">
-                    <p className="text-sm tracking-tight font-medium">{name}</p>
-                    <span className="text-muted-foreground block text-[11px] tracking-tight opacity-70">
-                      {role}
-                      {company ? ` · ${company}` : ""}
-                    </span>
-                    <span className="text-[10px] opacity-40 block">
-                      {date} · {relationship}
-                    </span>
+                <CardContent t={t} />
+
+                {/* "Read all" overlay — mobile (on 5th card) */}
+                {showMobileOverlay && (
+                  <div className="sm:hidden absolute inset-x-0 bottom-0 rounded-b-md h-4/5 z-10 bg-gradient-to-t from-background via-background/75 to-transparent flex items-end justify-center pb-5">
+                    <button
+                      onClick={() => setExpanded(true)}
+                      className="rounded-full border border-border bg-card px-5 py-2 text-sm font-medium shadow-sm hover:bg-accent transition-colors"
+                    >
+                      Read all {testimonials.length} reviews
+                    </button>
                   </div>
-                  <blockquote className="mt-8">
-                    <p className="text-foreground/70 text-sm leading-relaxed tracking-wide">
-                      {quote}
-                    </p>
-                  </blockquote>
-                </div>
+                )}
+
+                {/* "Read all" overlay — tablet + desktop (on 6th card) */}
+                {showDesktopOverlay && (
+                  <div className="hidden sm:flex absolute inset-x-0 bottom-0 rounded-b-md h-4/5 z-10 bg-gradient-to-t from-background via-background/75 to-transparent items-end justify-center pb-5">
+                    <button
+                      onClick={() => setExpanded(true)}
+                      className="rounded-full border border-border bg-card px-5 py-2 text-sm font-medium shadow-sm hover:bg-accent transition-colors"
+                    >
+                      Read all {testimonials.length} reviews
+                    </button>
+                  </div>
+                )}
               </motion.div>
-            ),
-          )}
+            );
+          })}
+
+          {/* ── Rest of cards revealed on expand ──────────────────────── */}
+          <AnimatePresence>
+            {expanded &&
+              restBatch.map((t, i) => (
+                <motion.div
+                  key={t.name}
+                  initial={{ filter: "blur(4px)", translateY: -8, opacity: 0 }}
+                  animate={{ filter: "blur(0px)", translateY: 0, opacity: 1 }}
+                  transition={{ delay: 0.05 * i, duration: 0.7 }}
+                  className="grid grid-cols-[auto_1fr] gap-x-3 border border-border rounded-md bg-[#fff]/2 p-4"
+                >
+                  <CardContent t={t} />
+                </motion.div>
+              ))}
+          </AnimatePresence>
         </div>
       </div>
     </section>

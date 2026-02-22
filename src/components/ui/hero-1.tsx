@@ -5,13 +5,13 @@ import { LogoCloud } from "@/components/ui/logo-cloud-3";
 
 export function HeroSection() {
   return (
-    <section className="mx-auto w-full max-w-6xl">
+    <section className="mx-auto w-full max-w-6xl h-[70vh]">
       {/* Radial top glow */}
       <div
         aria-hidden="true"
         className="absolute inset-0 isolate hidden overflow-hidden contain-strict lg:block"
       >
-        <div className="absolute inset-0 -top-14 isolate -z-10 bg-[radial-gradient(35%_80%_at_49%_0%,color-mix(in_oklch,var(--color-foreground)_8%,transparent),transparent)] contain-strict opacity-40" />
+        <div className="absolute inset-0 isolate -z-10 bg-[radial-gradient(35%_80%_at_49%_0%,color-mix(in_oklch,var(--color-foreground)_8%,transparent),transparent)] contain-strict opacity-40" />
       </div>
 
       {/*
@@ -36,9 +36,9 @@ export function HeroSection() {
         */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-[1] size-full overflow-hidden"
+          className="absolute inset-0 -z-[1] size-full overflow-hidden mt-[5vh]"
         >
-          <div className="absolute inset-y-0 left-6 w-px bg-gradient-to-b from-transparent via-border to-border lg:left-8" />
+          <div className="absolute inset-y-0 left-6 w-px bg-gradient-to-b from-transparent via-border to-border lg:left-8 " />
           <div className="absolute inset-y-0 right-6 w-px bg-gradient-to-b from-transparent via-border to-border lg:right-8" />
           <div className="absolute inset-y-0 left-10 w-px bg-gradient-to-b from-transparent via-border/40 to-border/40 lg:left-14" />
           <div className="absolute inset-y-0 right-10 w-px bg-gradient-to-b from-transparent via-border/40 to-border/40 lg:right-14" />
