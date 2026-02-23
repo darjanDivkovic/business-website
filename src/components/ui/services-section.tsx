@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Zap, Clock, Sparkles, Check, LucideIcon } from "lucide-react";
 import { ReactNode } from "react";
+import SectionTitleComponent from "./SectionTitleComponent";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -96,14 +97,11 @@ export function ServicesSection() {
   return (
     <section className="py-8 md:py-16 border">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
-        <div className="mb-12 text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            How I Can Help
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            Flexible engagement models built around your project and timeline.
-          </p>
-        </div>
+        <SectionTitleComponent
+          prefix="How I Can Help"
+          header="Services Tailored and customizable for your specific needs."
+          children="Find a suitable service or simply reach out via any Book a Call button to set up a free 15-min Call"
+        />
 
         <div className="mx-auto grid gap-4 lg:grid-cols-2">
           {services.map((service, idx) =>

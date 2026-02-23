@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { cn } from "@/lib/utils";
+import SectionTitleComponent from "./SectionTitleComponent";
 
 const items = [
   {
@@ -91,18 +92,12 @@ const GridItem = ({ area, icon, title, description }: GridItemProps) => {
 export function AboutTrustSection() {
   return (
     <section className="py-16 md:py-24 px-6 lg:px-8 max-w-6xl mx-auto">
-      <div className="mb-12 text-center">
-        <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-3">
-          Why work with me
-        </p>
-        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground text-balance">
-          A developer you can actually rely on
-        </h2>
-        <p className="mt-4 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-          I&apos;m Darjan — a freelance developer who builds clean, fast, and
-          maintainable web products. Here&apos;s what that means in practice.
-        </p>
-      </div>
+      <SectionTitleComponent
+        prefix="Why work with me"
+        header="A developer you can actually rely on"
+        children="  I'm Darjan — a freelance developer who builds clean, fast, and
+        maintainable web products. Here's what that means in practice."
+      />
 
       <ul className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[34rem] xl:grid-rows-2">
         {items.map((item) => (

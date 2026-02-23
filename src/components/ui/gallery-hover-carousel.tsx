@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 import Link from "next/link";
+import SectionTitleComponent from "./SectionTitleComponent";
 
 interface GalleryHoverCarouselItem {
   id: string;
@@ -81,13 +82,13 @@ export default function GalleryHoverCarousel({
       {/* Header */}
       <div className="mx-auto max-w-6xl px-6 lg:px-8 mb-8 md:mb-14 lg:mb-16">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between">
-          <h3 className="max-w-xl mx-2 text-2xl font-semibold tracking-tight text-foreground lg:text-3xl">
-            {heading}{" "}
-            <span className="text-base text-muted-foreground lg:text-2xl">
-              — Explore the collection of latest projects Darjan has been
-              involved with
-            </span>
-          </h3>
+          <SectionTitleComponent
+            className="text-left"
+            prefix="PREVIOUS WORK"
+            header="Featured Solutions"
+            children="— Explore the collection of latest projects Darjan has been
+              involved with"
+          />
 
           {/* Swipe hint */}
           <motion.div
