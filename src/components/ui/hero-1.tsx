@@ -5,7 +5,7 @@ import { LogoCloud } from "@/components/ui/logo-cloud-3";
 
 export function HeroSection() {
   return (
-    <section className="relative mx-auto w-full max-w-6xl h-[80vh] md:h-[70vh] overflow-hidden">
+    <section className="relative mx-auto w-full max-w-6xl h-[85vh] md:h-[70vh] overflow-hidden">
       {/* Video background */}
       <video
         className="absolute inset-0 h-full w-full object-cover"
@@ -99,7 +99,7 @@ export function HeroSection() {
           validate
         </p>
 
-        <div className="animate-in fade-in slide-in-from-bottom-4 flex items-left flex-col md:flex-row mt-16 md:mt-0 gap-3 fill-mode-backwards pt-2 delay-300 duration-500 ease-out absolute bottom-0">
+        <div className="animate-in fade-in slide-in-from-bottom-4 flex items-left w-full md:w-unset pr-12 flex-col md:flex-row mt-16 md:mt-0 gap-3 fill-mode-backwards pt-2 delay-300 duration-500 ease-out absolute bottom-[-40px] md:bottom-0">
           <Button variant="outline">Book a Call</Button>
           <Button>Get started</Button>
         </div>
