@@ -15,12 +15,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(slug);
 
   if (!post) {
-    return { title: "Post not found | darjan.dev" };
+    return { title: "Post Not Found" };
   }
 
   return {
-    title: `${post.title} | darjan.dev`,
+    title: post.title,
     description: post.description,
+    alternates: {
+      canonical: `https://darjan.dev/blog/${post.slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.description,

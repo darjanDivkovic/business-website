@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import { BlogPage } from "@/app/pages/Blog/BlogPage";
 
 export const metadata: Metadata = {
-  title: "Blog | darjan.dev",
+  title: "Blog",
   description:
     "Thoughts on React, TypeScript, architecture decisions, and shipping great software — from a freelance developer who builds for modern teams.",
+  alternates: {
+    canonical: "https://darjan.dev/blog",
+  },
   openGraph: {
-    title: "Blog | darjan.dev",
+    title: "Blog | Darjan.dev",
     description:
       "Thoughts on React, TypeScript, architecture decisions, and shipping great software.",
     type: "website",
@@ -14,7 +17,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blog | darjan.dev",
+    title: "Blog | Darjan.dev",
     description:
       "Thoughts on React, TypeScript, architecture decisions, and shipping great software.",
   },

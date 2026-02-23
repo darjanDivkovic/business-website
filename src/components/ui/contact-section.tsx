@@ -76,13 +76,11 @@ export function ContactSection({
   };
 
   return (
-    <div className="h-[50vh] overflow-hidden mt-[-10vh] border">
-      <section className="relative min-h-screen bg-black flex items-center overflow-hidden py-24 md:py-32 px-6 lg:px-32">
-        {/* 3D dot wave background, clipped to this section */}
-        <DottedSurface className="absolute opacity-40" />
+    <section className="relative bg-black flex items-center overflow-hidden py-24 md:py-32 px-6 lg:px-32">
+        {/* 3D dot wave background */}
+        <DottedSurface className="opacity-40" />
 
         <div className="relative z-10 mx-auto w-full max-w-6xl">
-          <div className="px-16 mx-16">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-start">
               {/* ── Left ───────────────────────────────────────────── */}
               <div className="flex flex-col gap-10 lg:sticky lg:top-28 lg:pt-3">
@@ -236,9 +234,7 @@ export function ContactSection({
                 </form>
               </div>
             </div>
-          </div>
         </div>
-      </section>
-    </div>
+    </section>
   );
 }
