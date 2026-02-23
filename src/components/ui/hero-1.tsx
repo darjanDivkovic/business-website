@@ -15,6 +15,7 @@ export function HeroSection() {
         loop
         muted
         playsInline
+        preload="metadata"
       />
 
       {/* Mobile-only: dark top gradient so the sticky header stays readable */}
