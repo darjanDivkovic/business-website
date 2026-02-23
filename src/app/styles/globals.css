@@ -35,6 +35,25 @@ body {
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/*
+  ─── Cosmic palette ────────────────────────────────────────────────────────
+  Derived from the background beam-effect (same hues/values used there).
+  Purple   → atmospheric cloud   oklch(0.36–0.44, 0.22–0.24, 275–278)
+  Blue     → vivid mid conic     oklch(0.74, 0.26, 244)
+  Ice blue → SVG wing streaks    #88aaff / #aabbff
+  ─────────────────────────────────────────────────────────────────────────── */
+:root {
+  --cosmic-purple-deep:  #1E1060;   /* deepest atmospheric purple          */
+  --cosmic-purple-mid:   #3A2490;   /* outer conic purple                  */
+  --cosmic-purple-glow:  #5566DD;   /* wing inner (readable glow)          */
+  --cosmic-purple-text:  #9999F8;   /* light lavender — readable on dark   */
+  --cosmic-blue-deep:    #0E2060;   /* deep space blue                     */
+  --cosmic-blue-mid:     #1E50C0;   /* royal blue                          */
+  --cosmic-blue-glow:    #4488FF;   /* vivid blue — mid conic              */
+  --cosmic-blue-text:    #88AAFF;   /* light periwinkle — wing highlight   */
+  --cosmic-ice:          #AABBFF;   /* wing outer highlight                */
+}
+
 /* Light mode tokens */
 :root {
   --background: oklch(1 0 0);
@@ -84,6 +103,9 @@ body {
 
 @theme {
   --animate-meteor-effect: meteor 5s linear infinite;
+  --animate-aurora-drift: aurora-drift 10s ease-in-out infinite;
+  --animate-card-slide-up: card-slide-up 0.65s ease-out both;
+  --animate-scan-sweep: scan-sweep 1.8s ease-in-out both;
 }
 
 @keyframes meteor {
@@ -98,6 +120,24 @@ body {
     transform: rotate(215deg) translateX(-500px);
     opacity: 0;
   }
+}
+
+@keyframes aurora-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(28px, -20px) scale(1.08); }
+  66%       { transform: translate(-20px, 12px) scale(0.94); }
+}
+
+@keyframes card-slide-up {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scan-sweep {
+  from  { transform: translateX(-120px); opacity: 0; }
+  6%    { opacity: 1; }
+  92%   { opacity: 1; }
+  to    { transform: translateX(calc(100vw + 120px)); opacity: 0; }
 }
 
 @layer base {

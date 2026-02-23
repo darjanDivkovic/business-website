@@ -95,9 +95,10 @@ export function AboutTrustSection() {
       <SectionTitleComponent
         prefix="Why work with me"
         header="A developer you can actually rely on"
-        children="  I'm Darjan — a freelance developer who builds clean, fast, and
-        maintainable web products. Here's what that means in practice."
-      />
+      >
+        I&apos;m Darjan — a freelance developer who builds clean, fast, and
+        maintainable web products. Here&apos;s what that means in practice.
+      </SectionTitleComponent>
 
       <ul className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[34rem] xl:grid-rows-2">
         {items.map((item) => (
