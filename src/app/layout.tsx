@@ -4,6 +4,7 @@ import { Actor } from "next/font/google";
 import { Footer } from "@/components/ui/footer";
 import { SplashScreen } from "@/components/ui/splash-screen";
 import { Providers } from "@/components/providers";
+import { Analytics } from "@vercel/analytics/next";
 
 const actor = Actor({
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({
           {children}
           <Footer />
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
