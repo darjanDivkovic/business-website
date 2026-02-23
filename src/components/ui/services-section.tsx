@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Meteors } from "@/components/ui/meteors";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import { Zap, Clock, Sparkles, Check, LucideIcon } from "lucide-react";
 import { ReactNode } from "react";
 
@@ -17,8 +18,16 @@ interface ServiceData {
   colSpan?: boolean;
   badge?: {
     text: string;
-    variant: "purple-subtle" | "blue-subtle" | "green-subtle" | "amber-subtle" | "trial";
+    variant:
+      | "purple-subtle"
+      | "blue-subtle"
+      | "green-subtle"
+      | "amber-subtle"
+      | "trial";
   };
+  titleColor?: string;
+  checkColor?: string;
+  showButtons?: boolean;
 }
 
 const services: ServiceData[] = [
@@ -37,6 +46,9 @@ const services: ServiceData[] = [
       "Small-to-medium frontend enhancements",
     ],
     badge: { text: "Most Popular", variant: "purple-subtle" },
+    titleColor: "#C370FB",
+    checkColor: "#351143",
+    showButtons: true,
   },
   {
     icon: Clock,
@@ -53,6 +65,9 @@ const services: ServiceData[] = [
       "ATS and HR tech solutions",
     ],
     badge: { text: "Best for Scale", variant: "blue-subtle" },
+    titleColor: "#0446C4",
+    checkColor: "#022349",
+    showButtons: true,
   },
   {
     icon: Sparkles,
@@ -70,6 +85,8 @@ const services: ServiceData[] = [
     ],
     comingSoon: true,
     colSpan: true,
+    titleColor: "#F39301",
+    checkColor: "#371800",
   },
 ];
 
@@ -144,12 +161,27 @@ function ServiceCard({
           title={service.title}
           tagline={service.tagline}
           description={service.description}
+          titleColor={service.titleColor}
         />
       </CardHeader>
 
-      <CardContent className="relative z-10 pt-4">
-        <OfferingsList offerings={service.offerings} />
+      <CardContent
+        className={cn("relative z-10 pt-4", service.showButtons && "pb-0")}
+      >
+        <OfferingsList
+          offerings={service.offerings}
+          checkColor={service.checkColor}
+        />
       </CardContent>
+
+      {service.showButtons && (
+        <div className="relative z-10 flex flex-col gap-4 px-12 pb-6 mt-6 mb-6">
+          <Button className="w-full">Get this Service</Button>
+          <Button variant="outline" className="w-full">
+            Book a Call
+          </Button>
+        </div>
+      )}
     </FeatureCard>
   );
 }
@@ -172,6 +204,7 @@ function AiCard({ service }: { service: ServiceData }) {
             title={service.title}
             tagline={service.tagline}
             description={service.description}
+            titleColor={service.titleColor}
           />
         </div>
 
@@ -182,7 +215,10 @@ function AiCard({ service }: { service: ServiceData }) {
               key={item}
               className="flex items-center gap-2 rounded-md border border-dashed px-3 py-2 text-sm text-muted-foreground opacity-60"
             >
-              <Check className="size-4 shrink-0 text-primary" />
+              <Check
+                className="size-4 shrink-0"
+                style={{ color: service.checkColor }}
+              />
               {item}
             </div>
           ))}
@@ -224,27 +260,48 @@ interface CardHeadingProps {
   title: string;
   tagline: string;
   description: string;
+  titleColor?: string;
 }
 
-function CardHeading({ icon: Icon, title, tagline, description }: CardHeadingProps) {
+function CardHeading({
+  icon: Icon,
+  title,
+  tagline,
+  description,
+  titleColor,
+}: CardHeadingProps) {
   return (
     <div className="p-6 pb-0">
-      <span className="flex items-center gap-2 text-sm text-muted-foreground">
+      <p
+        className="text-xl font-semibold"
+        style={titleColor ? { color: titleColor } : undefined}
+      >
+        {title}
+      </p>
+      <span className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
         <Icon className="size-4" />
         {tagline}
       </span>
-      <p className="mt-3 text-xl font-semibold">{title}</p>
-      <p className="mt-2 text-sm text-muted-foreground">{description}</p>
+      <p className="mt-4 text-sm text-muted-foreground">{description}</p>
     </div>
   );
 }
 
-function OfferingsList({ offerings }: { offerings: string[] }) {
+function OfferingsList({
+  offerings,
+  checkColor,
+}: {
+  offerings: string[];
+  checkColor?: string;
+}) {
   return (
     <ul className="mt-4 space-y-2 px-6 mb-4">
       {offerings.map((item) => (
         <li key={item} className="flex items-center gap-2 text-sm">
-          <Check className="size-4 shrink-0 text-primary" />
+          <Check
+            className={cn("size-4 shrink-0", !checkColor && "text-primary")}
+            style={checkColor ? { color: checkColor } : undefined}
+          />
           {item}
         </li>
       ))}

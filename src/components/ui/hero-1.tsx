@@ -5,7 +5,7 @@ import { LogoCloud } from "@/components/ui/logo-cloud-3";
 
 export function HeroSection() {
   return (
-    <section className="relative mx-auto w-full max-w-6xl h-[85vh] md:h-[70vh] overflow-hidden">
+    <section className="relative mx-auto w-full max-w-6xl h-[88vh] md:h-[70vh] overflow-hidden">
       {/* Video background */}
       <video
         className="absolute inset-0 h-full w-full object-cover"
