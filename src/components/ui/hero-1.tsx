@@ -5,7 +5,7 @@ import { LogoCloud } from "@/components/ui/logo-cloud-3";
 
 export function HeroSection() {
   return (
-    <section className="relative mx-auto w-full max-w-6xl h-[70vh] overflow-hidden">
+    <section className="relative mx-auto w-full max-w-6xl h-[80vh] md:h-[70vh] overflow-hidden">
       {/* Video background */}
       <video
         className="absolute inset-0 h-full w-full object-cover"
@@ -90,22 +90,18 @@ export function HeroSection() {
             "[text-shadow:0_0px_50px_color-mix(in_oklch,var(--color-foreground)_20%,transparent)]",
           )}
         >
-          High-Quality Solutions. <br /> Real results. No fluff.
+          High-Quality Solutions. <br /> Real results.{" "}
+          <br className="md:hidden" /> No fluff.
         </h1>
 
         <p className="animate-in fade-in opacity-60">
-          At prices you can actually afford and validate
+          At prices you can actually afford <br className="md:hidden" /> and
+          validate
         </p>
 
-        <div className="animate-in fade-in slide-in-from-bottom-4 flex items-left gap-3 fill-mode-backwards pt-2 delay-300 duration-500 ease-out">
-          <Button className="rounded-full" size="lg" variant="secondary">
-            <PhoneCallIcon className="mr-2 size-4" />
-            Book a Call
-          </Button>
-          <Button className="rounded-full" size="lg">
-            Get started
-            <ArrowRightIcon className="ms-2 size-4" />
-          </Button>
+        <div className="animate-in fade-in slide-in-from-bottom-4 flex items-left flex-col md:flex-row mt-16 md:mt-0 gap-3 fill-mode-backwards pt-2 delay-300 duration-500 ease-out">
+          <Button variant="outline">Book a Call</Button>
+          <Button>Get started</Button>
         </div>
       </div>
     </section>
