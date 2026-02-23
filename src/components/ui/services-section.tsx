@@ -201,7 +201,7 @@ export function ServicesSection() {
       {/* One-shot scan sweep — uses wing-streak color */}
       {inView && !scanned && (
         <div
-          className="pointer-events-none absolute inset-y-0 z-30 w-20 bg-gradient-to-r from-transparent via-[#5566DD]/20 to-transparent animate-scan-sweep"
+          className="pointer-events-none absolute inset-y-0 z-30 w-20 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-scan-sweep"
           onAnimationEnd={() => setScanned(true)}
         />
       )}
