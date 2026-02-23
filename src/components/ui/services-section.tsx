@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Meteors } from "@/components/ui/meteors";
 import { cn } from "@/lib/utils";
 import { Zap, Clock, Sparkles, Check, LucideIcon } from "lucide-react";
@@ -14,6 +15,10 @@ interface ServiceData {
   offerings: string[];
   comingSoon?: boolean;
   colSpan?: boolean;
+  badge?: {
+    text: string;
+    variant: "purple-subtle" | "blue-subtle" | "green-subtle" | "amber-subtle" | "trial";
+  };
 }
 
 const services: ServiceData[] = [
@@ -31,6 +36,7 @@ const services: ServiceData[] = [
       "React-based interactive features",
       "Small-to-medium frontend enhancements",
     ],
+    badge: { text: "Most Popular", variant: "purple-subtle" },
   },
   {
     icon: Clock,
@@ -46,11 +52,12 @@ const services: ServiceData[] = [
       "Corporate websites",
       "ATS and HR tech solutions",
     ],
+    badge: { text: "Best for Scale", variant: "blue-subtle" },
   },
   {
     icon: Sparkles,
     title: "AI-Powered Features",
-    tagline: "Coming Soon",
+    tagline: "AI & Automation",
     description:
       "Integrating AI-driven features into web apps for smarter, more adaptive user experiences.",
     offerings: [
@@ -112,13 +119,22 @@ function ServiceCard({
     <FeatureCard
       className={
         isFeatured
-          ? "overflow-hidden bg-white/2 text-white relative"
+          ? "overflow-hidden bg-gradient-to-br from-[#673AB7]/10 via-background to-[#FF4081]/5 relative"
           : undefined
       }
     >
       {isFeatured && (
-        <div className="absolute inset-0 opacity-30">
+        <div className="absolute inset-0 opacity-20">
           <Meteors number={20} />
+        </div>
+      )}
+
+      {/* Badge — top-right corner */}
+      {service.badge && (
+        <div className="absolute top-4 right-5 z-20">
+          <Badge variant={service.badge.variant} size="sm" capitalize={false}>
+            {service.badge.text}
+          </Badge>
         </div>
       )}
 
@@ -128,12 +144,11 @@ function ServiceCard({
           title={service.title}
           tagline={service.tagline}
           description={service.description}
-          dark={isFeatured}
         />
       </CardHeader>
 
       <CardContent className="relative z-10 pt-4">
-        <OfferingsList offerings={service.offerings} dark={isFeatured} />
+        <OfferingsList offerings={service.offerings} />
       </CardContent>
     </FeatureCard>
   );
@@ -146,17 +161,18 @@ function AiCard({ service }: { service: ServiceData }) {
     <FeatureCard className="lg:col-span-2">
       <div className="p-6">
         {/* Header row */}
-        <div className="flex flex-wrap items-start justify-between gap-4">
+        <div className="relative flex flex-wrap items-start gap-4">
+          <div className="absolute top-0 right-0">
+            <Badge variant="amber-subtle" size="sm" capitalize={false}>
+              Coming Soon
+            </Badge>
+          </div>
           <CardHeading
             icon={service.icon}
             title={service.title}
             tagline={service.tagline}
             description={service.description}
           />
-
-          <span className="inline-flex items-center rounded-full border border-dashed px-3 py-1 text-sm font-medium text-muted-foreground">
-            Coming Soon
-          </span>
         </div>
 
         {/* Offerings in a 2–3 col grid */}
@@ -170,19 +186,6 @@ function AiCard({ service }: { service: ServiceData }) {
               {item}
             </div>
           ))}
-        </div>
-
-        {/* Decorative circles */}
-        <div className="mt-10 flex justify-center gap-6 overflow-hidden">
-          <CircularUI
-            circles={[{ pattern: "border" }, { pattern: "border" }]}
-          />
-          <CircularUI circles={[{ pattern: "none" }, { pattern: "primary" }]} />
-          <CircularUI circles={[{ pattern: "blue" }, { pattern: "none" }]} />
-          <CircularUI
-            circles={[{ pattern: "primary" }, { pattern: "none" }]}
-            className="hidden sm:block"
-          />
         </div>
       </div>
     </FeatureCard>
@@ -221,104 +224,30 @@ interface CardHeadingProps {
   title: string;
   tagline: string;
   description: string;
-  dark?: boolean;
 }
 
-function CardHeading({
-  icon: Icon,
-  title,
-  tagline,
-  description,
-  dark,
-}: CardHeadingProps) {
+function CardHeading({ icon: Icon, title, tagline, description }: CardHeadingProps) {
   return (
     <div className="p-6 pb-0">
-      <span
-        className={cn(
-          "flex items-center gap-2 text-sm",
-          dark ? "text-white/60" : "text-muted-foreground",
-        )}
-      >
+      <span className="flex items-center gap-2 text-sm text-muted-foreground">
         <Icon className="size-4" />
         {tagline}
       </span>
-      <p className={cn("mt-3 text-xl font-semibold", dark && "text-white")}>
-        {title}
-      </p>
-      <p
-        className={cn(
-          "mt-2 text-sm",
-          dark ? "text-white/60" : "text-muted-foreground",
-        )}
-      >
-        {description}
-      </p>
+      <p className="mt-3 text-xl font-semibold">{title}</p>
+      <p className="mt-2 text-sm text-muted-foreground">{description}</p>
     </div>
   );
 }
 
-function OfferingsList({
-  offerings,
-  dark,
-}: {
-  offerings: string[];
-  dark?: boolean;
-}) {
+function OfferingsList({ offerings }: { offerings: string[] }) {
   return (
-    <ul className="mt-4 space-y-2 px-6 mb-6">
+    <ul className="mt-4 space-y-2 px-6 mb-4">
       {offerings.map((item) => (
-        <li
-          key={item}
-          className={cn(
-            "flex items-center gap-2 text-sm",
-            dark && "text-white/80",
-          )}
-        >
-          <Check
-            className={cn(
-              "size-4 shrink-0",
-              dark ? "text-white" : "text-primary",
-            )}
-          />
+        <li key={item} className="flex items-center gap-2 text-sm">
+          <Check className="size-4 shrink-0 text-primary" />
           {item}
         </li>
       ))}
     </ul>
-  );
-}
-
-// ─── Circular decorative UI (for AI card) ────────────────────────────────────
-
-interface CircleConfig {
-  pattern: "none" | "border" | "primary" | "blue";
-}
-
-interface CircularUIProps {
-  circles: CircleConfig[];
-  className?: string;
-}
-
-function CircularUI({ circles, className }: CircularUIProps) {
-  return (
-    <div className={className}>
-      <div className="size-fit rounded-2xl bg-gradient-to-b from-border to-transparent p-px">
-        <div className="relative flex aspect-square w-fit items-center -space-x-4 rounded-[15px] bg-gradient-to-b from-background to-muted/25 p-4">
-          {circles.map((circle, i) => (
-            <div
-              key={i}
-              className={cn("size-7 rounded-full border sm:size-8", {
-                "border-primary": circle.pattern === "none",
-                "border-primary bg-[repeating-linear-gradient(-45deg,hsl(var(--border)),hsl(var(--border))_1px,transparent_1px,transparent_4px)]":
-                  circle.pattern === "border",
-                "border-primary bg-[repeating-linear-gradient(-45deg,hsl(var(--primary)),hsl(var(--primary))_1px,transparent_1px,transparent_4px)]":
-                  circle.pattern === "primary",
-                "z-1 border-blue-500 bg-background bg-[repeating-linear-gradient(-45deg,theme(colors.blue.500),theme(colors.blue.500)_1px,transparent_1px,transparent_4px)]":
-                  circle.pattern === "blue",
-              })}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
   );
 }

@@ -5,20 +5,47 @@ import { LogoCloud } from "@/components/ui/logo-cloud-3";
 
 export function HeroSection() {
   return (
-    <section className="mx-auto w-full max-w-6xl h-[70vh]">
-      {/* Radial top glow */}
+    <section className="relative mx-auto w-full max-w-6xl h-[70vh] overflow-hidden">
+      {/* Video background */}
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src="https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/BackgroundBeam.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
+
+      {/* Mobile-only: dark top gradient so the sticky header stays readable */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 isolate hidden overflow-hidden contain-strict lg:block"
-      >
-        <div className="absolute inset-0 isolate -z-10 bg-[radial-gradient(35%_80%_at_49%_0%,color-mix(in_oklch,var(--color-foreground)_8%,transparent),transparent)] contain-strict opacity-40" />
-      </div>
+        className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/80 to-transparent md:hidden"
+      />
 
-      {/*
-        Outer vertical rail lines — track the max-w-6xl container edges.
-        left-0/right-0 are relative to the mx-auto centered container,
-        so they sit exactly at the content column boundary.
-      */}
+      {/* Blurred black circles — soften top-left and top-right corners
+          so the video loop seam and edges blend into the page background */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-24 -top-24 size-[80vh] rounded-full bg-black hidden md:block"
+        style={{ filter: "blur(72px)", opacity: 0.88 }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-24 -top-24 size-[60vh] rounded-full bg-black hidden md:block"
+        style={{ filter: "blur(72px)", opacity: 0.88 }}
+      />
+
+      <div
+        className="pointer-events-none absolute bottom-[-50px] left-[-50px] h-[30vh] w-[30vh] rounded-full blur-xl hidden md:block"
+        style={{ background: "linear-gradient(to bottom, transparent, black)" }}
+      />
+
+      <div
+        className="pointer-events-none absolute bottom-[0px] right-[-50px] h-[40vh] w-[25vh] rounded-full blur-xl hidden md:block"
+        style={{ background: "linear-gradient(to bottom, transparent, black)" }}
+      />
+
+      {/* Outer vertical rail lines — track the max-w-6xl container edges */}
       <div
         aria-hidden="true"
         className="absolute inset-0 mx-auto hidden min-h-screen w-full max-w-6xl lg:block"
@@ -28,7 +55,7 @@ export function HeroSection() {
       </div>
 
       {/* Main content — padded to match section standard */}
-      <div className="relative flex flex-col items-center justify-center gap-5 px-6 pt-32 pb-28 lg:px-8">
+      <div className="relative flex flex-col items-left justify-center gap-5 px-6 pt-32 pb-28 lg:px-8">
         {/*
           Inner decorative lines — sit at the padding boundary.
           px-6 (24px) on mobile → left-6/right-6
@@ -46,7 +73,7 @@ export function HeroSection() {
 
         <a
           className={cn(
-            "group mx-auto flex w-fit items-center gap-3 rounded-full border bg-card px-3 py-1 shadow",
+            "group flex w-fit items-center gap-3 rounded-full border bg-card px-3 py-1 shadow mt-10",
             "animate-in fade-in slide-in-from-bottom-4 fill-mode-backwards transition-all delay-500 duration-500 ease-out",
           )}
           href="#link"
@@ -59,18 +86,18 @@ export function HeroSection() {
 
         <h1
           className={cn(
-            "animate-in fade-in slide-in-from-bottom-4 fill-mode-backwards text-balance text-center text-4xl tracking-tight delay-100 duration-500 ease-out md:text-5xl lg:text-6xl",
+            "animate-in fade-in slide-in-from-bottom-4 fill-mode-backwards text-balance text-left text-4xl tracking-tight delay-100 duration-500 ease-out md:text-5xl lg:text-6xl",
             "[text-shadow:0_0px_50px_color-mix(in_oklch,var(--color-foreground)_20%,transparent)]",
           )}
         >
           High-Quality Solutions. <br /> Real results. No fluff.
         </h1>
 
-        <p className="animate-in fade-in slide-in-from-bottom-4 mx-auto max-w-md fill-mode-backwards text-center text-base text-foreground/80 tracking-wider delay-200 duration-500 ease-out sm:text-md md:text-md opacity-40">
+        <p className="animate-in fade-in opacity-60">
           At prices you can actually afford and validate
         </p>
 
-        <div className="animate-in fade-in slide-in-from-bottom-4 flex flex-row flex-wrap items-center justify-center gap-3 fill-mode-backwards pt-2 delay-300 duration-500 ease-out">
+        <div className="animate-in fade-in slide-in-from-bottom-4 flex items-left gap-3 fill-mode-backwards pt-2 delay-300 duration-500 ease-out">
           <Button className="rounded-full" size="lg" variant="secondary">
             <PhoneCallIcon className="mr-2 size-4" />
             Book a Call

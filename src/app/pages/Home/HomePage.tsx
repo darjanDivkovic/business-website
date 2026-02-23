@@ -8,7 +8,7 @@ export function HomePage() {
   return (
     <div className="flex w-full flex-col">
       <Header />
-      <main className="relative grow overflow-hidden">
+      <main className="relative grow overflow-hidden top-[-57px]">
         <HeroSection />
         <LogosSection />
         <ServicesSection />

@@ -31,10 +31,12 @@ export function Header() {
 
   return (
     <header
-      className={cn("sticky top-0 z-50 w-full border-b border-transparent", {
-        "bg-background/95 supports-[backdrop-filter]:bg-background/50 border-border backdrop-blur-lg":
-          scrolled,
-      })}
+      className={cn(
+        "sticky top-[0px] z-50 w-full border-b border-transparent bg-white/0 ",
+        {
+          "bg-background/15 backdrop-blur-lg border-border": scrolled,
+        },
+      )}
     >
       <nav className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-6 lg:px-8">
         <Link
