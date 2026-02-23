@@ -39,11 +39,17 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
 		);
 		camera.position.set(0, 355, 1220);
 
-		const renderer = new THREE.WebGLRenderer({
-			alpha: true,
-			antialias: true,
-		});
-		renderer.setPixelRatio(window.devicePixelRatio);
+		let renderer: THREE.WebGLRenderer;
+		try {
+			renderer = new THREE.WebGLRenderer({
+				alpha: true,
+				antialias: window.devicePixelRatio === 1,
+			});
+		} catch {
+			// WebGL not available (some Android/Xiaomi WebView contexts)
+			return;
+		}
+		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		renderer.setClearColor(scene.fog.color, 0);
 

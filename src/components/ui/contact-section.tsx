@@ -8,7 +8,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, ArrowRight, Clock, MessageSquare } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { DottedSurface } from "@/components/ui/dotted-surface";
 
 interface FormState {
   name: string;
@@ -76,10 +75,7 @@ export function ContactSection({
   };
 
   return (
-    <section className="relative bg-black flex items-center overflow-hidden py-24 md:py-32 px-6 lg:px-32">
-      {/* 3D dot wave background */}
-      <DottedSurface className="opacity-40" />
-
+    <section className="relative bg-black flex items-center overflow-hidden py-24 md:py-32 px-6 lg:px-32 mt-16">
       <div className="relative z-10 mx-auto w-full max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-start">
           {/* ── Left ───────────────────────────────────────────── */}
@@ -125,7 +121,7 @@ export function ContactSection({
           <div
             className={cn(
               "rounded-2xl p-8",
-              "bg-black/20",
+              "bg-[#0f0f0f]",
               "shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_8px_48px_rgba(255,255,255,0.06),0_32px_100px_rgba(255,255,255,0.03)]",
             )}
           >
@@ -142,8 +138,11 @@ export function ContactSection({
               />
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="text-white/60 text-sm">
+                <div className="space-y-6">
+                  <Label
+                    htmlFor="name"
+                    className="text-white/60 text-sm mb-[10px]"
+                  >
                     Name
                   </Label>
                   <Input
