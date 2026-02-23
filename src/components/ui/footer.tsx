@@ -43,7 +43,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border mt-4">
-      <div className="mx-auto max-w-5xl px-6 lg:px-10">
+      <div className="mx-auto max-w-6xl px-6 lg:px-8">
         {/* Main row */}
         <div className="flex flex-col gap-8 py-12 sm:flex-row sm:items-start sm:justify-between">
           {/* Brand */}

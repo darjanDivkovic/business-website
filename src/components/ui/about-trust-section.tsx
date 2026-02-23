@@ -90,12 +90,12 @@ const GridItem = ({ area, icon, title, description }: GridItemProps) => {
 
 export function AboutTrustSection() {
   return (
-    <section className="py-16 md:py-24 px-4 md:px-8 max-w-7xl mx-auto">
+    <section className="py-16 md:py-24 px-6 lg:px-8 max-w-6xl mx-auto">
       <div className="mb-12 text-center">
         <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-3">
           Why work with me
         </p>
-        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground text-balance">
+        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground text-balance">
           A developer you can actually rely on
         </h2>
         <p className="mt-4 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto text-balance">

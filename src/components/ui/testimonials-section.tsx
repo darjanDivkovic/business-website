@@ -199,8 +199,8 @@ export function TestimonialsSection() {
   const restBatch = testimonials.slice(6);
 
   return (
-    <section className="relative w-full py-20 px-6 lg:px-10 max-w-5xl mx-auto">
-      <div className="mx-auto max-w-6xl space-y-10">
+    <section className="relative w-full py-20 px-6 lg:px-8 max-w-6xl mx-auto">
+      <div className="space-y-10">
         <div className="space-y-2">
           <h2 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl">
             What people say

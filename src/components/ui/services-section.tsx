@@ -95,7 +95,7 @@ const services: ServiceData[] = [
 export function ServicesSection() {
   return (
     <section className="py-8 md:py-16 border">
-      <div className="mx-auto max-w-2xl px-6 lg:max-w-5xl">
+      <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
             How I Can Help
@@ -175,7 +175,7 @@ function ServiceCard({
       </CardContent>
 
       {service.showButtons && (
-        <div className="relative z-10 flex flex-col gap-4 px-12 pb-6 mt-6 mb-6">
+        <div className="relative z-10 flex flex-col gap-4 px-6 pb-6 mt-6 mb-6">
           <Button className="w-full">Get this Service</Button>
           <Button variant="outline" className="w-full">
             Book a Call
@@ -271,7 +271,7 @@ function CardHeading({
   titleColor,
 }: CardHeadingProps) {
   return (
-    <div className="p-6 pb-0">
+    <div className="p-6 px-2 pb-0">
       <p
         className="text-xl font-semibold"
         style={titleColor ? { color: titleColor } : undefined}
@@ -295,7 +295,7 @@ function OfferingsList({
   checkColor?: string;
 }) {
   return (
-    <ul className="mt-4 space-y-2 px-6 mb-4">
+    <ul className="mt-4 space-y-2 px-0 mb-4">
       {offerings.map((item) => (
         <li key={item} className="flex items-center gap-2 text-sm">
           <Check
