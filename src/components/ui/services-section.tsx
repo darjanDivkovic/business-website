@@ -94,7 +94,7 @@ const services: ServiceData[] = [
 
 export function ServicesSection() {
   return (
-    <section className="py-16 md:py-32">
+    <section className="py-8 md:py-16 border">
       <div className="mx-auto max-w-2xl px-6 lg:max-w-5xl">
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">

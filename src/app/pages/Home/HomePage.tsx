@@ -3,6 +3,7 @@ import { Header } from "@/components/ui/header-1";
 import GalleryHoverCarousel from "@/components/ui/gallery-hover-carousel";
 import { TestimonialsSection } from "@/components/ui/testimonials-section";
 import { ServicesSection } from "@/components/ui/services-section";
+import { AboutTrustSection } from "@/components/ui/about-trust-section";
 
 export function HomePage() {
   return (
@@ -11,9 +12,10 @@ export function HomePage() {
       <main className="relative grow overflow-hidden top-[-57px]">
         <HeroSection />
         <LogosSection />
-        <ServicesSection />
+        <AboutTrustSection />
         <hr />
         <GalleryHoverCarousel heading="Featured Projects" />
+        <ServicesSection />
         <hr />
         <TestimonialsSection />
       </main>

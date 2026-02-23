@@ -77,7 +77,7 @@ export default function GalleryHoverCarousel({
   items?: GalleryHoverCarouselItem[];
 }) {
   return (
-    <section className="bg-background py-16 md:py-24 overflow-hidden">
+    <section className="bg-background py-16 md:py-24 overflow-hidden mt-5">
       {/* Header */}
       <div className="mx-auto max-w-6xl px-6 lg:px-8 mb-8 md:mb-14 lg:mb-16">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between">

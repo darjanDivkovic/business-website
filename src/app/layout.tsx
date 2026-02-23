@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@/app/styles/globals.css";
 import { Actor } from "next/font/google";
+import { Footer } from "@/components/ui/footer";
 
 const actor = Actor({
   subsets: ["latin"],
@@ -21,7 +22,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${actor.variable} antialiased`}>{children}</body>
+      <body className={`${actor.variable} antialiased`}>
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

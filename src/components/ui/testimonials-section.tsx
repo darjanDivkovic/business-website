@@ -145,6 +145,19 @@ const testimonials: Testimonial[] = [
   },
 ];
 
+// ─── Card decorator (corner brackets, same as services cards) ─────────────────
+
+function CardDecorator() {
+  return (
+    <>
+      <span className="absolute -left-px -top-px block size-2 border-l-2 border-t-2 border-primary" />
+      <span className="absolute -right-px -top-px block size-2 border-r-2 border-t-2 border-primary" />
+      <span className="absolute -bottom-px -left-px block size-2 border-b-2 border-l-2 border-primary" />
+      <span className="absolute -bottom-px -right-px block size-2 border-b-2 border-r-2 border-primary" />
+    </>
+  );
+}
+
 // ─── Sub-component ────────────────────────────────────────────────────────────
 
 function CardContent({ t }: { t: Testimonial }) {
@@ -186,7 +199,7 @@ export function TestimonialsSection() {
   const restBatch = testimonials.slice(6);
 
   return (
-    <section className="relative w-full py-20 px-6 lg:px-10 max-w-6xl mx-auto">
+    <section className="relative w-full py-20 px-6 lg:px-10 max-w-5xl mx-auto">
       <div className="mx-auto max-w-6xl space-y-10">
         <div className="space-y-2">
           <h2 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl">
@@ -213,11 +226,12 @@ export function TestimonialsSection() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.05 * index + 0.05, duration: 0.7 }}
                 className={cn(
-                  "relative grid grid-cols-[auto_1fr] gap-x-3 border border-border rounded-md bg-[#fff]/2 p-4",
+                  "relative grid grid-cols-[auto_1fr] gap-x-3 border border-border rounded-none bg-[#fff]/2 p-5",
                   // 6th card is hidden on mobile unless expanded
                   isSixth && !expanded && "hidden sm:grid",
                 )}
               >
+                <CardDecorator />
                 <CardContent t={t} />
 
                 {/* "Read all" overlay — mobile (on 5th card) */}
@@ -256,8 +270,9 @@ export function TestimonialsSection() {
                   initial={{ filter: "blur(4px)", translateY: -8, opacity: 0 }}
                   animate={{ filter: "blur(0px)", translateY: 0, opacity: 1 }}
                   transition={{ delay: 0.05 * i, duration: 0.7 }}
-                  className="grid grid-cols-[auto_1fr] gap-x-3 border border-border rounded-md bg-[#fff]/2 p-4"
+                  className="relative grid grid-cols-[auto_1fr] gap-x-3 border border-border rounded-none bg-[#fff]/2 p-5"
                 >
+                  <CardDecorator />
                   <CardContent t={t} />
                 </motion.div>
               ))}
