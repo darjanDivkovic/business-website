@@ -1,6 +1,6 @@
 import { HeroSection, LogosSection } from "@/components/ui/hero-1";
 import { Header } from "@/components/ui/header-1";
-import GalleryHoverCarousel from "@/components/ui/gallery-hover-carousel";
+import { GalleryScrollSection } from "@/components/ui/gallery-scroll-section";
 import { TestimonialsSection } from "@/components/ui/testimonials-section";
 import { ServicesSection } from "@/components/ui/services-section";
 import { AboutTrustSection } from "@/components/ui/about-trust-section";
@@ -14,7 +14,7 @@ export function HomePage() {
         <LogosSection />
         <AboutTrustSection />
         <hr />
-        <GalleryHoverCarousel heading="Featured Projects" />
+        <GalleryScrollSection />
         <ServicesSection />
         <hr />
         <TestimonialsSection />
