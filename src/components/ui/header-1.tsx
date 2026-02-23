@@ -16,7 +16,6 @@ export function Header() {
   const links = [
     { label: "Services", href: "/services" },
     { label: "Blog", href: "/blog" },
-    { label: "About", href: "/about" },
   ];
 
   React.useEffect(() => {
@@ -40,10 +39,7 @@ export function Header() {
       )}
     >
       <nav className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-6 lg:px-8">
-        <Link
-          href="/"
-          className="hover:bg-accent flex items-center gap-2 rounded-md p-2"
-        >
+        <Link href="/" className="flex items-center gap-2 rounded-md p-2">
           <div className="flex items-center gap-4">
             <Image
               src={Logo}

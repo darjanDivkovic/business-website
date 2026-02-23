@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { RocketIcon, ArrowRightIcon, PhoneCallIcon } from "lucide-react";
 import { LogoCloud } from "@/components/ui/logo-cloud-3";
+import Link from "next/link";
 
 export function HeroSection() {
   return (
@@ -100,7 +101,7 @@ export function HeroSection() {
         </p>
 
         <div className="animate-in fade-in slide-in-from-bottom-4 flex items-left w-full md:w-unset pr-12 flex-col md:flex-row mt-16 md:mt-0 gap-3 fill-mode-backwards pt-2 delay-300 duration-500 ease-out absolute bottom-[-40px] md:bottom-0">
-          <Button>Get started</Button>
+          <Button asChild><Link href="/contact">Get started</Link></Button>
           <Button variant="outline">Book a Call</Button>
         </div>
       </div>

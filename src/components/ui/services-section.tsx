@@ -91,6 +91,8 @@ interface ServiceData {
   /** Only for cards without a hoverScheme (e.g. AI card) */
   checkColor?: string;
   showButtons?: boolean;
+  /** Maps to the contact form service badge id */
+  contactId?: string;
 }
 
 const services: ServiceData[] = [
@@ -111,6 +113,7 @@ const services: ServiceData[] = [
     badge: { text: "Most Popular", variant: "purple-subtle" },
     hoverScheme: "purple",
     showButtons: true,
+    contactId: "short-term",
   },
   {
     icon: Clock,
@@ -129,6 +132,7 @@ const services: ServiceData[] = [
     badge: { text: "Best for Scale", variant: "blue-subtle" },
     hoverScheme: "blue",
     showButtons: true,
+    contactId: "contract",
   },
   {
     icon: Sparkles,
@@ -149,12 +153,17 @@ const services: ServiceData[] = [
     badge: { text: "Coming Soon", variant: "amber-subtle" as const },
     titleColor: "#F39301",
     checkColor: "#371800",
+    contactId: "ai",
   },
 ];
 
 // ─── Section ─────────────────────────────────────────────────────────────────
 
-export function ServicesSection() {
+export function ServicesSection({
+  onServiceSelect,
+}: {
+  onServiceSelect?: (contactId: string) => void;
+} = {}) {
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
   const [scanned, setScanned] = useState(false);
@@ -230,6 +239,7 @@ export function ServicesSection() {
                 service={service}
                 inView={inView}
                 delay={idx * 160}
+                onServiceSelect={onServiceSelect}
               />
             ),
           )}
@@ -245,10 +255,12 @@ function ServiceCard({
   service,
   inView,
   delay,
+  onServiceSelect,
 }: {
   service: ServiceData;
   inView?: boolean;
   delay?: number;
+  onServiceSelect?: (contactId: string) => void;
 }) {
   const scheme = service.hoverScheme ? SCHEMES[service.hoverScheme] : null;
 
@@ -330,6 +342,9 @@ function ServiceCard({
               "w-full transition-shadow duration-300",
               scheme && scheme.buttonGlow,
             )}
+            onClick={() =>
+              service.contactId && onServiceSelect?.(service.contactId)
+            }
           >
             Get this Service
           </Button>

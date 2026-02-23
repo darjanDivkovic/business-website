@@ -106,6 +106,8 @@ body {
   --animate-aurora-drift: aurora-drift 10s ease-in-out infinite;
   --animate-card-slide-up: card-slide-up 0.65s ease-out both;
   --animate-scan-sweep: scan-sweep 1.8s ease-in-out both;
+  --animate-logo-flash: logo-flash 1.5s ease-in-out 1 forwards;
+  --animate-splash-progress: splash-progress 1.5s linear 1 forwards;
 }
 
 @keyframes meteor {
@@ -138,6 +140,35 @@ body {
   6%    { opacity: 1; }
   92%   { opacity: 1; }
   to    { transform: translateX(calc(100vw + 120px)); opacity: 0; }
+}
+
+/* Splash: logo flashes exactly 3 times over the 1.5s total duration.
+   Each flash springs in (scale 0.88 → 1.05 → 1.0) then softly fades out. */
+@keyframes logo-flash {
+  /* Flash 1 */
+  0%   { opacity: 0; transform: scale(0.88); }
+  8%   { opacity: 1; transform: scale(1.05); }
+  18%  { opacity: 1; transform: scale(1);    }
+  29%  { opacity: 0; transform: scale(0.94); }
+  /* Gap */
+  33%  { opacity: 0; transform: scale(0.88); }
+  /* Flash 2 */
+  41%  { opacity: 1; transform: scale(1.05); }
+  52%  { opacity: 1; transform: scale(1);    }
+  63%  { opacity: 0; transform: scale(0.94); }
+  /* Gap */
+  67%  { opacity: 0; transform: scale(0.88); }
+  /* Flash 3 */
+  75%  { opacity: 1; transform: scale(1.05); }
+  86%  { opacity: 1; transform: scale(1);    }
+  96%  { opacity: 0; transform: scale(0.94); }
+  100% { opacity: 0; transform: scale(0.94); }
+}
+
+/* Splash: thin progress bar fills left-to-right over 1.5s */
+@keyframes splash-progress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
 }
 
 @layer base {
