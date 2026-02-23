@@ -1,0 +1,129 @@
+---
+title: "Migrating from a Legacy Stack to React + TypeScript: A Practical Playbook"
+description: "After helping multiple teams escape jQuery spaghetti and framework fatigue, I've distilled the process into a repeatable playbook. Here's what actually works — and what looks good on paper but fails in practice."
+publishedAt: "2025-11-03"
+readTime: "12 min read"
+category: "Engineering"
+tags: ["react", "typescript", "migration", "architecture"]
+---
+
+There's a particular look I've come to recognise. A senior developer opens a legacy file — maybe 1,200 lines of jQuery, maybe a Backbone view from 2016 — and their jaw tightens. Not because the code is wrong, exactly. It worked. It's still working. But every time someone touches it, something else breaks somewhere unexpected.
+
+This is the migration moment. The business logic is entangled with the DOM manipulation. Tests don't exist or don't run. And the team has quietly agreed never to refactor that one file.
+
+I've been through this with multiple teams. Here's the playbook that actually works.
+
+## Step 0: Resist the Big Bang
+
+The most common mistake is trying to rewrite everything at once. A new git branch, a new architecture, a 6-month project to "rebuild it properly" — and three months in, the business has moved on, priorities have shifted, and you're maintaining two versions of the same product.
+
+**The strangler fig pattern is your friend.** Coined by Martin Fowler, it means you grow the new system around the old one, routing new features into React while the legacy code handles what it already handles. Eventually the old system is completely "strangled" — replaced piece by piece, never in one terrifying cutover.
+
+<Callout>
+**Rule of thumb**: If your migration plan requires going dark for more than two weeks — where no new features ship and no bugs get fixed — the plan is too big. Break it smaller.
+</Callout>
+
+## Step 1: Set Up the React Shell First
+
+Before you migrate a single component, get your tooling right. This is the investment that pays for everything else.
+
+```bash
+# Start with Vite for SPAs, Next.js for anything needing SSR/SEO
+npx create-next-app@latest --typescript --tailwind --app
+```
+
+The non-negotiables at setup time:
+
+- **TypeScript strict mode** — `"strict": true` in tsconfig. Yes, it's annoying at first. It will save you from a class of bugs that legacy codebases are full of.
+- **ESLint + Prettier** — agreed-upon formatting eliminates style debates in code review
+- **Path aliases** — `@/components` beats `../../../../components` every time
+- **A test runner** — Vitest or Jest, configured before you write a single component
+
+Skipping any of these because "we'll add it later" means you won't. Get the scaffolding right once.
+
+## Step 2: Extract and Model Your Data First
+
+This is the step most teams skip, and it's the one that causes the most pain later.
+
+Your legacy codebase has implicit data models scattered everywhere: object shapes built in jQuery AJAX callbacks, Backbone model attributes, PHP arrays serialised to JSON. Before you write a single React component, define your TypeScript interfaces.
+
+```typescript
+// Don't do this
+const user = response.data; // unknown shape, bugs waiting to happen
+
+// Do this
+interface User {
+  id: string;
+  email: string;
+  role: "admin" | "member" | "viewer";
+  createdAt: string; // ISO date string
+  plan: {
+    tier: "free" | "pro" | "enterprise";
+    expiresAt: string | null;
+  };
+}
+```
+
+This exercise almost always surfaces bugs in the existing system. You'll find fields that are sometimes null, sometimes undefined, sometimes an empty string — three different states being treated as one. TypeScript makes this explicit before it becomes a runtime bug.
+
+## Step 3: The Routing Bridge
+
+If you're running React alongside a legacy backend (Rails, Laravel, Django), you need to decide how routing works during the migration period.
+
+**Option A: Path-based split** — Legacy routes go to the old stack, new routes go to React. Simple, but limits you — you can't rebuild `/dashboard` incrementally.
+
+**Option B: Component-level islands** — Embed React components inside legacy templates for specific interactive pieces. Works well for forms, data tables, and complex UI modules. Uses `ReactDOM.createRoot` to mount into existing DOM nodes.
+
+```typescript
+// Mount a React component inside a legacy page
+const container = document.getElementById("react-mount-point");
+if (container) {
+  const root = ReactDOM.createRoot(container);
+  root.render(<NewUserTable userId={container.dataset.userId} />);
+}
+```
+
+Option B is slower but safer — it lets you migrate functionality without migrating routes, which means the user experience stays consistent throughout.
+
+<ServiceCTA
+  title="Inherited a legacy codebase?"
+  description="I've taken teams from jQuery + PHP to React + TypeScript without a big-bang rewrite. If you're staring at a migration that feels impossible, let's map it out together — I can usually find a path that keeps the business moving while the tech catches up."
+  ctaText="Book a 30-min architecture call"
+  ctaHref="/contact"
+/>
+
+## Step 4: State Management — Don't Over-Engineer It
+
+React's built-in state is more powerful than most teams give it credit for. Before reaching for Redux or Zustand, ask: does this state actually need to be global?
+
+For most applications:
+
+- **Local component state** (`useState`) handles 80% of cases
+- **Context** handles shared state that doesn't change frequently (theme, auth, current user)
+- **React Query / SWR** handles server state (data fetched from APIs) — this alone eliminates 90% of the Redux use cases I see in the wild
+
+Only reach for a global state manager (Zustand is my preference if you need one) when you have genuinely complex client-side state: optimistic updates, real-time collaboration, offline-first behaviour.
+
+## Step 5: Migrate by Feature, Not by Layer
+
+The temptation is to migrate all the components first, then all the data fetching, then all the state management. Resist this.
+
+Migrate by feature slice: pick one user-facing feature, and take it all the way — new component, new API call, new state, new TypeScript types. Ship it. Then move to the next feature.
+
+This approach:
+
+- Delivers value continuously rather than at the end of a long project
+- Gives your team practice with the new patterns before the stakes are high
+- Makes the migration reversible at any point — the old system is always running in parallel
+
+## The Realistic Timeline
+
+For a medium-complexity SaaS (20–40 distinct features, a team of 2–4 developers):
+
+- **Month 1**: Tooling setup, TypeScript interfaces, routing bridge, first 3–5 migrated features
+- **Month 2–3**: High-traffic features migrated, legacy code isolated to non-critical paths
+- **Month 4–6**: Tail-end legacy cleanup, test coverage, performance optimisation
+
+The business barely notices the migration is happening. That's the goal.
+
+If you're at the start of this process and feeling overwhelmed, the most useful thing you can do today is pick the smallest useful feature in your app and migrate just that — end to end, in the new stack. The rest follows from there.

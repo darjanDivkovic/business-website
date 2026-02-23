@@ -1,0 +1,108 @@
+---
+title: "Why Tailwind CSS Is the Right Choice for Scaling Your Frontend"
+description: "Most developers reach for Tailwind and never look back. Here's why the utility-first approach beats traditional CSS for teams that want to ship fast and maintain a clean codebase."
+publishedAt: "2025-10-15"
+readTime: "8 min read"
+category: "Frontend"
+tags: ["tailwind", "css", "frontend", "developer-experience"]
+---
+
+You've probably heard the anti-Tailwind arguments: *"It's just inline styles"*, *"It pollutes your HTML"*, *"It's unreadable."* I've heard them too. And I've watched teams spend months untangling BEM class name collisions, fighting specificity wars, and maintaining CSS files that nobody dares delete.
+
+Here's what I've learned after five years and dozens of production projects: **Tailwind doesn't add complexity. It removes the hidden complexity you didn't know you had.**
+
+## The Real Problem with Traditional CSS
+
+Before we talk about Tailwind, let's be honest about what traditional CSS actually gives you.
+
+A fresh CSS file is a blank canvas. That sounds empowering. In practice, it means every developer on your team is making arbitrary decisions: Should I use `margin-bottom` or `padding-bottom`? Is this a `.card__header` or `.card-header`? Do we have a spacing token for 20px, or should I just hardcode it?
+
+Six months in, your codebase looks like an archaeological dig. Ancient `.btn-primary` rules buried under `!important` overrides. Classes referenced in five components but defined in one stylesheet from 2022 that nobody remembers writing.
+
+<Callout>
+**The dirty secret of CSS**: Dead styles are invisible. You can't easily tell what's safe to delete without testing every page. The result is accumulated dead weight that slows down every developer who touches the codebase.
+</Callout>
+
+## What Tailwind Actually Solves
+
+Tailwind forces co-location. When you open a component, every styling decision is right there in the JSX. You never have to context-switch to a separate stylesheet to understand why something looks a certain way.
+
+This has a compounding effect on team velocity:
+
+- **Onboarding is faster** — a new developer reads the component and understands the styles immediately
+- **Refactoring is safer** — delete a component, delete its styles at the same time, zero orphaned CSS
+- **Design system enforcement is structural** — you can't use `color: #3b82f6` if that's not in your config; you have to use `text-blue-500`
+- **Code reviews become visual** — seeing `hover:scale-105 transition-transform` tells you exactly what the interaction does
+
+## The "Readability" Objection
+
+The most common pushback: *"long className strings are ugly and hard to read."*
+
+Fair. `className="flex items-center gap-4 rounded-lg border border-gray-200 px-4 py-3 hover:bg-gray-50 transition-colors"` isn't poetry.
+
+But consider what you're comparing it to. In a traditional CSS approach:
+
+```jsx
+// Component file
+<div className="feature-card">
+
+// Somewhere in a stylesheet, maybe
+.feature-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  padding: 12px 16px;
+  transition: background-color 150ms;
+}
+.feature-card:hover {
+  background-color: #f9fafb;
+}
+```
+
+You're not reducing information — you're hiding it behind a class name that requires a file jump to understand. That's not readability. That's indirection.
+
+## Scaling in Practice
+
+At Pequity, we built a complex equity management SaaS with dozens of table views, form patterns, and data visualisation components. The entire design system lived in the Tailwind config. New features that matched existing patterns took hours instead of days, because the "CSS was already written" — encoded as design tokens.
+
+When we needed to tweak the primary button style globally, it was one line in the config. No grep-and-replace through stylesheets, no praying that nothing else shared that class name.
+
+The compound effect becomes clear at scale:
+
+- Zero dead CSS — if a component is deleted, its styles are gone with it
+- Perfect consistency — the spacing, color, and radius values are physically constrained to your token set
+- Fast context-switching — any developer can open any component and immediately understand its visual behaviour
+
+<ServiceCTA
+  title="Building a scalable frontend?"
+  description="I help teams set up Tailwind-based design systems that stay maintainable as they grow. Whether you're starting fresh or modernising an existing codebase, I've done this migration and know the pitfalls."
+  ctaText="Schedule a free 15-min call"
+  ctaHref="/contact"
+/>
+
+## When Tailwind Isn't the Answer
+
+To be fair: Tailwind isn't a silver bullet.
+
+If you're building a component library meant to be consumed by teams with their own design systems, scoped CSS or CSS Modules might be a better fit — Tailwind's utility classes can conflict with the host app's styles.
+
+If your team has strong opinions about keeping styles separate from markup (and the discipline to enforce it), a well-structured CSS Modules setup can work. The key word is *discipline* — most teams don't maintain it as the codebase grows.
+
+For product teams building web applications in React or Next.js? Tailwind wins almost every time.
+
+## Getting Started Without Breaking Everything
+
+The practical path for adoption:
+
+1. **Add Tailwind alongside your existing CSS** — you don't have to migrate overnight
+2. **Start with new components** — any new feature uses Tailwind from day one
+3. **Migrate high-traffic components** — once you've built muscle memory, tackle the components you touch most
+4. **Configure your tokens first** — before writing a single utility class, define your colors, spacing, and typography in `tailwind.config.ts`
+
+The initial investment: learning the utility class vocabulary (faster than you think), configuring your design tokens, and setting up the Prettier plugin for consistent class ordering.
+
+The return: a frontend codebase where adding a new feature doesn't require archaeology, where every developer speaks the same visual language, and where dead code is structurally impossible.
+
+If you're evaluating Tailwind for your next project — or wondering whether to migrate your current one — I'm happy to walk through your specific situation.

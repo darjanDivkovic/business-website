@@ -3,7 +3,6 @@
 
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { motion } from "motion/react";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
@@ -14,6 +13,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SectionTitleComponent from "./SectionTitleComponent";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -123,39 +123,51 @@ export function GalleryScrollSection() {
                     href={item.url}
                     className="group relative flex flex-col h-full w-full"
                   >
-                    <Card className="flex flex-col h-full w-full overflow-hidden rounded-xl border-white/10 bg-[#0a0a0a] shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
-                      {/* Fixed-ratio image — never stretches beyond natural proportions */}
-                      <div className="relative w-full aspect-[4/3] shrink-0 overflow-hidden">
-                        <Image
-                          src={item.image}
-                          alt={item.title}
-                          fill
-                          className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                          sizes="(max-width: 640px) 82vw, (max-width: 768px) 52vw, 300px"
-                          quality={95}
-                          priority={item.id === "item-1"}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                      </div>
+                    {/* Outer border wrapper — GlowingEffect lives here */}
+                    <div className="relative flex flex-col h-full w-full rounded-[1.25rem] border-[0.75px] border-border p-1.5">
+                      <GlowingEffect
+                        spread={40}
+                        glow={true}
+                        disabled={false}
+                        proximity={64}
+                        inactiveZone={0.01}
+                        borderWidth={3}
+                      />
+                      {/* Inner card */}
+                      <div className="relative flex flex-col h-full w-full overflow-hidden rounded-xl bg-[#0a0a0a]">
+                        {/* Fixed-ratio image — never stretches beyond natural proportions */}
+                        <div className="relative w-full aspect-[4/3] shrink-0 overflow-hidden">
+                          <Image
+                            src={item.image}
+                            alt={item.title}
+                            fill
+                            className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                            sizes="(max-width: 640px) 82vw, (max-width: 768px) 52vw, 300px"
+                            quality={95}
+                            priority={item.id === "item-1"}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                        </div>
 
-                      {/* Text panel — always visible below image */}
-                      <div className="relative flex flex-col grow px-4 py-3 border-t border-white/8">
-                        <h4 className="text-sm font-semibold md:text-base leading-snug line-clamp-2">
-                          {item.title}
-                        </h4>
-                        <p className="mt-1.5 text-xs text-muted-foreground md:text-sm line-clamp-2 grow">
-                          {item.summary}
-                        </p>
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          className="absolute bottom-3 right-3 h-7 w-7 rounded-full transition-transform duration-300 group-hover:-rotate-45"
-                          tabIndex={-1}
-                        >
-                          <ArrowRight className="size-3.5" />
-                        </Button>
+                        {/* Text panel — always visible below image */}
+                        <div className="relative flex flex-col grow px-4 py-3 border-t border-white/8">
+                          <h4 className="text-sm font-semibold md:text-base leading-snug line-clamp-2">
+                            {item.title}
+                          </h4>
+                          <p className="mt-1.5 text-xs text-muted-foreground md:text-sm line-clamp-2 grow">
+                            {item.summary}
+                          </p>
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            className="absolute bottom-3 right-3 h-7 w-7 rounded-full transition-transform duration-300 group-hover:-rotate-45"
+                            tabIndex={-1}
+                          >
+                            <ArrowRight className="size-3.5" />
+                          </Button>
+                        </div>
                       </div>
-                    </Card>
+                    </div>
                   </Link>
                 </CarouselItem>
               ))}

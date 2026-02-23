@@ -50,10 +50,9 @@ export function Header() {
               alt="Darjan.dev"
               width={140}
               height={32}
-              className="h-8 w-auto ml-[-5px] scale-80"
+              className="h-8 w-12 ml-[-10px] scale-80"
               priority
             />
-            <p className="pt-1 opacity-30">Darjan.dev</p>
           </div>
         </Link>
         <div className="hidden items-center gap-2 md:flex">
