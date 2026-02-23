@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { WordmarkIcon } from "@/components/ui/header-1";
+import Logo from "../../../public/logo.png";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Services", href: "/services" },
@@ -48,9 +49,17 @@ export function Footer() {
         <div className="flex flex-col gap-8 py-12 sm:flex-row sm:items-start sm:justify-between">
           {/* Brand */}
           <div className="space-y-3 max-w-xs">
-            <Link href="/" aria-label="darjan.dev home">
-              <WordmarkIcon className="h-4 text-foreground" />
-            </Link>
+            <div className="flex items-center gap-3">
+              <Image
+                src={Logo}
+                alt="Darjan.dev"
+                width={140}
+                height={32}
+                className="h-8 w-auto ml-[-5px] scale-80"
+                priority
+              />
+              <p className="pt-1 opacity-30">Darjan.dev</p>
+            </div>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed opacity-60">
               Frontend freelancer crafting fast, pixel-perfect interfaces.
             </p>
