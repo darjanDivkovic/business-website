@@ -73,7 +73,7 @@ export function HeroSection() {
 
         <a
           className={cn(
-            "group flex w-fit items-center gap-3 rounded-full border bg-card px-3 py-1 shadow mt-10",
+            "group flex w-fit items-center gap-3 rounded-full border bg-card px-3 py-1 shadow mt-10 hidden md:visible",
             "animate-in fade-in slide-in-from-bottom-4 fill-mode-backwards transition-all delay-500 duration-500 ease-out",
           )}
           href="#link"
