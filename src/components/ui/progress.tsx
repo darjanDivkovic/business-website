@@ -1,0 +1,35 @@
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
+  value?: number;
+  indicatorClassName?: string;
+}
+
+const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
+  ({ className, value = 0, indicatorClassName, ...props }, ref) => (
+    <div
+      ref={ref}
+      role="progressbar"
+      aria-valuenow={value}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      className={cn(
+        "relative h-1 w-full overflow-hidden rounded-full bg-zinc-800",
+        className,
+      )}
+      {...props}
+    >
+      <div
+        className={cn(
+          "h-full bg-white transition-all duration-500 ease-out",
+          indicatorClassName,
+        )}
+        style={{ width: `${value}%` }}
+      />
+    </div>
+  ),
+);
+Progress.displayName = "Progress";
+
+export { Progress };
