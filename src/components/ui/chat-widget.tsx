@@ -9,6 +9,50 @@ import { GradientDots } from "@/components/ui/gradient-dots";
 const WEBHOOK_URL =
   "https://darjan.app.n8n.cloud/webhook/a09badee-79cb-4aaa-9ebc-ed3413a8fe18/chat";
 
+const SLOW_PHRASES = [
+  "Thinkering...",
+  "Overclocking...",
+  "Cogitating...",
+  "Brainstorming...",
+  "Pondering...",
+  "Combustulating...",
+  "Calculating...",
+  "Synthesizing...",
+  "Speculating...",
+  "Conjuring...",
+  "Plotting...",
+
+  "Beep-booping...",
+  "Whirring...",
+  "Bzzzt...",
+  "Clunking...",
+  "Ticking...",
+  "Spinning...",
+  "Glitching...",
+  "Buffering...",
+  "Loading...",
+  "Rendering...",
+
+  "Daydreaming...",
+  "Scheming...",
+  "Wizarding...",
+  "Alchemy...",
+  "Brainjuice...",
+  "Ideating...",
+  "Vibing...",
+  "Percolating...",
+  "Cooking...",
+  "Manifesting...",
+
+  "Recalibrating...",
+  "Untangling...",
+  "Decoding...",
+  "Unfolding...",
+  "Assembling...",
+  "Polishing...",
+  "Finalizing...",
+];
+
 interface Message {
   id: string;
   role: "user" | "assistant";
@@ -26,8 +70,19 @@ export function ChatWidget() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [sessionId] = useState(() => generateSessionId());
+  const [streamingMessageId, setStreamingMessageId] = useState<string | null>(
+    null,
+  );
+  const [slowHint, setSlowHint] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const streamingRef = useRef<{
+    fullContent: string;
+    index: number;
+    charsPerTick: number;
+  } | null>(null);
+  const streamTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const slowHintCycleRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -68,9 +123,79 @@ export function ChatWidget() {
     }
   }, [isOpen]);
 
+  // Only scroll when a new message is added or loading state changes,
+  // not on every content update during streaming.
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isLoading]);
+  }, [messages.length, isLoading]);
+
+  // Stream assistant reply character-by-character after the API call resolves.
+  useEffect(() => {
+    if (!streamingMessageId || !streamingRef.current) return;
+
+    const INTERVAL_MS = 16;
+
+    streamTimerRef.current = setInterval(() => {
+      if (!streamingRef.current) return;
+      const { fullContent, index, charsPerTick } = streamingRef.current;
+      const nextIndex = Math.min(index + charsPerTick, fullContent.length);
+      streamingRef.current.index = nextIndex;
+
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === streamingMessageId
+            ? { ...m, content: fullContent.slice(0, nextIndex) }
+            : m,
+        ),
+      );
+
+      if (nextIndex >= fullContent.length) {
+        clearInterval(streamTimerRef.current!);
+        streamTimerRef.current = null;
+        setStreamingMessageId(null);
+        streamingRef.current = null;
+      }
+    }, INTERVAL_MS);
+
+    return () => {
+      if (streamTimerRef.current) {
+        clearInterval(streamTimerRef.current);
+        streamTimerRef.current = null;
+      }
+    };
+  }, [streamingMessageId]);
+
+  // Show a funny hint after 5 s of waiting, then cycle through phrases.
+  useEffect(() => {
+    const pick = () => {
+      const idx = Math.floor(Math.random() * SLOW_PHRASES.length);
+      return SLOW_PHRASES[idx];
+    };
+
+    if (!isLoading) {
+      setSlowHint(null);
+      if (slowHintCycleRef.current) {
+        clearInterval(slowHintCycleRef.current);
+        slowHintCycleRef.current = null;
+      }
+      return;
+    }
+
+    const initial = setTimeout(() => {
+      setSlowHint(pick());
+      slowHintCycleRef.current = setInterval(() => {
+        setSlowHint(pick());
+      }, 2500);
+    }, 5000);
+
+    return () => {
+      clearTimeout(initial);
+      if (slowHintCycleRef.current) {
+        clearInterval(slowHintCycleRef.current);
+        slowHintCycleRef.current = null;
+      }
+    };
+  }, [isLoading]);
 
   const adjustHeight = useCallback(() => {
     const el = textareaRef.current;
@@ -107,19 +232,25 @@ export function ChatWidget() {
         data.text ??
         data.response ??
         "Sorry, I couldn't process that.";
+      const newMsgId = (Date.now() + 1).toString();
+      // Aim for ~2.5 s total reveal; faster for short replies, capped for long ones.
+      const TOTAL_TICKS = 150;
+      const charsPerTick = Math.max(1, Math.ceil(reply.length / TOTAL_TICKS));
+      streamingRef.current = { fullContent: reply, index: 0, charsPerTick };
       setMessages((prev) => [
         ...prev,
-        { id: (Date.now() + 1).toString(), role: "assistant", content: reply },
+        { id: newMsgId, role: "assistant", content: "" },
       ]);
+      setStreamingMessageId(newMsgId);
     } catch {
+      const errMsg = "Something went wrong. Please try again.";
+      const errId = (Date.now() + 1).toString();
+      streamingRef.current = { fullContent: errMsg, index: 0, charsPerTick: 2 };
       setMessages((prev) => [
         ...prev,
-        {
-          id: (Date.now() + 1).toString(),
-          role: "assistant",
-          content: "Something went wrong. Please try again.",
-        },
+        { id: errId, role: "assistant", content: "" },
       ]);
+      setStreamingMessageId(errId);
     } finally {
       setIsLoading(false);
     }
@@ -696,29 +827,52 @@ export function ChatWidget() {
                       </div>
                       <div
                         style={{
-                          backgroundColor: "rgba(255,255,255,0.06)",
-                          border: "1px solid rgba(255,255,255,0.1)",
-                          borderRadius: "20px",
-                          borderBottomLeftRadius: "5px",
-                          padding: "16px 20px",
                           display: "flex",
-                          alignItems: "center",
-                          gap: "6px",
+                          flexDirection: "column",
+                          alignItems: "flex-start",
+                          gap: "8px",
                         }}
                       >
-                        {[0, 1, 2].map((i) => (
-                          <span
-                            key={i}
+                        <div
+                          style={{
+                            backgroundColor: "rgba(255,255,255,0.06)",
+                            border: "1px solid rgba(255,255,255,0.1)",
+                            borderRadius: "20px",
+                            borderBottomLeftRadius: "5px",
+                            padding: "16px 20px",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "6px",
+                          }}
+                        >
+                          {[0, 1, 2].map((i) => (
+                            <span
+                              key={i}
+                              style={{
+                                display: "block",
+                                width: "7px",
+                                height: "7px",
+                                borderRadius: "50%",
+                                backgroundColor: "rgba(255,255,255,0.55)",
+                                animation: `chatDot 0.8s ${i * 0.16}s infinite ease-in-out`,
+                              }}
+                            />
+                          ))}
+                        </div>
+                        {slowHint && (
+                          <p
                             style={{
-                              display: "block",
-                              width: "7px",
-                              height: "7px",
-                              borderRadius: "50%",
-                              backgroundColor: "rgba(255,255,255,0.55)",
-                              animation: `chatDot 0.8s ${i * 0.16}s infinite ease-in-out`,
+                              margin: 0,
+                              fontSize: "12px",
+                              color: "rgba(255,255,255,0.35)",
+                              fontStyle: "italic",
+                              animation:
+                                "slowHintBlink 1.8s ease-in-out infinite",
                             }}
-                          />
-                        ))}
+                          >
+                            {slowHint}
+                          </p>
+                        )}
                       </div>
                     </div>
                   )}
@@ -744,6 +898,11 @@ export function ChatWidget() {
       )}
 
       <style>{`
+        @keyframes slowHintBlink {
+          0%, 100% { opacity: 0.35; }
+          50%       { opacity: 0.75; }
+        }
+
         @keyframes chatDot {
           0%, 100% { opacity: 0.3; transform: translateY(0px); }
           50%       { opacity: 1;   transform: translateY(-5px); }
