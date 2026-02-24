@@ -94,8 +94,7 @@ export function HeroSection() {
             "[text-shadow:0_0px_50px_color-mix(in_oklch,var(--color-foreground)_20%,transparent)]",
           )}
         >
-          High-Quality Solutions. <br /> Real results.{" "}
-          <br className="md:hidden" /> No fluff.
+          Lightning-Fast Builds. <br /> Scalable Apps. <br /> Zero Chaos.
         </h1>
 
         <p className="animate-in fade-in opacity-60">
@@ -104,8 +103,18 @@ export function HeroSection() {
         </p>
 
         <div className="animate-in fade-in slide-in-from-bottom-4 flex items-left w-full md:w-unset pr-12 flex-col md:flex-row mt-16 md:mt-0 gap-3 fill-mode-backwards pt-2 delay-300 duration-500 ease-out absolute bottom-[-40px] md:bottom-0">
-          <Button asChild><Link href="/contact">Get started</Link></Button>
-          <Button variant="outline" asChild><Link href="https://calendly.com/darjan-developer/30min" target="_blank" rel="noopener noreferrer">Book a Call</Link></Button>
+          <Button asChild>
+            <Link href="/contact">Get started</Link>
+          </Button>
+          <Button variant="outline" asChild>
+            <Link
+              href="https://calendly.com/darjan-developer/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Book a Call
+            </Link>
+          </Button>
         </div>
       </div>
     </section>
