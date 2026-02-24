@@ -310,7 +310,9 @@ export function ChatWidget() {
           className="chat-overlay"
           style={{
             position: "fixed",
-            inset: 0,
+            top: 0,
+            left: 0,
+            right: 0,
             zIndex: 9000,
             display: "flex",
             flexDirection: "column",
@@ -319,8 +321,8 @@ export function ChatWidget() {
           }}
         >
           <GradientDots
-            dotSize={5}
-            spacing={5}
+            dotSize={4}
+            spacing={4}
             duration={32}
             backgroundColor="#000000"
             style={{ zIndex: 0 }}
@@ -742,11 +744,19 @@ export function ChatWidget() {
         }
 
         /*
-         * Use dynamic viewport height so the overlay shrinks correctly
-         * when the iOS soft keyboard appears — keeps the input visible.
+         * Full-height overlay on iOS Safari.
+         * inset:0 is NOT used (would create bottom:0 conflict with height).
+         * top/left/right are set inline; height is controlled here only.
+         *
+         * Fallback chain (browser picks last recognised value):
+         *   100vh               – universal fallback
+         *   -webkit-fill-available – iOS ≤15: tracks visible area incl. browser chrome
+         *   100dvh              – iOS 16+/modern: dynamic viewport, shrinks with keyboard
          */
         .chat-overlay {
-          height: 100dvh !important;
+          height: 100vh;
+          height: -webkit-fill-available;
+          height: 100dvh;
         }
 
         /* Pad input bar above the iPhone home indicator */
@@ -763,6 +773,18 @@ export function ChatWidget() {
         @media (max-width: 768px) {
           .chat-esc-hint { display: none !important; }
           .chat-hint-text { display: none !important; }
+        }
+
+        /*
+         * When floating over the black overlay the button needs a visible
+         * background and border — otherwise it's invisible against the bg.
+         */
+        .chat-toggle-open,
+        .chat-toggle-active {
+          background-color: rgba(255,255,255,0.10) !important;
+          border: 1px solid rgba(255,255,255,0.28) !important;
+          backdrop-filter: blur(12px) !important;
+          -webkit-backdrop-filter: blur(12px) !important;
         }
 
         /*
