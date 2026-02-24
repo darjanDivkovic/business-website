@@ -98,8 +98,7 @@ export function HeroSection() {
         </h1>
 
         <p className="animate-in fade-in opacity-60">
-          At prices you can actually afford <br className="md:hidden" /> and
-          validate
+          At price points you can afford and verify through measurable ROI.
         </p>
 
         <div className="animate-in fade-in slide-in-from-bottom-4 flex items-left w-full md:w-unset pr-12 flex-col md:flex-row mt-16 md:mt-0 gap-3 fill-mode-backwards pt-2 delay-300 duration-500 ease-out absolute bottom-[-40px] md:bottom-0">
