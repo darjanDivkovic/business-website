@@ -377,4 +377,4 @@ const ContactSection = () => {
   );
 };
 
-export default ContactSection;
+export { ContactSection };

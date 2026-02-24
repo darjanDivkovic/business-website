@@ -1,4 +1,4 @@
-import ContactSection from "@/components/ui/contact-section";
+import { ContactSection } from "@/components/ui/contact-section";
 import { Header } from "@/components/ui/header-1";
 
 export function ContactPage() {
