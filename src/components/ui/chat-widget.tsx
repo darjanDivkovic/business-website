@@ -32,14 +32,19 @@ export function ChatWidget() {
   useEffect(() => {
     if (isOpen) {
       setVisible(true);
+      // Measure scrollbar width before hiding it so we can compensate
+      const sw = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
+      if (sw > 0) document.body.style.paddingRight = `${sw}px`;
     } else {
       document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
       const t = setTimeout(() => setVisible(false), 320);
       return () => clearTimeout(t);
     }
     return () => {
       document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
     };
   }, [isOpen]);
 
@@ -154,7 +159,7 @@ export function ChatWidget() {
         width: "100%",
         maxWidth: "720px",
         margin: "0 auto",
-        padding: "0 24px",
+        padding: "0 16px",
       }}
     >
       <div
@@ -188,13 +193,16 @@ export function ChatWidget() {
             border: "none",
             outline: "none",
             color: "white",
-            fontSize: "15px",
+            /* 16px minimum prevents Safari from auto-zooming on focus */
+            fontSize: "16px",
             lineHeight: "1.55",
             fontFamily: "inherit",
             minHeight: "48px",
             maxHeight: "150px",
             overflow: "hidden",
             padding: "12px 0",
+            /* Remove iOS inner shadow on inputs */
+            WebkitAppearance: "none",
           }}
         />
         <button
@@ -222,11 +230,12 @@ export function ChatWidget() {
         </button>
       </div>
       <p
+        className="chat-hint-text"
         style={{
           textAlign: "center",
           color: "rgba(255,255,255,0.15)",
           fontSize: "11px",
-          marginTop: "12px",
+          marginTop: "10px",
           letterSpacing: "0.05em",
         }}
       >
@@ -241,6 +250,9 @@ export function ChatWidget() {
       <button
         onClick={() => setIsOpen((v) => !v)}
         aria-label={isOpen ? "Close chat" : "Open chat"}
+        className={
+          isOpen ? "chat-toggle-btn chat-toggle-open" : "chat-toggle-btn"
+        }
         style={{
           position: "fixed",
           bottom: "30px",
@@ -292,6 +304,7 @@ export function ChatWidget() {
       {/* ── Full-screen overlay ────────────────────────── */}
       {visible && (
         <div
+          className="chat-overlay"
           style={{
             position: "fixed",
             inset: 0,
@@ -311,7 +324,7 @@ export function ChatWidget() {
           <GradientDots
             dotSize={5}
             spacing={5}
-            duration={5}
+            duration={32}
             backgroundColor="#000000"
             style={{ zIndex: 0 }}
             aria-hidden="true"
@@ -355,7 +368,9 @@ export function ChatWidget() {
                 }}
               />
             </div>
+            {/* Hidden on mobile via CSS */}
             <span
+              className="chat-esc-hint"
               style={{
                 color: "rgba(255,255,255,0.2)",
                 fontSize: "12px",
@@ -369,13 +384,15 @@ export function ChatWidget() {
           {/* ── Landing view ─────────────────────────── */}
           {!hasMessages && (
             <div
+              className="chat-landing"
               style={{
                 flex: 1,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                padding: "0 24px 100px",
+                padding: "0 24px",
+                paddingBottom: "100px",
                 position: "relative",
                 zIndex: 1,
               }}
@@ -404,7 +421,7 @@ export function ChatWidget() {
                 <h1
                   style={{
                     color: "white",
-                    fontSize: "clamp(34px, 5vw, 52px)",
+                    fontSize: "clamp(30px, 5vw, 52px)",
                     fontWeight: 600,
                     margin: "0 0 14px",
                     letterSpacing: "-0.025em",
@@ -417,7 +434,7 @@ export function ChatWidget() {
                 <p
                   style={{
                     color: "rgba(255,255,255,0.5)",
-                    fontSize: "clamp(15px, 2vw, 18px)",
+                    fontSize: "clamp(14px, 2vw, 18px)",
                     margin: 0,
                     lineHeight: 1.55,
                     maxWidth: "400px",
@@ -439,6 +456,8 @@ export function ChatWidget() {
                 style={{
                   flex: 1,
                   overflowY: "auto",
+                  /* Smooth momentum scroll on iOS */
+                  WebkitOverflowScrolling: "touch",
                   padding: "32px 0 16px",
                   position: "relative",
                   zIndex: 1,
@@ -448,7 +467,7 @@ export function ChatWidget() {
                   style={{
                     maxWidth: "720px",
                     margin: "0 auto",
-                    padding: "0 24px",
+                    padding: "0 16px",
                     display: "flex",
                     flexDirection: "column",
                     gap: "20px",
@@ -472,7 +491,7 @@ export function ChatWidget() {
                       )}
                       <div
                         style={{
-                          maxWidth: "72%",
+                          maxWidth: "80%",
                           borderRadius: "20px",
                           borderBottomRightRadius:
                             msg.role === "user" ? "5px" : "20px",
@@ -505,28 +524,52 @@ export function ChatWidget() {
                                 <p style={{ margin: "0 0 8px" }}>{children}</p>
                               ),
                               ul: ({ children }) => (
-                                <ul style={{ margin: "6px 0", paddingLeft: "20px" }}>{children}</ul>
+                                <ul
+                                  style={{
+                                    margin: "6px 0",
+                                    paddingLeft: "20px",
+                                  }}
+                                >
+                                  {children}
+                                </ul>
                               ),
                               ol: ({ children }) => (
-                                <ol style={{ margin: "6px 0", paddingLeft: "20px" }}>{children}</ol>
+                                <ol
+                                  style={{
+                                    margin: "6px 0",
+                                    paddingLeft: "20px",
+                                  }}
+                                >
+                                  {children}
+                                </ol>
                               ),
                               li: ({ children }) => (
-                                <li style={{ marginBottom: "4px" }}>{children}</li>
+                                <li style={{ marginBottom: "4px" }}>
+                                  {children}
+                                </li>
                               ),
                               strong: ({ children }) => (
-                                <strong style={{ fontWeight: 600, color: "inherit" }}>{children}</strong>
+                                <strong
+                                  style={{ fontWeight: 600, color: "inherit" }}
+                                >
+                                  {children}
+                                </strong>
                               ),
                               em: ({ children }) => (
-                                <em style={{ fontStyle: "italic" }}>{children}</em>
+                                <em style={{ fontStyle: "italic" }}>
+                                  {children}
+                                </em>
                               ),
                               code: ({ children, className }) => {
-                                const isBlock = className?.includes("language-");
+                                const isBlock =
+                                  className?.includes("language-");
                                 return isBlock ? (
                                   <code
                                     style={{
                                       display: "block",
                                       background: "rgba(255,255,255,0.07)",
-                                      border: "1px solid rgba(255,255,255,0.12)",
+                                      border:
+                                        "1px solid rgba(255,255,255,0.12)",
                                       borderRadius: "8px",
                                       padding: "10px 14px",
                                       fontSize: "13px",
@@ -553,29 +596,74 @@ export function ChatWidget() {
                                 );
                               },
                               pre: ({ children }) => (
-                                <pre style={{ margin: "8px 0", background: "none", padding: 0 }}>{children}</pre>
+                                <pre
+                                  style={{
+                                    margin: "8px 0",
+                                    background: "none",
+                                    padding: 0,
+                                  }}
+                                >
+                                  {children}
+                                </pre>
                               ),
                               h1: ({ children }) => (
-                                <h1 style={{ fontSize: "17px", fontWeight: 600, margin: "0 0 8px", color: "white" }}>{children}</h1>
+                                <h1
+                                  style={{
+                                    fontSize: "17px",
+                                    fontWeight: 600,
+                                    margin: "0 0 8px",
+                                    color: "white",
+                                  }}
+                                >
+                                  {children}
+                                </h1>
                               ),
                               h2: ({ children }) => (
-                                <h2 style={{ fontSize: "16px", fontWeight: 600, margin: "0 0 6px", color: "white" }}>{children}</h2>
+                                <h2
+                                  style={{
+                                    fontSize: "16px",
+                                    fontWeight: 600,
+                                    margin: "0 0 6px",
+                                    color: "white",
+                                  }}
+                                >
+                                  {children}
+                                </h2>
                               ),
                               h3: ({ children }) => (
-                                <h3 style={{ fontSize: "15px", fontWeight: 600, margin: "0 0 4px", color: "white" }}>{children}</h3>
+                                <h3
+                                  style={{
+                                    fontSize: "15px",
+                                    fontWeight: 600,
+                                    margin: "0 0 4px",
+                                    color: "white",
+                                  }}
+                                >
+                                  {children}
+                                </h3>
                               ),
                               a: ({ children, href }) => (
                                 <a
                                   href={href}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  style={{ color: "#AAAAFF", textDecoration: "underline" }}
+                                  style={{
+                                    color: "#AAAAFF",
+                                    textDecoration: "underline",
+                                  }}
                                 >
                                   {children}
                                 </a>
                               ),
                               hr: () => (
-                                <hr style={{ border: "none", borderTop: "1px solid rgba(255,255,255,0.12)", margin: "10px 0" }} />
+                                <hr
+                                  style={{
+                                    border: "none",
+                                    borderTop:
+                                      "1px solid rgba(255,255,255,0.12)",
+                                    margin: "10px 0",
+                                  }}
+                                />
                               ),
                             }}
                           >
@@ -635,6 +723,7 @@ export function ChatWidget() {
               </div>
 
               <div
+                className="chat-input-wrapper"
                 style={{
                   padding: "12px 0 32px",
                   flexShrink: 0,
@@ -653,6 +742,43 @@ export function ChatWidget() {
         @keyframes chatDot {
           0%, 100% { opacity: 0.3; transform: translateY(0px); }
           50%       { opacity: 1;   transform: translateY(-5px); }
+        }
+
+        /*
+         * Use dynamic viewport height so the overlay shrinks correctly
+         * when the iOS soft keyboard appears — keeps the input visible.
+         */
+        .chat-overlay {
+          height: 100dvh !important;
+        }
+
+        /* Pad input bar above the iPhone home indicator */
+        .chat-input-wrapper {
+          padding-bottom: max(32px, env(safe-area-inset-bottom, 0px)) !important;
+        }
+
+        /* Same for the landing view CTA */
+        .chat-landing {
+          padding-bottom: max(100px, calc(80px + env(safe-area-inset-bottom, 0px))) !important;
+        }
+
+        /* "ESC to close" is meaningless on touch — hide it */
+        @media (max-width: 768px) {
+          .chat-esc-hint { display: none !important; }
+          .chat-hint-text { display: none !important; }
+        }
+
+        /*
+         * When the chat is open on mobile, centre the X button at the bottom
+         * so it floats naturally over the full-screen overlay.
+         */
+        @media (max-width: 768px) {
+          .chat-toggle-open {
+            right: auto !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            bottom: 24px !important;
+          }
         }
       `}</style>
     </>
