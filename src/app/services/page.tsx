@@ -4,7 +4,7 @@ import { ServicesPage } from "@/app/pages/Services/ServicesPage";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Web development services by Darjan — React, TypeScript, Next.js, full-stack development, performance optimization, and modern UI. Let's build something great.",
+    "Web development services by Darjan — React, TypeScript, Next.js, full-stack development, performance optimization, and modern UI. Let's build something world class.",
   alternates: {
     canonical: "https://darjan.dev/services",
   },

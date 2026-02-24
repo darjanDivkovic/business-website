@@ -1,15 +1,9 @@
 "use client";
 
-import { useRef, useState, useCallback, useEffect } from "react";
 import { Code2, Rocket, ShieldCheck, Clock, MessageSquare } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { cn } from "@/lib/utils";
 import { SectionTitleComponent } from "./SectionTitleComponent";
-
-// ─── Video base ───────────────────────────────────────────────────────────────
-
-const BASE =
-  "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/Trust/";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -20,7 +14,6 @@ const items = [
     title: "Full-Stack, End to End",
     description:
       "From pixel-perfect frontends to robust backends and databases — I handle the full stack so you never have to juggle multiple contractors.",
-    video: BASE + "FullStack.mp4",
   },
   {
     area: "md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]",
@@ -28,7 +21,6 @@ const items = [
     title: "5+ Years in the Trenches",
     description:
       "Half a decade building production apps for startups and scale-ups. I've seen what breaks at scale — and how to avoid it from day one.",
-    video: BASE + "FiveYears.mp4",
   },
   {
     area: "md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]",
@@ -36,7 +28,6 @@ const items = [
     title: "Ship Fast, Break Nothing",
     description:
       "Speed without chaos. I move quickly and ship working software by keeping codebases clean, tested, and easy to iterate on. Your deadline is real — I treat it that way.",
-    video: BASE + "ShipFast.mp4",
   },
   {
     area: "md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]",
@@ -44,7 +35,6 @@ const items = [
     title: "You'll Always Know Where Things Stand",
     description:
       "No disappearing acts. Async-first updates, clear timelines, and honest feedback when something needs to change.",
-    video: BASE + "KnowWhereYouStand.mp4?v=2",
   },
   {
     area: "md:[grid-area:3/1/4/13] xl:[grid-area:2/8/3/13]",
@@ -52,57 +42,8 @@ const items = [
     title: "Built to Last, Not Just to Launch",
     description:
       "I write code I'd be happy to maintain a year from now. Good architecture, sensible abstractions, and zero cowboy deployments.",
-    video: BASE + "BultToLast.mp4",
   },
 ];
-
-// ─── VideoBackground ──────────────────────────────────────────────────────────
-// Plays the video, and on each natural end:
-//   1. fades opacity to 0 (700ms CSS transition)
-//   2. restarts from the beginning
-//   3. fades back to full opacity
-
-function VideoBackground({ src }: { src: string }) {
-  const ref = useRef<HTMLVideoElement>(null);
-  const [fading, setFading] = useState(false);
-
-  useEffect(() => {
-    ref.current?.play().catch(() => {
-      // Browser may pause background/power-saving media — silently ignore
-    });
-  }, []);
-
-  const handleEnded = useCallback(() => {
-    setFading(true); // trigger fade-to-black
-    setTimeout(() => {
-      if (ref.current) {
-        ref.current.currentTime = 0;
-        ref.current.play().catch(() => {
-          // Browser may pause background/power-saving media — silently ignore
-        });
-      }
-      setFading(false); // fade back in
-    }, 750); // slightly longer than the 700ms CSS transition
-  }, []);
-
-  return (
-    <>
-      <video
-        ref={ref}
-        src={src}
-        muted
-        playsInline
-        onEnded={handleEnded}
-        className={cn(
-          "absolute inset-0 h-full w-full object-cover transition-opacity duration-700",
-          fading ? "opacity-0" : "opacity-[0.48]",
-        )}
-      />
-      {/* Gradient overlay — heavier at the bottom where the text lives */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background/92 via-background/55 to-background/10" />
-    </>
-  );
-}
 
 // ─── GridItem ─────────────────────────────────────────────────────────────────
 
@@ -111,10 +52,9 @@ interface GridItemProps {
   icon: React.ReactNode;
   title: string;
   description: React.ReactNode;
-  video: string;
 }
 
-const GridItem = ({ area, icon, title, description, video }: GridItemProps) => {
+const GridItem = ({ area, icon, title, description }: GridItemProps) => {
   return (
     <li className={cn("min-h-[14rem] list-none", area)}>
       <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
@@ -127,10 +67,6 @@ const GridItem = ({ area, icon, title, description, video }: GridItemProps) => {
           borderWidth={3}
         />
         <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
-          {/* Video + overlay sit behind everything */}
-          <VideoBackground src={video} />
-
-          {/* Content on top */}
           <div className="relative z-10 flex flex-1 flex-col justify-between gap-3">
             <div className="w-fit rounded-lg border-[0.75px] border-border bg-muted/80 p-2 backdrop-blur-sm">
               {icon}
@@ -171,7 +107,6 @@ export function AboutTrustSection() {
             icon={item.icon}
             title={item.title}
             description={item.description}
-            video={item.video}
           />
         ))}
       </ul>

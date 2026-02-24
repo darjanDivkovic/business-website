@@ -4,6 +4,8 @@ import { useState, useEffect, ComponentProps } from "react";
 
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
+
+const openChat = () => window.dispatchEvent(new Event("openDayanaChat"));
 import { cn } from "@/lib/utils";
 import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
 import { useScroll } from "@/components/ui/use-scroll";
@@ -63,8 +65,18 @@ export function Header() {
               {link.label}
             </Link>
           ))}
-          <Button variant="outline" asChild>
-            <Link href="/contact">Contact</Link>
+          <Button variant="outline" onClick={openChat}>
+            <div className="flex items-center gap-3">
+              Talk to Assistant
+              <div
+                style={{
+                  width: "7px",
+                  height: "7px",
+                  borderRadius: "50%",
+                  backgroundColor: "rgb(20, 255, 126)",
+                }}
+              />
+            </div>
           </Button>
           <Button asChild>
             <Link href="/contact">Get Started</Link>
@@ -98,8 +110,12 @@ export function Header() {
           ))}
         </div>
         <div className="flex flex-col gap-2">
-          <Button variant="outline" className="w-full bg-transparent" asChild>
-            <Link href="/contact">Contact</Link>
+          <Button
+            variant="outline"
+            className="w-full bg-transparent"
+            onClick={openChat}
+          >
+            Contact
           </Button>
           <Button className="w-full" asChild>
             <Link href="/contact">Get Started</Link>

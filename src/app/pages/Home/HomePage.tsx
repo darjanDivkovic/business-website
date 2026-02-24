@@ -4,7 +4,7 @@ import { GalleryScrollSection } from "@/components/ui/gallery-scroll-section";
 import { TestimonialsSection } from "@/components/ui/testimonials-section";
 import { ServicesSection } from "@/components/ui/services-section";
 import { AboutTrustSection } from "@/components/ui/about-trust-section";
-import { ContactSection } from "@/components/ui/contact-section";
+import ContactSection from "@/components/ui/contact-section";
 
 export function HomePage() {
   return (

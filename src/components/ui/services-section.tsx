@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Meteors } from "@/components/ui/meteors";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { Zap, Clock, Sparkles, Check, LucideIcon } from "lucide-react";
 import { CSSProperties, ReactNode, useEffect, useRef, useState } from "react";
 import { SectionTitleComponent } from "./SectionTitleComponent";
@@ -159,11 +160,7 @@ const services: ServiceData[] = [
 
 // ─── Section ─────────────────────────────────────────────────────────────────
 
-export function ServicesSection({
-  onServiceSelect,
-}: {
-  onServiceSelect?: (contactId: string) => void;
-} = {}) {
+export function ServicesSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
   const [scanned, setScanned] = useState(false);
@@ -239,7 +236,6 @@ export function ServicesSection({
                 service={service}
                 inView={inView}
                 delay={idx * 160}
-                onServiceSelect={onServiceSelect}
               />
             ),
           )}
@@ -255,12 +251,10 @@ function ServiceCard({
   service,
   inView,
   delay,
-  onServiceSelect,
 }: {
   service: ServiceData;
   inView?: boolean;
   delay?: number;
-  onServiceSelect?: (contactId: string) => void;
 }) {
   const scheme = service.hoverScheme ? SCHEMES[service.hoverScheme] : null;
 
@@ -342,14 +336,12 @@ function ServiceCard({
               "w-full transition-shadow duration-300",
               scheme && scheme.buttonGlow,
             )}
-            onClick={() =>
-              service.contactId && onServiceSelect?.(service.contactId)
-            }
+            asChild
           >
-            Get this Service
+            <Link href="/contact">Get this Service</Link>
           </Button>
-          <Button variant="outline" className="w-full">
-            Book a Call
+          <Button variant="outline" className="w-full" asChild>
+            <Link href="https://calendly.com/darjan-developer/30min" target="_blank" rel="noopener noreferrer">Book a Call</Link>
           </Button>
         </div>
       )}

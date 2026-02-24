@@ -48,6 +48,12 @@ export function ChatWidget() {
   }, [isOpen]);
 
   useEffect(() => {
+    const openHandler = () => setIsOpen(true);
+    window.addEventListener("openDayanaChat", openHandler);
+    return () => window.removeEventListener("openDayanaChat", openHandler);
+  }, []);
+
+  useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) setIsOpen(false);
     };
@@ -238,7 +244,7 @@ export function ChatWidget() {
           letterSpacing: "0.05em",
         }}
       >
-        Dayana AI · Enter to send · Shift+Enter for new line
+        Dayana · Enter to send · Shift+Enter for new line
       </p>
     </div>
   );
@@ -355,7 +361,7 @@ export function ChatWidget() {
                   fontFamily: "inherit",
                 }}
               >
-                Dayana AI
+                Dayana
               </span>
               {/* Online dot */}
               <div
@@ -785,6 +791,15 @@ export function ChatWidget() {
           border: 1px solid rgba(255,255,255,0.28) !important;
           backdrop-filter: blur(12px) !important;
           -webkit-backdrop-filter: blur(12px) !important;
+        }
+
+        /* Smaller button when floating over the overlay on mobile */
+        @media (max-width: 768px) {
+          .chat-toggle-open,
+          .chat-toggle-active {
+            width: 40px !important;
+            height: 40px !important;
+          }
         }
 
         /*
