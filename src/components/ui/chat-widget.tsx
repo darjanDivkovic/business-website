@@ -39,8 +39,7 @@ export function ChatWidget() {
     } else {
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
-      const t = setTimeout(() => setVisible(false), 320);
-      return () => clearTimeout(t);
+      setVisible(false);
     }
     return () => {
       document.body.style.overflow = "";
@@ -251,7 +250,11 @@ export function ChatWidget() {
         onClick={() => setIsOpen((v) => !v)}
         aria-label={isOpen ? "Close chat" : "Open chat"}
         className={
-          isOpen ? "chat-toggle-btn chat-toggle-open" : "chat-toggle-btn"
+          !isOpen
+            ? "chat-toggle-btn"
+            : hasMessages
+              ? "chat-toggle-btn chat-toggle-active"
+              : "chat-toggle-btn chat-toggle-open"
         }
         style={{
           position: "fixed",
@@ -313,12 +316,6 @@ export function ChatWidget() {
             flexDirection: "column",
             backgroundColor: "#000000",
             overflow: "hidden",
-            transition: "opacity 0.32s ease, transform 0.32s ease",
-            opacity: isOpen ? 1 : 0,
-            transform: isOpen
-              ? "translateY(0) scale(1)"
-              : "translateY(28px) scale(0.98)",
-            transformOrigin: "bottom right",
           }}
         >
           <GradientDots
@@ -769,8 +766,7 @@ export function ChatWidget() {
         }
 
         /*
-         * When the chat is open on mobile, centre the X button at the bottom
-         * so it floats naturally over the full-screen overlay.
+         * No messages yet — centre the X button at the bottom of the overlay.
          */
         @media (max-width: 768px) {
           .chat-toggle-open {
@@ -778,6 +774,20 @@ export function ChatWidget() {
             left: 50% !important;
             transform: translateX(-50%) !important;
             bottom: 24px !important;
+          }
+        }
+
+        /*
+         * Conversation started — move the X to the top-right so it doesn't
+         * obstruct the input bar or messages.
+         */
+        @media (max-width: 768px) {
+          .chat-toggle-active {
+            bottom: auto !important;
+            top: 14px !important;
+            right: 16px !important;
+            left: auto !important;
+            transform: none !important;
           }
         }
       `}</style>
