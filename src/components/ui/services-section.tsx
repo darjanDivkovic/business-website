@@ -328,7 +328,10 @@ function ServiceCard({
       </CardContent>
 
       {service.showButtons && (
-        <div className="mt-12 relative z-10 flex flex-col gap-3 px-6 pb-6 mt-4 mb-4">
+        <div
+          style={{ marginTop: "40px" }}
+          className="relative z-10 flex flex-col gap-3 px-6 pb-6 mt-4 mb-4"
+        >
           <Button
             className={cn(
               "w-full transition-shadow duration-300",
