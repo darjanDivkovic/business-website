@@ -109,7 +109,6 @@ const services: ServiceData[] = [
       "UI components and design systems",
       "Responsive website updates & optimizations",
       "React-based interactive features",
-      "Small-to-medium frontend enhancements",
     ],
     badge: { text: "Most Popular", variant: "purple-subtle" },
     hoverScheme: "purple",
@@ -128,7 +127,6 @@ const services: ServiceData[] = [
       "Frontend product features",
       "API integrations and automations",
       "Corporate websites",
-      "ATS and HR tech solutions",
     ],
     badge: { text: "Best for Scale", variant: "blue-subtle" },
     hoverScheme: "blue",
@@ -330,7 +328,7 @@ function ServiceCard({
       </CardContent>
 
       {service.showButtons && (
-        <div className="relative z-10 flex flex-col gap-3 px-6 pb-6 mt-4 mb-4">
+        <div className="mt-12 relative z-10 flex flex-col gap-3 px-6 pb-6 mt-4 mb-4">
           <Button
             className={cn(
               "w-full transition-shadow duration-300",
@@ -341,7 +339,13 @@ function ServiceCard({
             <Link href="/contact">Get this Service</Link>
           </Button>
           <Button variant="outline" className="w-full" asChild>
-            <Link href="https://calendly.com/darjan-developer/30min" target="_blank" rel="noopener noreferrer">Book a Call</Link>
+            <Link
+              href="https://calendly.com/darjan-developer/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Book a Call
+            </Link>
           </Button>
         </div>
       )}
