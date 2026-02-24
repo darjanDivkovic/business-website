@@ -1,5 +1,7 @@
 "use client";
-import React from "react";
+
+import { useState, useEffect, ComponentProps } from "react";
+
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -10,7 +12,7 @@ import { createPortal } from "react-dom";
 import Logo from "../../../public/logo.png";
 
 export function Header() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const scrolled = useScroll(10);
 
   const links = [
@@ -18,7 +20,7 @@ export function Header() {
     { label: "Blog", href: "/blog" },
   ];
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
     } else {
@@ -108,7 +110,7 @@ export function Header() {
   );
 }
 
-type MobileMenuProps = React.ComponentProps<"div"> & {
+type MobileMenuProps = ComponentProps<"div"> & {
   open: boolean;
 };
 
@@ -138,23 +140,3 @@ function MobileMenu({ open, children, className, ...props }: MobileMenuProps) {
     document.body,
   );
 }
-
-export const WordmarkIcon = (props: React.ComponentProps<"svg">) => (
-  <svg
-    viewBox="0 0 88 16"
-    fill="currentColor"
-    aria-label="darjan.dev"
-    {...props}
-  >
-    <text
-      x="0"
-      y="13"
-      fontSize="13"
-      fontWeight="600"
-      fontFamily="inherit"
-      letterSpacing="-0.3"
-    >
-      Darjan.dev
-    </text>
-  </svg>
-);

@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import { useState, useEffect, ChangeEvent } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -45,21 +46,21 @@ export function ContactSection({
 }: {
   preselectedService?: string;
 } = {}) {
-  const [form, setForm] = React.useState<FormState>({
+  const [form, setForm] = useState<FormState>({
     name: "",
     email: "",
     message: "",
     services: preselectedService ? [preselectedService] : [],
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (preselectedService) {
       setForm((prev) => ({ ...prev, services: [preselectedService] }));
     }
   }, [preselectedService]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));

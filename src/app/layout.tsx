@@ -3,7 +3,7 @@ import "@/app/styles/globals.css";
 import { Actor } from "next/font/google";
 import { Footer } from "@/components/ui/footer";
 import { SplashScreen } from "@/components/ui/splash-screen";
-import { Providers } from "@/components/providers";
+import { ChatWidget } from "@/components/ui/chat-widget";
 import { Analytics } from "@vercel/analytics/next";
 
 const actor = Actor({
@@ -73,11 +73,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className={`${actor.variable} antialiased`}>
-        <Providers>
-          <SplashScreen />
-          {children}
-          <Footer />
-        </Providers>
+        <SplashScreen />
+        {children}
+        <Footer />
+        <ChatWidget />
         <Analytics />
       </body>
     </html>

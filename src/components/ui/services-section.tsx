@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Zap, Clock, Sparkles, Check, LucideIcon } from "lucide-react";
 import { CSSProperties, ReactNode, useEffect, useRef, useState } from "react";
-import SectionTitleComponent from "./SectionTitleComponent";
+import { SectionTitleComponent } from "./SectionTitleComponent";
 
 // ─── Cosmic palette ───────────────────────────────────────────────────────────
 //

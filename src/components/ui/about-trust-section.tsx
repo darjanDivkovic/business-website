@@ -4,7 +4,7 @@ import { useRef, useState, useCallback, useEffect } from "react";
 import { Code2, Rocket, ShieldCheck, Clock, MessageSquare } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { cn } from "@/lib/utils";
-import SectionTitleComponent from "./SectionTitleComponent";
+import { SectionTitleComponent } from "./SectionTitleComponent";
 
 // ─── Video base ───────────────────────────────────────────────────────────────
 

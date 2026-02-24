@@ -1,9 +1,18 @@
-const SectionTitleComponent = ({
+import { ReactNode } from "react";
+
+interface SectionTitleProps {
+  prefix: string;
+  header: string;
+  children?: ReactNode;
+  className?: string;
+}
+
+export function SectionTitleComponent({
   prefix,
   header,
   children,
   className = "",
-}) => {
+}: SectionTitleProps) {
   return (
     <div className={`mb-12 text-center ${className}`}>
       <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-3">
@@ -17,6 +26,4 @@ const SectionTitleComponent = ({
       </p>
     </div>
   );
-};
-
-export default SectionTitleComponent;
+}

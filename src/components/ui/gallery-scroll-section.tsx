@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 import Link from "next/link";
-import SectionTitleComponent from "./SectionTitleComponent";
+import { SectionTitleComponent } from "./SectionTitleComponent";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 
