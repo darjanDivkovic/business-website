@@ -31,7 +31,7 @@ const projects: ProjectItem[] = [
     title: "Community Website & Shop – Barz Freak",
     summary:
       "From concept to launch, I spearheaded the end-to-end development of Barz Freak as a responsive, mobile-first website optimized for cross-browser compatibility and high-performance loading times.",
-    url: "#",
+    url: "https://www.barz-freak.com/",
     image:
       "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/BarzFreakPoster.png",
   },
@@ -40,7 +40,7 @@ const projects: ProjectItem[] = [
     title: "Pequity – B2B SaaS Application",
     summary:
       "At Pequity, a San Francisco-based equity management SaaS, I served as UI/UX Developer delivering polished, high-converting interfaces while extending functionality with third-party tools.",
-    url: "#",
+    url: "https://pequity.com/",
     image:
       "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/PequityPoster.png",
   },
@@ -55,21 +55,21 @@ const projects: ProjectItem[] = [
   },
   {
     id: "item-4",
-    title: "Predictive Analytics Dashboard",
+    title: "Kandor Solutions – Website, UI/UX & Kinnect Platform",
     summary:
-      "Advanced forecasting UI that visualises historical data to surface future trends — helping teams make confident, data-driven decisions at a glance.",
-    url: "#",
+      "Led UI/UX design and React frontend for Kandor’s site and Kinnect headcount SaaS (Workday-integrated). Built modern interfaces, predictive dashboards, complex request forms, reusable components — plus LinkedIn visuals, campaign assets, and marketing designs to drive product awareness and trial adoption.",
+    url: "https://kandorsolutions.com/",
     image:
-      "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/BarzFreakPoster.png",
+      "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/KandorPoster.png",
   },
   {
     id: "item-5",
-    title: "Neural Network Architecture Explorer",
+    title: "Headcount Management Software for Workday Customers",
     summary:
-      "Interactive deep-learning model visualiser built with React — letting engineers inspect layer weights, activation maps, and gradient flows in real time.",
-    url: "#",
+      "Meet your team of specialized AI agents designed to streamline Workday headcount planning.",
+    url: "https://kandorsolutions.com/",
     image:
-      "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/LegioGemina.png",
+      "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/KinnectPoster.png",
   },
 ];
 
@@ -94,7 +94,11 @@ export function GalleryScrollSection() {
             <motion.div
               className="flex items-center gap-1.5 text-sm text-muted-foreground shrink-0 pb-1"
               animate={{ x: [0, 7, 0] }}
-              transition={{ repeat: Infinity, duration: 1.4, ease: "easeInOut" }}
+              transition={{
+                repeat: Infinity,
+                duration: 1.4,
+                ease: "easeInOut",
+              }}
             >
               <span>swipe to explore</span>
               <ChevronRight className="h-3.5 w-3.5" />
