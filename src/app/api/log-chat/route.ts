@@ -1,3 +1,7 @@
+function escapeHtml(s: string): string {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
 export async function POST(req: Request) {
   const { messages, sessionId } = await req.json();
 
@@ -7,13 +11,13 @@ export async function POST(req: Request) {
 
   const lines = (messages as { role: string; content: string }[]).map((m) =>
     m.role === "user"
-      ? `👤 <b>Visitor:</b> ${m.content}`
-      : `🤖 <b>Dayana:</b> ${m.content}`
+      ? `👤 <b>Visitor:</b> ${escapeHtml(m.content)}`
+      : `🤖 <b>Dayana:</b> ${escapeHtml(m.content)}`
   );
 
   const text = [
     `📋 <b>Dayana Chat Log</b>`,
-    `🔑 Session: <code>${sessionId}</code>`,
+    `🔑 Session: <code>${escapeHtml(sessionId)}</code>`,
     `🕐 ${new Date().toUTCString()}`,
     ``,
     ...lines,

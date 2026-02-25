@@ -81,6 +81,9 @@ export function ChatWidget() {
   const [cooldownEnd, setCooldownEnd] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState(0);
   const userMsgCountRef = useRef(0);
+  const loggedRef = useRef(false);
+  const messagesRef = useRef<Message[]>([]);
+  const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const streamingRef = useRef<{
@@ -115,13 +118,6 @@ export function ChatWidget() {
     return () => window.removeEventListener("openDayanaChat", openHandler);
   }, []);
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) setIsOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {
@@ -204,6 +200,11 @@ export function ChatWidget() {
     };
   }, [isLoading]);
 
+  // Keep messagesRef in sync so closures always see latest messages
+  useEffect(() => {
+    messagesRef.current = messages;
+  }, [messages]);
+
   // Restore persisted cooldown on mount
   useEffect(() => {
     const stored = localStorage.getItem(LS_COOLDOWN_KEY);
@@ -231,6 +232,43 @@ export function ChatWidget() {
     return () => clearInterval(id);
   }, [cooldownEnd]);
 
+  // Send conversation log — no-op if already sent or no messages
+  const sendLog = useCallback((override?: Message[]) => {
+    const msgs = override ?? messagesRef.current;
+    if (loggedRef.current || msgs.length === 0) return;
+    loggedRef.current = true;
+    navigator.sendBeacon(
+      "/api/log-chat",
+      new Blob([JSON.stringify({ messages: msgs, sessionId })], {
+        type: "application/json",
+      }),
+    );
+  }, [sessionId]);
+
+  // Send log on page unload
+  useEffect(() => {
+    const handler = () => sendLog();
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, [sendLog]);
+
+  const closeChat = useCallback(() => {
+    sendLog();
+    if (idleTimerRef.current) {
+      clearTimeout(idleTimerRef.current);
+      idleTimerRef.current = null;
+    }
+    setIsOpen(false);
+  }, [sendLog]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) closeChat();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen, closeChat]);
+
   const adjustHeight = useCallback(() => {
     const el = textareaRef.current;
     if (!el) return;
@@ -256,14 +294,12 @@ export function ChatWidget() {
       const end = Date.now() + COOLDOWN_MS;
       setCooldownEnd(end);
       localStorage.setItem(LS_COOLDOWN_KEY, String(end));
-      // Fire-and-forget — capture snapshot before async state updates
-      const snapshot = [...messages, userMsg];
-      fetch("/api/log-chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: snapshot, sessionId }),
-      }).catch(() => {});
+      sendLog([...messages, userMsg]);
     }
+
+    // Reset 2-min idle timer on every message
+    if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+    idleTimerRef.current = setTimeout(() => sendLog(), 2 * 60 * 1000);
     if (textareaRef.current) textareaRef.current.style.height = "48px";
     setIsLoading(true);
 
@@ -302,7 +338,7 @@ export function ChatWidget() {
     } finally {
       setIsLoading(false);
     }
-  }, [input, isLoading, sessionId, cooldownEnd, messages]);
+  }, [input, isLoading, sessionId, cooldownEnd, messages, sendLog]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -500,7 +536,7 @@ export function ChatWidget() {
     <>
       {/* ── Toggle button ─────────────────────────────── */}
       <button
-        onClick={() => setIsOpen((v) => !v)}
+        onClick={() => (isOpen ? closeChat() : setIsOpen(true))}
         aria-label={isOpen ? "Close chat" : "Open chat"}
         className={
           !isOpen
