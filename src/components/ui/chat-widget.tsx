@@ -9,6 +9,10 @@ import { GradientDots } from "@/components/ui/gradient-dots";
 const WEBHOOK_URL =
   "https://darjan.app.n8n.cloud/webhook/a09badee-79cb-4aaa-9ebc-ed3413a8fe18/chat";
 
+const MESSAGE_LIMIT = 6;
+const COOLDOWN_MS = 15 * 60 * 1000;
+const LS_COOLDOWN_KEY = "dayana_cooldown_end";
+
 const SLOW_PHRASES = [
   "Thinkering...",
   "Overclocking...",
@@ -74,6 +78,9 @@ export function ChatWidget() {
     null,
   );
   const [slowHint, setSlowHint] = useState<string | null>(null);
+  const [cooldownEnd, setCooldownEnd] = useState<number | null>(null);
+  const [timeLeft, setTimeLeft] = useState(0);
+  const userMsgCountRef = useRef(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const streamingRef = useRef<{
@@ -197,6 +204,33 @@ export function ChatWidget() {
     };
   }, [isLoading]);
 
+  // Restore persisted cooldown on mount
+  useEffect(() => {
+    const stored = localStorage.getItem(LS_COOLDOWN_KEY);
+    if (stored) {
+      const end = parseInt(stored, 10);
+      if (end > Date.now()) setCooldownEnd(end);
+      else localStorage.removeItem(LS_COOLDOWN_KEY);
+    }
+  }, []);
+
+  // Countdown tick
+  useEffect(() => {
+    if (!cooldownEnd) return;
+    const tick = () => {
+      const remaining = Math.max(0, Math.floor((cooldownEnd - Date.now()) / 1000));
+      setTimeLeft(remaining);
+      if (remaining === 0) {
+        setCooldownEnd(null);
+        localStorage.removeItem(LS_COOLDOWN_KEY);
+        userMsgCountRef.current = 0;
+      }
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [cooldownEnd]);
+
   const adjustHeight = useCallback(() => {
     const el = textareaRef.current;
     if (!el) return;
@@ -206,7 +240,7 @@ export function ChatWidget() {
 
   const sendMessage = useCallback(async () => {
     const trimmed = input.trim();
-    if (!trimmed || isLoading) return;
+    if (!trimmed || isLoading || cooldownEnd) return;
 
     const userMsg: Message = {
       id: Date.now().toString(),
@@ -216,6 +250,20 @@ export function ChatWidget() {
 
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
+
+    userMsgCountRef.current += 1;
+    if (userMsgCountRef.current >= MESSAGE_LIMIT) {
+      const end = Date.now() + COOLDOWN_MS;
+      setCooldownEnd(end);
+      localStorage.setItem(LS_COOLDOWN_KEY, String(end));
+      // Fire-and-forget — capture snapshot before async state updates
+      const snapshot = [...messages, userMsg];
+      fetch("/api/log-chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: snapshot, sessionId }),
+      }).catch(() => {});
+    }
     if (textareaRef.current) textareaRef.current.style.height = "48px";
     setIsLoading(true);
 
@@ -254,7 +302,7 @@ export function ChatWidget() {
     } finally {
       setIsLoading(false);
     }
-  }, [input, isLoading, sessionId]);
+  }, [input, isLoading, sessionId, cooldownEnd, messages]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -267,7 +315,7 @@ export function ChatWidget() {
   );
 
   const hasMessages = messages.length > 0;
-  const canSend = input.trim().length > 0 && !isLoading;
+  const canSend = input.trim().length > 0 && !isLoading && !cooldownEnd;
 
   /* ─── Bot avatar (reused) ─────────────────────────────── */
   const botAvatar = (size: number, iconSize: number) => (
@@ -377,6 +425,74 @@ export function ChatWidget() {
       >
         Dayana · Enter to send · Shift+Enter for new line
       </p>
+    </div>
+  );
+
+  const mins = String(Math.floor(timeLeft / 60)).padStart(2, "0");
+  const secs = String(timeLeft % 60).padStart(2, "0");
+
+  const cooldownBar = (
+    <div
+      style={{
+        width: "100%",
+        maxWidth: "720px",
+        margin: "0 auto",
+        padding: "0 16px",
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: "rgba(255,255,255,0.05)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+          border: "1px solid rgba(255,255,255,0.1)",
+          borderRadius: "18px",
+          padding: "24px 28px",
+          boxShadow: "0 4px 30px rgba(0,0,0,0.4)",
+          textAlign: "center",
+        }}
+      >
+        <p
+          style={{
+            color: "rgba(255,255,255,0.75)",
+            fontSize: "15px",
+            lineHeight: "1.6",
+            margin: "0 0 16px",
+          }}
+        >
+          We&apos;re sorry — to keep Dayana available for everyone, sessions are
+          limited to {MESSAGE_LIMIT} messages. You can continue in:
+        </p>
+        <p
+          style={{
+            color: "white",
+            fontSize: "36px",
+            fontWeight: 600,
+            letterSpacing: "0.05em",
+            fontVariantNumeric: "tabular-nums",
+            margin: "0 0 16px",
+            fontFamily: "monospace",
+          }}
+        >
+          {mins}:{secs}
+        </p>
+        <p
+          style={{
+            color: "rgba(255,255,255,0.4)",
+            fontSize: "13px",
+            margin: 0,
+          }}
+        >
+          In the meantime,{" "}
+          <a
+            href="/contact"
+            style={{ color: "rgba(255,255,255,0.65)", textDecoration: "underline" }}
+          >
+            the contact form
+          </a>{" "}
+          is always open.
+        </p>
+      </div>
     </div>
   );
 
@@ -581,7 +697,7 @@ export function ChatWidget() {
                 </p>
               </div>
 
-              {inputBar}
+              {cooldownEnd ? cooldownBar : inputBar}
             </div>
           )}
 
@@ -890,7 +1006,7 @@ export function ChatWidget() {
                   zIndex: 1,
                 }}
               >
-                {inputBar}
+                {cooldownEnd ? cooldownBar : inputBar}
               </div>
             </>
           )}
