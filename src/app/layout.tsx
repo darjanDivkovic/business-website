@@ -13,49 +13,27 @@ const actor = Actor({
   display: "swap",
 });
 
+const siteUrl = "https://www.darjan.dev";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://darjan.dev"),
+  metadataBase: new URL(siteUrl),
   title: {
     template: "%s | Darjan.dev",
-    default: "Darjan.dev",
+    default: "Darjan.dev — Freelance React & Next.js Developer",
   },
   description:
     "Freelance React & TypeScript developer building fast, modern web applications. Specializing in Next.js, clean architecture, and performance. Available for projects.",
-  keywords: [
-    "freelance developer",
-    "React developer",
-    "TypeScript developer",
-    "Next.js developer",
-    "frontend developer",
-    "web development",
-    "Darjan",
-    "darjan.dev",
-  ],
-  authors: [{ name: "Darjan", url: "https://darjan.dev" }],
-  creator: "Darjan",
-  publisher: "Darjan",
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://darjan.dev",
+    url: siteUrl,
     siteName: "Darjan.dev",
-    title: "Darjan | Freelance React & Next.js Developer",
+    title: "Darjan — Freelance React & Next.js Developer",
     description:
       "Freelance React & TypeScript developer building fast, modern web applications. Specializing in Next.js, clean architecture, and performance.",
     images: [
       {
-        url: "/opengraph-image.jpg",
+        url: `${siteUrl}/opengraph-image.jpg`,
         width: 1200,
         height: 630,
         alt: "Darjan — Freelance React & Next.js Developer",
@@ -64,14 +42,12 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Darjan | Freelance React & Next.js Developer",
+    title: "Darjan — Freelance React & Next.js Developer",
     description:
       "Freelance React & TypeScript developer building fast, modern web applications. Specializing in Next.js, clean architecture, and performance.",
-    images: ["/opengraph-image.jpg"],
+    images: [`${siteUrl}/opengraph-image.jpg`],
   },
-  alternates: {
-    canonical: "https://darjan.dev",
-  },
+  alternates: { canonical: siteUrl },
 };
 
 export default function RootLayout({
