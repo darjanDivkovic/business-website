@@ -33,7 +33,7 @@ export const metadata: Metadata = {
       "Freelance React & TypeScript developer building fast, modern web applications. Specializing in Next.js, clean architecture, and performance.",
     images: [
       {
-        url: `${siteUrl}/opengraph-image.jpg`,
+        url: siteUrl,
         width: 1200,
         height: 630,
         alt: "Darjan — Freelance React & Next.js Developer",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     title: "Darjan — Freelance React & Next.js Developer",
     description:
       "Freelance React & TypeScript developer building fast, modern web applications. Specializing in Next.js, clean architecture, and performance.",
-    images: [`${siteUrl}/opengraph-image.jpg`],
+    images: siteUrl,
   },
   alternates: { canonical: siteUrl },
 };
