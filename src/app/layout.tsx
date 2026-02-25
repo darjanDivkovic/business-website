@@ -50,15 +50,24 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://darjan.dev",
     siteName: "Darjan.dev",
-    title: "Darjan.dev",
+    title: "Darjan | Freelance React & Next.js Developer",
     description:
       "Freelance React & TypeScript developer building fast, modern web applications. Specializing in Next.js, clean architecture, and performance.",
+    images: [
+      {
+        url: "/opengraph-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Darjan — Freelance React & Next.js Developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Darjan.dev",
+    title: "Darjan | Freelance React & Next.js Developer",
     description:
       "Freelance React & TypeScript developer building fast, modern web applications. Specializing in Next.js, clean architecture, and performance.",
+    images: ["/opengraph-image.jpg"],
   },
   alternates: {
     canonical: "https://darjan.dev",
