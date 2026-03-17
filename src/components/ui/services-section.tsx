@@ -100,7 +100,7 @@ const services: ServiceData[] = [
   {
     icon: Zap,
     title: "Small Short-Term Projects",
-    tagline: "Fixed pricing · Fast turnaround",
+    tagline: "Fixed pricing · starting from 200$  · Fast turnaround",
     description:
       "Ideal for one-off tasks like Figma to HTML conversions or responsive updates — scoped, priced upfront, delivered fast.",
     offerings: [
@@ -118,7 +118,7 @@ const services: ServiceData[] = [
   {
     icon: Clock,
     title: "Contract Per Hour",
-    tagline: "For SaaS apps & ongoing work",
+    tagline: "Starting from 35$/h",
     description:
       "Ongoing support for complex features, API integrations, and UI/UX redesigns in SaaS environments — billed by the hour.",
     offerings: [
