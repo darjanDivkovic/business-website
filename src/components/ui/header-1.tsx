@@ -49,8 +49,8 @@ export function Header() {
               src={Logo}
               alt="Darjan.dev"
               width={140}
-              height={25}
-              className="h-6 w-10 ml-[-10px] scale-80"
+              height={140}
+              className="h-6 w-9 ml-[-10px] scale-80"
               priority
             />
           </div>
