@@ -4,7 +4,7 @@ import { BlogPage } from "@/app/pages/Blog/BlogPage";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Thoughts on React, TypeScript, architecture decisions, and shipping great software — from a freelance developer who builds for modern teams.",
+    "Thoughts on React, TypeScript, architecture decisions, and shipping great software - from a freelance developer who builds for modern teams.",
   alternates: {
     canonical: "https://darjan.dev/blog",
   },

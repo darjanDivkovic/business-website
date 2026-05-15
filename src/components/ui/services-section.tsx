@@ -2,7 +2,6 @@
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Meteors } from "@/components/ui/meteors";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -102,7 +101,7 @@ const services: ServiceData[] = [
     title: "Small Short-Term Projects",
     tagline: "Fixed pricing · starting from 200$  · Fast turnaround",
     description:
-      "Ideal for one-off tasks like Figma to HTML conversions or responsive updates — scoped, priced upfront, delivered fast.",
+      "Ideal for one-off tasks like Figma to HTML conversions or responsive updates - scoped, priced upfront, delivered fast.",
     offerings: [
       "Figma to HTML / CSS / JS conversions",
       "Landing pages and marketing sites",
@@ -120,7 +119,7 @@ const services: ServiceData[] = [
     title: "Contract Per Hour",
     tagline: "Starting from 35$/h",
     description:
-      "Ongoing support for complex features, API integrations, and UI/UX redesigns in SaaS environments — billed by the hour.",
+      "Ongoing support for complex features, API integrations, and UI/UX redesigns in SaaS environments - billed by the hour.",
     offerings: [
       "SaaS application development",
       "UI/UX redesigns",
@@ -182,7 +181,7 @@ export function ServicesSection() {
   return (
     <section
       ref={sectionRef}
-      className="py-8 md:py-16 border relative overflow-hidden"
+      className="py-8 md:py-16 border relative overflow-hidden bg-black"
     >
       {/* Aurora blobs — purple left, blue right — fade in on scroll */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -212,11 +211,12 @@ export function ServicesSection() {
 
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <SectionTitleComponent
-          prefix="How I Can Help"
-          header="Services Tailored and customizable for your specific needs."
+          prefix="Work With Me"
+          header="I shipped my own product. I can ship yours."
         >
-          Find a suitable service or simply reach out via any Book a Call button
-          to set up a free 15-min Call
+          CloudsForge proves I execute end-to-end - design, code, DevOps,
+          launch. I&apos;m available for founding roles and senior engineering,
+          and I take on select freelance work too.
         </SectionTitleComponent>
 
         <div className="mx-auto grid gap-4 lg:grid-cols-2">
@@ -281,11 +281,6 @@ function ServiceCard({
               scheme.overlayGradient,
             )}
           />
-
-          {/* Meteor shower — dim at rest, full on hover */}
-          <div className="absolute inset-0 opacity-[0.18] group-hover:opacity-90 transition-opacity duration-700 pointer-events-none">
-            <Meteors number={22} />
-          </div>
 
           {/* Ambient blur orbs */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">

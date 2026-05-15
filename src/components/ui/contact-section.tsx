@@ -186,7 +186,7 @@ const ContactSection = () => {
   }
 
   return (
-    <div className="flex w-full flex-col items-center py-16 gap-10">
+    <div className="flex w-full flex-col items-center py-16 gap-10 px-4 sm:px-0">
       <div className="text-center">
         <h1 className="text-4xl font-bold text-white tracking-tight mb-3">
           Get in Touch
@@ -291,7 +291,7 @@ const ContactSection = () => {
               </Label>
               <Textarea
                 id="description"
-                placeholder="Briefly describe what you need — the more context the better."
+                placeholder="Briefly describe what you need - the more context the better."
                 value={formData.description}
                 onChange={(e) => updateField("description", e.target.value)}
                 className={`${inputClass} min-h-[110px] resize-none`}
@@ -364,7 +364,7 @@ const ContactSection = () => {
               </Label>
               <Textarea
                 id="message"
-                placeholder="Links, references, questions — anything helpful to know."
+                placeholder="Links, references, questions - anything helpful to know."
                 value={formData.message}
                 onChange={(e) => updateField("message", e.target.value)}
                 className={`${inputClass} min-h-[110px] resize-none`}

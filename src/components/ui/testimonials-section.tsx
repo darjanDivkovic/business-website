@@ -1,23 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
+import {
+  StaggerTestimonials,
+  type StaggerTestimonial,
+} from "@/components/ui/stagger-testimonials";
+import { StarButton } from "@/components/ui/star-button";
+import { SectionTitleComponent } from "./SectionTitleComponent";
 
-type Testimonial = {
-  name: string;
-  role: string;
-  company?: string;
-  image: string;
-  quote: string;
-  date: string;
-  relationship: string;
-};
+const LINKEDIN_RECS_URL =
+  "https://www.linkedin.com/in/darjan-d-171386163/details/recommendations/?detailScreenTabIndex=0";
 
-// Paste your Supabase bucket URLs into the image fields below
-// e.g. "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/SeenaMojahedi.jpg"
-const testimonials: Testimonial[] = [
+const testimonials: StaggerTestimonial[] = [
   {
+    tempId: 0,
     name: "Seena Mojahedi",
     role: "Director",
     image:
@@ -26,8 +22,10 @@ const testimonials: Testimonial[] = [
     relationship: "Managed Darjan directly",
     quote:
       "Simply put, Darjan is EXCELLENT. He shows up with poise and positive energy, is self-motivated, and gets stuff done.",
+    audio: "/Voices/Seena.mp3",
   },
   {
+    tempId: 1,
     name: "Warren Lebovics",
     role: "Co-Founder",
     company: "Pequity",
@@ -37,8 +35,10 @@ const testimonials: Testimonial[] = [
     relationship: "Managed Darjan directly",
     quote:
       "Darjan is a designer's dream frontend partner. Any team is lucky to have him.",
+    audio: "/Voices/Warren.mp3",
   },
   {
+    tempId: 2,
     name: "Ji Tae Kim",
     role: "Product Designer",
     company: "Uber",
@@ -47,9 +47,11 @@ const testimonials: Testimonial[] = [
     date: "March 2023",
     relationship: "Worked with Darjan on the same team",
     quote:
-      "Darjan is an engineer who thinks like a designer. He can turn any design into a flawless and stunning feature that delights your end users. ",
+      "Darjan is an engineer who thinks like a designer. He can turn any design into a flawless and stunning feature that delights your end users.",
+    audio: "/Voices/JiTaeKim.mp3",
   },
   {
+    tempId: 3,
     name: "Jeff Auston",
     role: "Engineering Lead",
     image:
@@ -57,9 +59,11 @@ const testimonials: Testimonial[] = [
     date: "March 2023",
     relationship: "Managed Darjan directly",
     quote:
-      "Darjan worked with our team for more than 2 years. I would hire Darjan again — highly recommend him for any team looking for a strong engineer.",
+      "Darjan worked with our team for more than 2 years. I would hire Darjan again - highly recommend him for any team looking for a strong engineer.",
+    audio: "/Voices/Jeff.mp3",
   },
   {
+    tempId: 4,
     name: "Harsh Patel",
     role: "Product Manager",
     image:
@@ -68,8 +72,10 @@ const testimonials: Testimonial[] = [
     relationship: "Worked with Darjan on the same team",
     quote:
       "Darjan is a PM's engineer. Right from backlog grooming to product launch he was a terrific partner, customer centric and delivered big time.",
+    audio: "/Voices/Harsh.mp3",
   },
   {
+    tempId: 5,
     name: "Mohamed Anwer",
     role: "Senior Software Engineer",
     company: "Pequity",
@@ -79,8 +85,10 @@ const testimonials: Testimonial[] = [
     relationship: "Worked with Darjan on the same team",
     quote:
       "I was consistently impressed by his productivity and speed. His ability to solve complex problems in a timely manner is truly exceptional.",
+    audio: "/Voices/Mohamed.mp3",
   },
   {
+    tempId: 6,
     name: "Colby Dugger",
     role: "Marketing Lead",
     image:
@@ -89,8 +97,10 @@ const testimonials: Testimonial[] = [
     relationship: "Worked with Darjan on the same team",
     quote:
       "The turnaround time and cross-functional collaboration were unmatched. I highly recommend him to anyone looking for a top-tier developer.",
+    audio: "/Voices/Colby.mp3",
   },
   {
+    tempId: 7,
     name: "Joseph Lee",
     role: "Senior Full Stack Engineer",
     company: "BetterComp",
@@ -100,8 +110,10 @@ const testimonials: Testimonial[] = [
     relationship: "Worked with Darjan on the same team",
     quote:
       "Darjan fearlessly took on difficult frontend assignments and skillfully translated detailed Figma designs into functioning code.",
+    audio: "/Voices/Joseph.mp3",
   },
   {
+    tempId: 8,
     name: "Ioana Manoliu",
     role: "Senior Software Engineer",
     company: "ADP",
@@ -111,8 +123,10 @@ const testimonials: Testimonial[] = [
     relationship: "Senior to Darjan",
     quote:
       "If anyone is searching for the absolute frontend rockstar, I have to recommend Darjan! He makes frontends look pixel perfect in the most efficient manner.",
+    audio: "/Voices/Ioana.mp3",
   },
   {
+    tempId: 9,
     name: "Giannis Koutsaftakis",
     role: "Staff Frontend Engineer",
     image:
@@ -121,8 +135,10 @@ const testimonials: Testimonial[] = [
     relationship: "Senior to Darjan",
     quote:
       "He is an exceptional front-end developer with excellent proficiency in Python too. He has delivered high-quality projects that have exceeded our clients' expectations.",
+    audio: "/Voices/Giannis.mp3",
   },
   {
+    tempId: 10,
     name: "Petar Ćevriz",
     role: "Software Engineer",
     image:
@@ -130,9 +146,11 @@ const testimonials: Testimonial[] = [
     date: "March 2023",
     relationship: "Worked with Darjan on the same team",
     quote:
-      "Darjan was instrumental in delivering complex frontend projects and his work exceeded expectations. ",
+      "Darjan was instrumental in delivering complex frontend projects and his work exceeded expectations.",
+    audio: "/Voices/Petar.mp3",
   },
   {
+    tempId: 11,
     name: "Milos Glendza",
     role: "Software Developer",
     company: "ServalIT",
@@ -142,142 +160,43 @@ const testimonials: Testimonial[] = [
     relationship: "Worked with Darjan on the same team",
     quote:
       "He was the go-to guy when things needed to be perfect on the UI side, but had no fear when things needed to be done outside his expertise as well.",
+    audio: "/Voices/Milos.mp3",
   },
 ];
 
-// ─── Card decorator (corner brackets, same as services cards) ─────────────────
-
-function CardDecorator() {
-  return (
-    <>
-      <span className="absolute -left-px -top-px block size-2 border-l-2 border-t-2 border-primary" />
-      <span className="absolute -right-px -top-px block size-2 border-r-2 border-t-2 border-primary" />
-      <span className="absolute -bottom-px -left-px block size-2 border-b-2 border-l-2 border-primary" />
-      <span className="absolute -bottom-px -right-px block size-2 border-b-2 border-r-2 border-primary" />
-    </>
-  );
-}
-
-// ─── Sub-component ────────────────────────────────────────────────────────────
-
-function CardContent({ t }: { t: Testimonial }) {
-  return (
-    <>
-      <img
-        alt={t.name}
-        src={t.image}
-        loading="lazy"
-        className="size-9 rounded-full mt-0.5 object-cover"
-      />
-      <div>
-        <div className="-mt-0.5 space-y-0.5">
-          <p className="text-sm tracking-tight font-medium">{t.name}</p>
-          <span className="text-muted-foreground block text-[11px] tracking-tight opacity-70">
-            {t.role}
-            {t.company ? ` · ${t.company}` : ""}
-          </span>
-          <span className="text-[10px] opacity-40 block">
-            {t.date} · {t.relationship}
-          </span>
-        </div>
-        <blockquote className="mt-8">
-          <p className="text-foreground/70 text-sm leading-relaxed tracking-wide">
-            {t.quote}
-          </p>
-        </blockquote>
-      </div>
-    </>
-  );
-}
-
-// ─── Section ─────────────────────────────────────────────────────────────────
-
 export function TestimonialsSection() {
-  const [expanded, setExpanded] = useState(false);
-
-  const firstBatch = testimonials.slice(0, 6);
-  const restBatch = testimonials.slice(6);
-
   return (
-    <section className="relative w-full py-20 px-6 lg:px-8 max-w-6xl mx-auto">
-      <div className="space-y-10">
-        <div className="space-y-2">
-          <h2 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl">
-            What people say
-          </h2>
-          <p className="font-medium text-md mt-2 text-muted-foreground tracking-tight md:text-md opacity-50">
-            Verified recommendations from colleagues, managers, and founders
-            I&apos;ve worked with.
-          </p>
+    <section className="relative flex min-h-screen w-screen flex-col pt-10 pb-16 sm:h-screen sm:pb-0 mt-[-130px] sm:mt-0">
+      <div className="mt-8 flex flex-col gap-6 px-6 sm:mt-16 sm:flex-row sm:items-center sm:justify-between sm:gap-8 lg:px-[14%]">
+        <SectionTitleComponent
+          prefix="Testimonials"
+          header="What my colleagues say about working with me"
+        >
+          These are testimonials from real, top-tier industry professionals that
+          I had the enormous pleasure of working with. Started as coworkers, but
+          became friends that forever shaped me as a professional and a person,
+          for which I am forever grateful.
+          <br />
+          <br />
+          Thank you, where ever you might be today.
+        </SectionTitleComponent>
+
+        <div className="flex shrink-0 justify-start sm:justify-center">
+          <StarButton
+            onClick={() =>
+              window.open(LINKEDIN_RECS_URL, "_blank", "noopener,noreferrer")
+            }
+            borderWidth={3}
+            className="h-12 px-6 text-base"
+          >
+            Read full testimonials on LinkedIn
+            <ArrowRight className="size-4" />
+          </StarButton>
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {/* ── First 6 cards ─────────────────────────────────────────── */}
-          {firstBatch.map((t, index) => {
-            const isSixth = index === 5;
-            const showMobileOverlay = index === 4 && !expanded;
-            const showDesktopOverlay = isSixth && !expanded;
-
-            return (
-              <motion.div
-                key={t.name}
-                initial={{ filter: "blur(4px)", translateY: -8, opacity: 0 }}
-                whileInView={{ filter: "blur(0px)", translateY: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.05 * index + 0.05, duration: 0.7 }}
-                className={cn(
-                  "relative grid grid-cols-[auto_1fr] gap-x-3 border border-border rounded-none bg-[#fff]/2 p-5",
-                  // 6th card is hidden on mobile unless expanded
-                  isSixth && !expanded && "hidden sm:grid",
-                )}
-              >
-                <CardDecorator />
-                <CardContent t={t} />
-
-                {/* "Read all" overlay — mobile (on 5th card) */}
-                {showMobileOverlay && (
-                  <div className="sm:hidden absolute inset-x-0 bottom-0 rounded-b-md h-4/5 z-10 bg-gradient-to-t from-background via-background/75 to-transparent flex items-end justify-center pb-5">
-                    <button
-                      onClick={() => setExpanded(true)}
-                      className="rounded-full border border-border bg-card px-5 py-2 text-sm font-medium shadow-sm hover:bg-accent transition-colors"
-                    >
-                      Read all {testimonials.length} reviews
-                    </button>
-                  </div>
-                )}
-
-                {/* "Read all" overlay — tablet + desktop (on 6th card) */}
-                {showDesktopOverlay && (
-                  <div className="hidden sm:flex absolute inset-x-0 bottom-0 rounded-b-md h-4/5 z-10 bg-gradient-to-t from-background via-background/75 to-transparent items-end justify-center pb-5">
-                    <button
-                      onClick={() => setExpanded(true)}
-                      className="rounded-full border border-border bg-card px-5 py-2 text-sm font-medium shadow-sm hover:bg-accent transition-colors"
-                    >
-                      Read all {testimonials.length} reviews
-                    </button>
-                  </div>
-                )}
-              </motion.div>
-            );
-          })}
-
-          {/* ── Rest of cards revealed on expand ──────────────────────── */}
-          <AnimatePresence>
-            {expanded &&
-              restBatch.map((t, i) => (
-                <motion.div
-                  key={t.name}
-                  initial={{ filter: "blur(4px)", translateY: -8, opacity: 0 }}
-                  animate={{ filter: "blur(0px)", translateY: 0, opacity: 1 }}
-                  transition={{ delay: 0.05 * i, duration: 0.7 }}
-                  className="relative grid grid-cols-[auto_1fr] gap-x-3 border border-border rounded-none bg-[#fff]/2 p-5"
-                >
-                  <CardDecorator />
-                  <CardContent t={t} />
-                </motion.div>
-              ))}
-          </AnimatePresence>
-        </div>
+      <div className="relative mt-8 h-[520px] w-full sm:mt-0 sm:h-auto sm:flex-1">
+        <StaggerTestimonials testimonials={testimonials} />
       </div>
     </section>
   );

@@ -496,7 +496,7 @@ export function ChatWidget() {
             margin: "0 0 16px",
           }}
         >
-          We&apos;re sorry — to keep Dayana available for everyone, sessions are
+          We&apos;re sorry - to keep Dayana available for everyone, sessions are
           limited to {MESSAGE_LIMIT} messages. You can continue in:
         </p>
         <p

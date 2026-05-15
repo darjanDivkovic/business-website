@@ -8,16 +8,15 @@ import { Button, buttonVariants } from "@/components/ui/button";
 const openChat = () => window.dispatchEvent(new Event("openDayanaChat"));
 import { cn } from "@/lib/utils";
 import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
-import { useScroll } from "@/components/ui/use-scroll";
 import Image from "next/image";
 import { createPortal } from "react-dom";
 import Logo from "../../../public/logo.png";
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const scrolled = useScroll(10);
 
   const links = [
+    { label: "CloudsForge", href: "/cloudsforge", icon: "/cloudsforge/logo.png" },
     { label: "Services", href: "/services" },
     { label: "Blog", href: "/blog" },
   ];
@@ -36,13 +35,10 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-[0px] z-50 w-full border-b border-transparent bg-white/0 ",
-        {
-          "bg-background/15 backdrop-blur-lg border-border": scrolled,
-        },
+        "sticky top-[0px] z-50 w-full border-b border-border bg-background/15 backdrop-blur-lg",
       )}
     >
-      <nav className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-6 lg:px-8">
+      <nav className="mx-auto flex h-14 w-full max-w-[1800px] items-center justify-between px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 rounded-md p-2">
           <div className="flex items-center gap-4">
             <Image
@@ -63,6 +59,15 @@ export function Header() {
               href={link.href}
             >
               {link.label}
+              {link.icon && (
+                <Image
+                  src={link.icon}
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="ml-2 h-5 w-5"
+                />
+              )}
             </Link>
           ))}
           <Button variant="outline" onClick={openChat}>

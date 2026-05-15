@@ -13,21 +13,21 @@ const items = [
     icon: <Code2 className="h-4 w-4" />,
     title: "Full-Stack, End to End",
     description:
-      "From pixel-perfect frontends to robust backends and databases — I handle the full stack so you never have to juggle multiple contractors.",
+      "From pixel-perfect frontends to robust backends and databases. I handle the full stack so you never have to juggle multiple contractors.",
   },
   {
     area: "md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]",
     icon: <Clock className="h-4 w-4" />,
-    title: "5+ Years in the Trenches",
+    title: "6+ Years in the Trenches",
     description:
-      "Half a decade building production apps for startups and scale-ups. I've seen what breaks at scale — and how to avoid it from day one.",
+      "Half a decade building production apps for startups and scale-ups. I've seen what breaks at scale, and how to avoid it from day one.",
   },
   {
     area: "md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]",
     icon: <Rocket className="h-4 w-4" />,
     title: "Ship Fast, Break Nothing",
     description:
-      "Speed without chaos. I move quickly and ship working software by keeping codebases clean, tested, and easy to iterate on. Your deadline is real — I treat it that way.",
+      "Speed without chaos. I move quickly and ship working software by keeping codebases clean, tested, and easy to iterate on. Your deadline is real, I treat it that way.",
   },
   {
     area: "md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]",
@@ -75,7 +75,7 @@ const GridItem = ({ area, icon, title, description }: GridItemProps) => {
               <h3 className="pt-0.5 text-xl leading-[1.375rem] font-semibold font-sans tracking-[-0.04em] md:text-2xl md:leading-[1.875rem] text-balance text-foreground">
                 {title}
               </h3>
-              <p className="font-sans text-sm leading-[1.125rem] md:text-base md:leading-[1.375rem] text-muted-foreground">
+              <p className="font-sans text-sm leading-[1.125rem] md:text-base md:leading-[1.375rem] text-muted-foreground opacity-40">
                 {description}
               </p>
             </div>
@@ -95,8 +95,8 @@ export function AboutTrustSection() {
         prefix="Why work with me"
         header="A developer you can actually rely on"
       >
-        I&apos;m Darjan — a freelance developer who builds clean, fast, and
-        maintainable web products. Here&apos;s what that means in practice.
+        I&apos;m Darjan, a freelance developer contractor building clean, fast,
+        and maintainable web products. Here&apos;s what that means in practice.
       </SectionTitleComponent>
 
       <ul className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[34rem] xl:grid-rows-2">

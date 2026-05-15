@@ -44,9 +44,9 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border mt-4">
-      <div className="mx-auto max-w-6xl px-6 lg:px-8">
+      <div className="mx-auto px-6 lg:px-8 border">
         {/* Main row */}
-        <div className="flex flex-col gap-8 py-12 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex flex-col gap-8 py-12 sm:flex-row sm:items-start">
           {/* Brand */}
           <div className="space-y-3 max-w-xs">
             <div className="flex items-center gap-3">
@@ -111,7 +111,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col gap-2 border-t border-border py-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-2 border-t border-border py-6 sm:flex-row sm:items-center">
           <p className="text-xs text-muted-foreground opacity-50">
             &copy; {year} darjan.dev · All rights reserved.
           </p>

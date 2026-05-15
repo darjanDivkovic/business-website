@@ -38,6 +38,23 @@ module.exports = {
         border: 'var(--border)',
         input: 'var(--input)',
         ring: 'var(--ring)',
+        // CloudsForge brand — used on the /cloudsforge case study
+        cf: {
+          orange: '#D45D13',
+          yellow: '#F3BC47',
+          bg: '#060609',
+          surface: '#0d0d15',
+          'surface-2': '#12121c',
+        },
+      },
+      fontFamily: {
+        // Monospace — technical micro-labels on the /cloudsforge case study
+        mono: ['var(--font-jetbrains)', 'ui-monospace', 'monospace'],
+      },
+      backgroundImage: {
+        // Conic gradient utility — used by the lamp light beams
+        'gradient-conic':
+          'conic-gradient(var(--conic-position), var(--tw-gradient-stops))',
       },
       borderRadius: {
         sm: 'calc(var(--radius) - 4px)',
@@ -54,6 +71,9 @@ module.exports = {
         'splash-progress': 'splash-progress 1.5s linear 1 forwards',
         'beam-glow': 'beam-glow 4s ease-in-out infinite',
         'beam-pulse': 'beam-pulse 4s ease-in-out infinite',
+        'cf-grain': 'cf-grain 0.7s steps(2) infinite',
+        'cf-reveal': 'cf-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) both',
+        'star-btn': 'star-btn calc(var(--duration) * 1s) linear infinite',
       },
     },
   },

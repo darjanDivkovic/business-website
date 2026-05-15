@@ -101,7 +101,7 @@ export async function BlogPostPage({ slug }: Props) {
                 </h3>
                 <p className="text-muted-foreground mb-6 leading-relaxed max-w-xl">
                   Book a quick 15-minute call and we&apos;ll figure out whether
-                  I&apos;m the right fit for your project — no pressure, no
+                  I&apos;m the right fit for your project - no pressure, no
                   sales pitch.
                 </p>
                 <Button asChild>

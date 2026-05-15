@@ -133,6 +133,30 @@ body {
   to   { transform: scaleX(1); }
 }
 
+/*
+  ─── CloudsForge case study — cinematic motifs ─────────────────────────────
+  Scoped to the /cloudsforge route. Film grain, projector flicker, a slow
+  scanline drift, and a clip-path reveal for staggered section entrances.
+  ─────────────────────────────────────────────────────────────────────────── */
+@keyframes cf-grain {
+  0%, 100% { transform: translate(0, 0); }
+  10%      { transform: translate(-3%, -4%); }
+  30%      { transform: translate(5%, 2%); }
+  50%      { transform: translate(-2%, 5%); }
+  70%      { transform: translate(4%, -3%); }
+  90%      { transform: translate(-5%, 1%); }
+}
+
+@keyframes cf-reveal {
+  from { opacity: 0; transform: translateY(28px); clip-path: inset(0 0 100% 0); }
+  to   { opacity: 1; transform: translateY(0);   clip-path: inset(0 0 0 0); }
+}
+
+@keyframes star-btn {
+  0%   { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+
 @layer base {
   * {
     border-color: var(--border);

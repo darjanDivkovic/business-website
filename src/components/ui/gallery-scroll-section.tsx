@@ -48,7 +48,7 @@ const projects: ProjectItem[] = [
     id: "item-3",
     title: "Marketing Portal for Browser Game Alliance",
     summary:
-      "Designed and developed a personalized portal for browser-game alliances — where players could be invited, track rankings, and manage their alliance profile.",
+      "Designed and developed a personalized portal for browser-game alliances - where players could be invited, track rankings, and manage their alliance profile.",
     url: "#",
     image:
       "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/LegioGemina.png",
@@ -57,7 +57,7 @@ const projects: ProjectItem[] = [
     id: "item-4",
     title: "Kandor Solutions – Website, UI/UX & Kinnect Platform",
     summary:
-      "Led UI/UX design and React frontend for Kandor’s site and Kinnect headcount SaaS (Workday-integrated). Built modern interfaces, predictive dashboards, complex request forms, reusable components — plus LinkedIn visuals, campaign assets, and marketing designs to drive product awareness and trial adoption.",
+      "Led UI/UX design and React frontend for Kandor’s site and Kinnect headcount SaaS (Workday-integrated). Built modern interfaces, predictive dashboards, complex request forms, reusable components - plus LinkedIn visuals, campaign assets, and marketing designs to drive product awareness and trial adoption.",
     url: "https://kandorsolutions.com/",
     image:
       "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/KandorPoster.png",
@@ -77,17 +77,17 @@ const projects: ProjectItem[] = [
 
 export function GalleryScrollSection() {
   return (
-    <section className="bg-background overflow-hidden">
+    <section className=" overflow-hidden">
       <ContainerScroll
         titleComponent={
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 text-left mb-8">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 text-left mb-8 mt-12 sm:mt-0">
             <SectionTitleComponent
               className="text-left mb-0"
               prefix="PREVIOUS WORK"
-              header="Featured Solutions"
+              header="Client Work"
             >
-              — Explore the collection of latest projects Darjan has been
-              involved with
+              - Selected projects I&apos;ve designed and built for startups and
+              teams
             </SectionTitleComponent>
 
             {/* Swipe hint */}

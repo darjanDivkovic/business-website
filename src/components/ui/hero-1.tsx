@@ -2,117 +2,74 @@
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { RocketIcon, ArrowRightIcon, PhoneCallIcon } from "lucide-react";
+import { RocketIcon, ArrowRightIcon } from "lucide-react";
 import { LogoCloud } from "@/components/ui/logo-cloud-3";
 import Link from "next/link";
+import Image from "next/image";
 
 export function HeroSection() {
   return (
-    <section className="relative mx-auto w-full max-w-6xl h-[88vh] md:h-[70vh] overflow-hidden">
-      {/* Video background */}
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        src="https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/BackgroundBeam.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-      />
-
-      {/* Mobile-only: dark top gradient so the sticky header stays readable */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/80 to-transparent md:hidden"
-      />
-
-      {/* Blurred black circles — soften top-left and top-right corners
-          so the video loop seam and edges blend into the page background */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -left-24 -top-24 size-[80vh] rounded-full bg-black hidden md:block"
-        style={{ filter: "blur(72px)", opacity: 0.88 }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-24 -top-24 size-[60vh] rounded-full bg-black hidden md:block"
-        style={{ filter: "blur(72px)", opacity: 0.88 }}
-      />
-
-      <div
-        className="pointer-events-none absolute bottom-[-50px] left-[-50px] h-[30vh] w-[30vh] rounded-full blur-xl hidden md:block"
-        style={{ background: "linear-gradient(to bottom, transparent, black)" }}
-      />
-
-      <div
-        className="pointer-events-none absolute bottom-[0px] right-[-50px] h-[40vh] w-[25vh] rounded-full blur-xl hidden md:block"
-        style={{ background: "linear-gradient(to bottom, transparent, black)" }}
-      />
-
+    <section className="relative h-screen w-screen overflow-hidden flex items-center justify-center">
       {/* Outer vertical rail lines — track the max-w-6xl container edges */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 mx-auto hidden min-h-screen w-full max-w-6xl lg:block"
-      >
-        <div className="absolute inset-y-0 left-0 z-10 h-full w-px bg-foreground/10 [mask-image:linear-gradient(to_bottom,transparent_80%,black)]" />
-        <div className="absolute inset-y-0 right-0 z-10 h-full w-px bg-foreground/10 [mask-image:linear-gradient(to_bottom,transparent_80%,black)]" />
-      </div>
 
       {/* Main content — padded to match section standard */}
-      <div className="relative flex flex-col items-left justify-center gap-5 px-6 pt-32 pb-28 lg:px-8">
+      <div className="relative flex flex-col items-center justify-center gap-5 px-6 pb-28 lg:px-8">
         {/*
           Inner decorative lines — sit at the padding boundary.
           px-6 (24px) on mobile → left-6/right-6
           lg:px-8 (32px) on desktop → lg:left-8/lg:right-8
         */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 -z-[1] size-full overflow-hidden mt-[5vh]"
-        >
-          <div className="absolute inset-y-0 left-6 w-px bg-gradient-to-b from-transparent via-border to-border lg:left-8 " />
-          <div className="absolute inset-y-0 right-6 w-px bg-gradient-to-b from-transparent via-border to-border lg:right-8" />
-          <div className="absolute inset-y-0 left-10 w-px bg-gradient-to-b from-transparent via-border/40 to-border/40 lg:left-14" />
-          <div className="absolute inset-y-0 right-10 w-px bg-gradient-to-b from-transparent via-border/40 to-border/40 lg:right-14" />
-        </div>
 
-        <a
-          className={cn(
-            "group flex w-fit items-center gap-3 rounded-full border bg-card px-3 py-1 shadow mt-10 hidden md:visible",
-            "animate-in fade-in slide-in-from-bottom-4 fill-mode-backwards transition-all delay-500 duration-500 ease-out",
-          )}
-          href="#link"
+        <Image
+          src="/darjan.png"
+          alt="Darjan"
+          width={80}
+          height={80}
+          priority
+          className="size-16 rounded-full outline outline-2 outline-white/75 [outline-offset:-1px] object-cover [object-position:calc(3px)_top] shadow-lg md:size-20 border-4 border-white/40"
+        />
+
+        <Link
+          className="group flex w-fit items-center gap-3 rounded-full border bg-card px-3 py-1 shadow mt-4 hidden md:visible"
+          href="/cloudsforge"
         >
           <RocketIcon className="size-3 text-muted-foreground" />
-          <span className="text-xs">shipped new features!</span>
+          <span className="text-xs">
+            CloudsForge - built &amp; shipped solo
+          </span>
           <span className="block h-5 border-l" />
           <ArrowRightIcon className="size-3 duration-150 ease-out group-hover:translate-x-1" />
-        </a>
+        </Link>
 
         <h1
           className={cn(
-            "animate-in fade-in slide-in-from-bottom-4 fill-mode-backwards text-balance text-left text-4xl tracking-tight delay-100 duration-500 ease-out md:text-5xl lg:text-6xl",
+            "max-w-2xl text-balance text-center text-3xl font-medium leading-[1.1] tracking-tight md:text-4xl lg:text-5xl shadow-3xl",
             "[text-shadow:0_0px_50px_color-mix(in_oklch,var(--color-foreground)_20%,transparent)]",
+            "text-foreground/55",
           )}
         >
-          Lightning-Fast Builds. <br /> Scalable Apps. <br /> Zero Chaos.
+          Seasoned{" "}
+          <span className="bg-gradient-to-br from-foreground to-foreground/60 bg-clip-text text-transparent font-semibold">
+            Full-Stack Engineer
+          </span>{" "}
+          <br /> building and shipping{" "}
+          <span className="bg-gradient-to-br from-foreground to-foreground/60 bg-clip-text text-transparent font-semibold">
+            real products
+          </span>
+          .
         </h1>
 
-        <p className="animate-in fade-in opacity-60">
-          At price points you can afford and verify through measurable ROI.
+        <p className="mt-6 max-w-md text-center text-sm text-muted-foreground md:text-base">
+          Available for engineering positions, or building alongside founders
+          solving real problems.
         </p>
 
-        <div className="animate-in fade-in slide-in-from-bottom-4 flex items-left w-full md:w-unset pr-12 flex-col md:flex-row mt-16 md:mt-0 gap-3 fill-mode-backwards pt-2 delay-300 duration-500 ease-out absolute bottom-[-40px] md:bottom-0">
+        <div className="flex items-center justify-center w-full md:w-unset flex-col md:flex-row mt-16 md:mt-0 gap-3 pt-2 absolute bottom-[-40px] md:bottom-0">
           <Button asChild>
-            <Link href="/contact">Get started</Link>
+            <Link href="/contact">Hire me</Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link
-              href="https://calendly.com/darjan-developer/30min"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Book a Call
-            </Link>
+            <Link href="/cloudsforge">See what I built</Link>
           </Button>
         </div>
       </div>
