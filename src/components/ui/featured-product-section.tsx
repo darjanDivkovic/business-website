@@ -102,7 +102,7 @@ export function FeaturedProductSection() {
         variants={revealVariants}
         transition={{ duration: 0.55, ease: [0.22, 0.61, 0.36, 1] }}
       >
-        <div className="flex-row sm:flex-col items-center justify-between gap-8 px-6 lg:px-[14%]">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-8 px-6 lg:px-[14%]">
           <SectionTitleComponent
             prefix="recent activity: founded CloudsForge"
             header="I don't just ship features. I ship products."
