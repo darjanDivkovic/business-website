@@ -61,7 +61,8 @@ export function Footer() {
               <p className="pt-1 opacity-30">Darjan.dev</p>
             </div>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed opacity-60">
-              Frontend freelancer crafting fast, pixel-perfect interfaces.
+              Full-stack engineer. AI product builder. Available for contracts
+              and founding roles.
             </p>
           </div>
 

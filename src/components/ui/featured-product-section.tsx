@@ -104,8 +104,8 @@ export function FeaturedProductSection() {
       >
         <div className="flex flex-col sm:flex-row items-center justify-between gap-8 px-6 lg:px-[14%]">
           <SectionTitleComponent
-            prefix="recent activity: founded CloudsForge"
-            header="I don't just ship features. I ship products."
+            prefix="Proof, not promises"
+            header="From idea, over POC, to MVP and Launch, in under 2 months"
           >
             {CF_META.oneLiner}
           </SectionTitleComponent>

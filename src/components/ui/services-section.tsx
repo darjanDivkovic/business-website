@@ -97,17 +97,38 @@ interface ServiceData {
 
 const services: ServiceData[] = [
   {
-    icon: Zap,
-    title: "Small Short-Term Projects",
-    tagline: "Fixed pricing · starting from 200$  · Fast turnaround",
+    icon: Sparkles,
+    title: "AI-First Development",
+    tagline: "I build with AI: products, automations, and dev tooling",
     description:
-      "Ideal for one-off tasks like Figma to HTML conversions or responsive updates - scoped, priced upfront, delivered fast.",
+      "I don't bolt AI on at the end. I build AI-first, shipping products faster with AI in the loop, automating real workflows with Claude, and building the tooling that makes AI development actually work.",
     offerings: [
-      "Figma to HTML / CSS / JS conversions",
-      "Landing pages and marketing sites",
-      "UI components and design systems",
-      "Responsive website updates & optimizations",
-      "React-based interactive features",
+      "AI-powered products and app features",
+      "Workflow automation with Claude / LLMs",
+      "Custom Claude skills, agents & agentic workflows",
+      "AI developer tooling",
+      "LLM integrations (Claude, OpenAI, open-source)",
+      "Shipping faster with AI-accelerated builds",
+    ],
+    badge: { text: "Core Strength", variant: "amber-subtle" as const },
+    colSpan: true,
+    showButtons: true,
+    titleColor: "#F39301",
+    checkColor: "#371800",
+    contactId: "ai",
+  },
+  {
+    icon: Zap,
+    title: "Full-Stack Product Builds",
+    tagline: "Fixed scope · $1,500–4,000 · 1–3 weeks",
+    description:
+      "From design to deployment. I handle frontend, backend, database, and infrastructure, so you're not juggling multiple contractors who don't talk to each other.",
+    offerings: [
+      "React / Next.js frontends",
+      "Node.js backends and REST APIs",
+      "Database design (Postgres, Supabase)",
+      "Auth, payments, third-party integrations",
+      "Vercel / AWS deployment",
     ],
     badge: { text: "Most Popular", variant: "purple-subtle" },
     hoverScheme: "purple",
@@ -116,42 +137,21 @@ const services: ServiceData[] = [
   },
   {
     icon: Clock,
-    title: "Contract Per Hour",
-    tagline: "Starting from 35$/h",
+    title: "Senior Contract Work",
+    tagline: "Starting from $50/hr · hourly or retainer",
     description:
-      "Ongoing support for complex features, API integrations, and UI/UX redesigns in SaaS environments - billed by the hour.",
+      "Ongoing capacity for complex features, codebase rescue, or design-to-production frontend. I work well inside existing teams and messy codebases.",
     offerings: [
-      "SaaS application development",
-      "UI/UX redesigns",
-      "Frontend product features",
-      "API integrations and automations",
-      "Corporate websites",
+      "Design-to-React, pixel-perfect implementation",
+      "Legacy codebase features & refactoring",
+      "SaaS product frontend development",
+      "Design system architecture",
+      "Performance audits and improvements",
     ],
-    badge: { text: "Best for Scale", variant: "blue-subtle" },
+    badge: { text: "Best for Teams", variant: "blue-subtle" },
     hoverScheme: "blue",
     showButtons: true,
     contactId: "contract",
-  },
-  {
-    icon: Sparkles,
-    title: "AI-Powered Features",
-    tagline: "AI & Automation",
-    description:
-      "Integrating AI-driven features into web apps for smarter, more adaptive user experiences.",
-    offerings: [
-      "AI chat interfaces & assistants",
-      "Smart content generation",
-      "Personalization & recommendation engines",
-      "LLM API integrations",
-      "Predictive UI & intelligent forms",
-      "Automated workflows",
-    ],
-    comingSoon: true,
-    colSpan: true,
-    badge: { text: "Coming Soon", variant: "amber-subtle" as const },
-    titleColor: "#F39301",
-    checkColor: "#371800",
-    contactId: "ai",
   },
 ];
 
@@ -212,11 +212,11 @@ export function ServicesSection() {
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <SectionTitleComponent
           prefix="Work With Me"
-          header="I shipped my own product. I can ship yours."
+          header="Three things I'm actually good at."
         >
-          CloudsForge proves I execute end-to-end - design, code, DevOps,
-          launch. I&apos;m available for founding roles and senior engineering,
-          and I take on select freelance work too.
+          Not a commodity hire. I bring product thinking, AI integration
+          experience, and a track record of shipping at startups. Here&apos;s
+          what that looks like in practice.
         </SectionTitleComponent>
 
         <div className="mx-auto grid gap-4 lg:grid-cols-2">

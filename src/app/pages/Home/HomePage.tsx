@@ -6,7 +6,7 @@ import { FeaturedProductSection } from "@/components/ui/featured-product-section
 import { GalleryScrollSection } from "@/components/ui/gallery-scroll-section";
 import { TestimonialsSection } from "@/components/ui/testimonials-section";
 import { ScrollRevealSection } from "@/components/ui/scroll-reveal-section";
-// import { ServicesSection } from "@/components/ui/services-section";
+import { ServicesSection } from "@/components/ui/services-section";
 import { AboutTrustSection } from "@/components/ui/about-trust-section";
 import { ContactSection } from "@/components/ui/contact-section";
 
@@ -32,7 +32,7 @@ export function HomePage() {
         <ScrollRevealSection amount={0} margin="0px 0px 150px 0px">
           <GalleryScrollSection />
         </ScrollRevealSection>
-        {/* <ServicesSection /> */}
+        <ServicesSection />
         <LogosSection />
         <ScrollRevealSection amount={0} margin="0px 0px 150px 0px">
           <ContactSection />

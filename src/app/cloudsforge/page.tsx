@@ -23,6 +23,36 @@ export const metadata: Metadata = {
   },
 };
 
+// SoftwareApplication structured data — lets Google show CloudsForge as a
+// product (name, OS, price) and link it back to Darjan as the author.
+const softwareJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "CloudsForge",
+  applicationCategory: "MultimediaApplication",
+  operatingSystem: "Windows, macOS, Linux",
+  description,
+  url: "https://www.darjan.dev/cloudsforge",
+  offers: {
+    "@type": "Offer",
+    price: "49",
+    priceCurrency: "USD",
+  },
+  author: {
+    "@type": "Person",
+    name: "Darjan",
+    url: "https://www.darjan.dev",
+  },
+};
+
 export default function Page() {
-  return <CloudsForgePage />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
+      />
+      <CloudsForgePage />
+    </>
+  );
 }

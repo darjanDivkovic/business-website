@@ -26,13 +26,29 @@ const jetbrainsMono = JetBrains_Mono({
 const siteUrl = "https://www.darjan.dev";
 
 const rootDescription =
-  "Full-stack engineer who ships products end-to-end. I designed, built, and shipped CloudsForge - a desktop AI video workstation - solo. Available for founding roles, senior engineering, and select freelance work.";
+  "Full-stack engineer who shipped a live AI desktop product solo. I build AI-powered features, full-stack products, and design-to-production frontends. Available for founding-team roles and senior contract work.";
+
+// Person structured data — helps Google understand who the site is about and
+// connects the branded-search result to verified profiles.
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Darjan",
+  url: siteUrl,
+  jobTitle: "Full-Stack Engineer & AI Product Builder",
+  description: rootDescription,
+  sameAs: [
+    "https://github.com/darjandev",
+    "https://linkedin.com/in/darjandev",
+    "https://x.com/darjandev",
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     template: "%s | Darjan.dev",
-    default: "Darjan.dev - Full-Stack Engineer & Product Builder",
+    default: "Darjan.dev - Full-Stack Engineer & AI Product Builder",
   },
   description: rootDescription,
   openGraph: {
@@ -40,20 +56,20 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "Darjan.dev",
-    title: "Darjan - Full-Stack Engineer & Product Builder",
+    title: "Darjan - Full-Stack Engineer & AI Product Builder",
     description: rootDescription,
     images: [
       {
         url: siteUrl,
         width: 1200,
         height: 630,
-        alt: "Darjan - Full-Stack Engineer & Product Builder",
+        alt: "Darjan - Full-Stack Engineer & AI Product Builder",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Darjan - Full-Stack Engineer & Product Builder",
+    title: "Darjan - Full-Stack Engineer & AI Product Builder",
     description: rootDescription,
     images: siteUrl,
   },
@@ -72,6 +88,10 @@ export default function RootLayout({
       >
         {/* Global fixed background — sits behind all content, follows scroll.
             No ancestor transform must wrap it or `position: fixed` breaks. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <NeuralVortexBackground className="fixed inset-0 -z-10 h-screen w-screen opacity-90" />
         <LenisProvider />
         <SplashScreen />

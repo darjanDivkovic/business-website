@@ -48,28 +48,34 @@ export function HeroSection() {
             "text-foreground/55",
           )}
         >
-          Seasoned{" "}
-          <span className="bg-gradient-to-br from-foreground to-foreground/60 bg-clip-text text-transparent font-semibold">
-            Full-Stack Engineer
-          </span>{" "}
-          <br /> building and shipping{" "}
-          <span className="bg-gradient-to-br from-foreground to-foreground/60 bg-clip-text text-transparent font-semibold">
-            real products
+          I shipped product for US startups{" "}
+          <span className="mt-12 text-white font-semibold">
+            before AI was a thing.
+          </span>
+          .
+          <br />{" "}
+          <span className="text-[70%] opacity-50 pt-32">
+            Now I leverage those skills and knowledge to
+          </span>
+          <br />{" "}
+          <span className="italic te font-semibold text-[70%]">
+            build faster, scalable and better, with AI
           </span>
           .
         </h1>
 
         <p className="mt-6 max-w-md text-center text-sm text-muted-foreground md:text-base">
-          Available for engineering positions, or building alongside founders
-          solving real problems.
+          Hundreds of thousands of lines of production code for US and German
+          startups, before AI was a thing. Now I bring that judgment to AI-first
+          development, and I&apos;ve already shipped a live AI product solo.
         </p>
 
         <div className="flex items-center justify-center w-full md:w-unset flex-col md:flex-row mt-16 md:mt-0 gap-3 pt-2 absolute bottom-[-40px] md:bottom-0">
           <Button asChild>
-            <Link href="/contact">Hire me</Link>
+            <Link href="/contact">Work with me</Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link href="/cloudsforge">See what I built</Link>
+            <Link href="/cloudsforge">See what I shipped</Link>
           </Button>
         </div>
       </div>

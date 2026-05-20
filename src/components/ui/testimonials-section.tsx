@@ -14,15 +14,16 @@ const LINKEDIN_RECS_URL =
 const testimonials: StaggerTestimonial[] = [
   {
     tempId: 0,
-    name: "Seena Mojahedi",
-    role: "Director",
+    name: "Ji Tae Kim",
+    role: "Product Designer",
+    company: "Uber",
     image:
-      "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/People/Seena.png",
-    date: "May 2024",
-    relationship: "Managed Darjan directly",
+      "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/People/JosephKim.png",
+    date: "March 2023",
+    relationship: "Worked with Darjan on the same team",
     quote:
-      "Simply put, Darjan is EXCELLENT. He shows up with poise and positive energy, is self-motivated, and gets stuff done.",
-    audio: "/Voices/Seena.mp3",
+      "Darjan is an engineer who thinks like a designer. He can turn any design into a flawless and stunning feature that delights your end users.",
+    audio: "/Voices/JiTaeKim.mp3",
   },
   {
     tempId: 1,
@@ -39,16 +40,15 @@ const testimonials: StaggerTestimonial[] = [
   },
   {
     tempId: 2,
-    name: "Ji Tae Kim",
-    role: "Product Designer",
-    company: "Uber",
+    name: "Seena Mojahedi",
+    role: "Director",
     image:
-      "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/People/JosephKim.png",
-    date: "March 2023",
-    relationship: "Worked with Darjan on the same team",
+      "https://letzmwekswulldwvtsto.supabase.co/storage/v1/object/public/business-website-images/People/Seena.png",
+    date: "May 2024",
+    relationship: "Managed Darjan directly",
     quote:
-      "Darjan is an engineer who thinks like a designer. He can turn any design into a flawless and stunning feature that delights your end users.",
-    audio: "/Voices/JiTaeKim.mp3",
+      "Simply put, Darjan is EXCELLENT. He shows up with poise and positive energy, is self-motivated, and gets stuff done.",
+    audio: "/Voices/Seena.mp3",
   },
   {
     tempId: 3,
@@ -170,15 +170,11 @@ export function TestimonialsSection() {
       <div className="mt-8 flex flex-col gap-6 px-6 sm:mt-16 sm:flex-row sm:items-center sm:justify-between sm:gap-8 lg:px-[14%]">
         <SectionTitleComponent
           prefix="Testimonials"
-          header="What my colleagues say about working with me"
+          header="From people who've actually worked with me"
         >
-          These are testimonials from real, top-tier industry professionals that
-          I had the enormous pleasure of working with. Started as coworkers, but
-          became friends that forever shaped me as a professional and a person,
-          for which I am forever grateful.
-          <br />
-          <br />
-          Thank you, where ever you might be today.
+          Real colleagues. Real teams. Startups, scale-ups, and everything in
+          between. These aren&apos;t endorsements, they&apos;re from people who
+          watched me ship.
         </SectionTitleComponent>
 
         <div className="flex shrink-0 justify-start sm:justify-center">
