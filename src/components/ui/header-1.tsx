@@ -5,7 +5,7 @@ import { useState, useEffect, ComponentProps } from "react";
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
 
-const openChat = () => window.dispatchEvent(new Event("openDayanaChat"));
+// const openChat = () => window.dispatchEvent(new Event("openDayanaChat"));
 import { cn } from "@/lib/utils";
 import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
 import Image from "next/image";
@@ -70,7 +70,7 @@ export function Header() {
               )}
             </Link>
           ))}
-          <Button variant="outline" onClick={openChat}>
+          {/* <Button variant="outline" onClick={openChat}>
             <div className="flex items-center gap-3">
               Talk to Assistant
               <div
@@ -82,7 +82,7 @@ export function Header() {
                 }}
               />
             </div>
-          </Button>
+          </Button> */}
           <Button asChild>
             <Link href="/contact">Get Started</Link>
           </Button>
@@ -115,12 +115,8 @@ export function Header() {
           ))}
         </div>
         <div className="flex flex-col gap-2">
-          <Button
-            variant="outline"
-            className="w-full bg-transparent"
-            onClick={openChat}
-          >
-            Contact
+          <Button variant="outline" className="w-full bg-transparent" asChild>
+            <Link href="/contact">Contact</Link>
           </Button>
           <Button className="w-full" asChild>
             <Link href="/contact">Get Started</Link>

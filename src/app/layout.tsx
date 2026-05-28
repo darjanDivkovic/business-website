@@ -3,7 +3,7 @@ import "@/app/styles/globals.css";
 import { Actor, JetBrains_Mono } from "next/font/google";
 import { Footer } from "@/components/ui/footer";
 import { SplashScreen } from "@/components/ui/splash-screen";
-import { ChatWidget } from "@/components/ui/chat-widget";
+// import { ChatWidget } from "@/components/ui/chat-widget";
 import { NeuralVortexBackground } from "@/components/ui/neural-vortex-background";
 import { LenisProvider } from "@/components/ui/lenis-provider";
 import { Analytics } from "@vercel/analytics/next";
@@ -97,7 +97,7 @@ export default function RootLayout({
         <SplashScreen />
         {children}
         <Footer />
-        <ChatWidget />
+        {/* <ChatWidget /> */}
         <Analytics />
       </body>
     </html>
